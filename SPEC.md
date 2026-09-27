@@ -60,12 +60,31 @@ Estos ejercicios son obligatorios en R1. No requieren construir el SpellingModul
 - Reutilizar sesiones, corrección, guardado y controles compartidos.
 - Usar contenidos originales; para relatos históricos basados en hechos reales, verificar hechos antes de publicarlos. No presentar narraciones inventadas como historia real.
 - Punto y coma: aceptar variantes válidas o plantear selección de ejemplos con una respuesta inequívoca; no marcar como universal una única puntuación posible.
-- Preparar un banco editable de palabras b/v desde Parent Mode. Mientras no lleguen las palabras de clase, usar un banco provisional claramente identificado como práctica general.
+- Usar el banco inicial aprobado de palabras cotidianas de casa y escuela en content/spanish/bv-common-words.v1.json: 24 palabras, tres niveles, frases de dictado, huecos b/v y feedback. Es práctica general, no un ranking estadístico ni la lista exacta de clase. Permitir editarlo desde Parent Mode.
 - Dictado R1: el adulto consulta la palabra en Parent Mode, vuelve a la pantalla infantil con la respuesta oculta y dicta en voz alta. Judy escribe y la aplicación corrige.
 - El dictado básico debe funcionar offline; audio automático y reconocimiento de voz no son requisitos R1.
 - Distinguir en el feedback un error b/v de una tilde u otro error ortográfico; no penalizar como error de b/v una diferencia de mayúsculas o espacios.
-- No condicionar la entrega a recibir fotos adicionales. Incorporar después las palabras escolares cuando estén disponibles.
+- El adulto confirmó que no dispone de la lista de clase y autorizó palabras de uso cotidiano. No esperar fotografías ni listas adicionales para continuar; una lista escolar posterior será una personalización opcional.
 - El repaso integra todos los bloques del temario y muestra errores por tema; sin cronómetro ni barrera monetaria para volver a practicar.
+
+### Banco inicial de b/v confirmado
+
+Fuente de contenido: content/spanish/bv-common-words.v1.json.
+
+| Nivel | Palabras |
+| --- | --- |
+| 1 — Primeras palabras | barco, botella, nube, abuelo, vaca, vaso, ventana, verde |
+| 2 — Casa y escuela | bicicleta, biblioteca, caballo, escribir, vestido, vecino, verano, lluvia |
+| 3 — Más detalles | bebé, árbol, también, abrir, volver, vivir, nuevo, avión |
+
+La dificultad es una propuesta didáctica inicial y podrá ajustarse al desempeño de Judy. El banco contiene 12 palabras con b y 12 con v.
+
+- Alternar completar b/v y dictado con adulto en sesiones breves sugeridas de 6–8 palabras.
+- Usar la frase de contexto en el dictado, especialmente cuando existan palabras que suenen igual.
+- No enseñar una diferencia artificial de pronunciación entre b y v.
+- Ocultar tanto la palabra como la frase escrita y la solución durante el dictado infantil.
+- Registrar las tildes por separado: una tilde omitida no implica que haya fallado la elección de b/v.
+- El banco ya existe como contenido; su interfaz, almacenamiento de intentos e integración con la app siguen pendientes.
 
 ### Criterios de aceptación de R1
 

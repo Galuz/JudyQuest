@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "id": "es-bv-cotidianas-v1",
+  "locale": "es-MX",
+  "title": "Palabras cotidianas con b y v",
+  "selection": "Selección didáctica de casa y escuela; no es un ranking de frecuencia ni la lista exacta del salón.",
+  "levels": [
+    {
+      "id": 1,
+      "label": "Primeras palabras"
+    },
+    {
+      "id": 2,
+      "label": "Casa y escuela"
+    },
+    {
+      "id": 3,
+      "label": "Más detalles",
+      "note": "Incluye tildes y palabras con más de una letra objetivo; corregir tildes por separado."
+    }
+  ],
+  "usage": {
+    "completion": "Sustituir cada guion bajo por b o v; answers conserva el orden de los huecos.",
+    "dictation": "El adulto lee la frase y repite la palabra objetivo. Ocultar word, dictationSentence, completion.answers y feedback hasta que Judy responda.",
+    "pronunciation": "La b y la v no se distinguen por el sonido en el español habitual; no pedir que Judy las adivine por una pronunciación artificial.",
+    "practice": "Alternar palabras; repetir las falladas después de otras preguntas. Sesiones sugeridas de 6–8 palabras.",
+    "scoring": "Normalizar espacios externos y mayúsculas. Registrar errores b/v por separado de tildes y otras letras."
+  },
+  "words": [
+    {
+      "id": "es-bv-001",
+      "word": "barco",
+      "level": 1,
+      "dictationSentence": "El barco navega por el mar.",
+      "completion": {
+        "prompt": "_arco",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «barco». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-002",
+      "word": "botella",
+      "level": 1,
+      "dictationSentence": "Llené mi botella con agua.",
+      "completion": {
+        "prompt": "_otella",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «botella». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-003",
+      "word": "nube",
+      "level": 1,
+      "dictationSentence": "Una nube blanca cubrió el sol.",
+      "completion": {
+        "prompt": "nu_e",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «nube». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-004",
+      "word": "abuelo",
+      "level": 1,
+      "dictationSentence": "Mi abuelo me contó una historia.",
+      "completion": {
+        "prompt": "a_uelo",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «abuelo». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-005",
+      "word": "vaca",
+      "level": 1,
+      "dictationSentence": "La vaca come pasto en el campo.",
+      "completion": {
+        "prompt": "_aca",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «vaca». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-006",
+      "word": "vaso",
+      "level": 1,
+      "dictationSentence": "Puse agua en el vaso.",
+      "completion": {
+        "prompt": "_aso",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «vaso». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-007",
+      "word": "ventana",
+      "level": 1,
+      "dictationSentence": "Abrí la ventana de mi cuarto.",
+      "completion": {
+        "prompt": "_entana",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «ventana». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-008",
+      "word": "verde",
+      "level": 1,
+      "dictationSentence": "El lápiz verde está sobre la mesa.",
+      "completion": {
+        "prompt": "_erde",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «verde». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-009",
+      "word": "bicicleta",
+      "level": 2,
+      "dictationSentence": "Voy al parque en bicicleta.",
+      "completion": {
+        "prompt": "_icicleta",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «bicicleta». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-010",
+      "word": "biblioteca",
+      "level": 2,
+      "dictationSentence": "Busqué un cuento en la biblioteca.",
+      "completion": {
+        "prompt": "_i_lioteca",
+        "answers": [
+          "b",
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «biblioteca». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-011",
+      "word": "caballo",
+      "level": 2,
+      "dictationSentence": "El caballo corre por el campo.",
+      "completion": {
+        "prompt": "ca_allo",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «caballo». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-012",
+      "word": "escribir",
+      "level": 2,
+      "dictationSentence": "Me gusta escribir historias.",
+      "completion": {
+        "prompt": "escri_ir",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «escribir». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-013",
+      "word": "vestido",
+      "level": 2,
+      "dictationSentence": "El vestido tiene flores.",
+      "completion": {
+        "prompt": "_estido",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «vestido». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-014",
+      "word": "vecino",
+      "level": 2,
+      "dictationSentence": "Mi vecino tiene un perro.",
+      "completion": {
+        "prompt": "_ecino",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «vecino». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-015",
+      "word": "verano",
+      "level": 2,
+      "dictationSentence": "En verano vamos a la playa.",
+      "completion": {
+        "prompt": "_erano",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «verano». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-016",
+      "word": "lluvia",
+      "level": 2,
+      "dictationSentence": "La lluvia mojó el patio.",
+      "completion": {
+        "prompt": "llu_ia",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «lluvia». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-017",
+      "word": "bebé",
+      "level": 3,
+      "dictationSentence": "El bebé duerme en su cuna.",
+      "completion": {
+        "prompt": "_e_é",
+        "answers": [
+          "b",
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «bebé». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-018",
+      "word": "árbol",
+      "level": 3,
+      "dictationSentence": "El árbol del jardín tiene muchas hojas.",
+      "completion": {
+        "prompt": "ár_ol",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «árbol». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-019",
+      "word": "también",
+      "level": 3,
+      "dictationSentence": "Yo también quiero leer ese cuento.",
+      "completion": {
+        "prompt": "tam_ién",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «también». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-020",
+      "word": "abrir",
+      "level": 3,
+      "dictationSentence": "Voy a abrir mi cuaderno.",
+      "completion": {
+        "prompt": "a_rir",
+        "answers": [
+          "b"
+        ]
+      },
+      "feedback": "La forma correcta es «abrir». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-021",
+      "word": "volver",
+      "level": 3,
+      "dictationSentence": "Debemos volver a casa antes de cenar.",
+      "completion": {
+        "prompt": "_ol_er",
+        "answers": [
+          "v",
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «volver». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-022",
+      "word": "vivir",
+      "level": 3,
+      "dictationSentence": "Me gusta vivir cerca del parque.",
+      "completion": {
+        "prompt": "_i_ir",
+        "answers": [
+          "v",
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «vivir». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-023",
+      "word": "nuevo",
+      "level": 3,
+      "dictationSentence": "Tengo un cuaderno nuevo.",
+      "completion": {
+        "prompt": "nue_o",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «nuevo». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    },
+    {
+      "id": "es-bv-024",
+      "word": "avión",
+      "level": 3,
+      "dictationSentence": "El avión vuela sobre las montañas.",
+      "completion": {
+        "prompt": "a_ión",
+        "answers": [
+          "v"
+        ]
+      },
+      "feedback": "La forma correcta es «avión». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+    }
+  ]
+}

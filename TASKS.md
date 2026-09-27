@@ -67,7 +67,7 @@ Temario recibido por fotografía el 27 de septiembre de 2026:
 - Fábulas y refranes: moraleja y significado implícito (pp. 28–31).
 - Ortografía: dictado y uso de b/v en las palabras trabajadas en clase.
 
-Las páginas completas y las palabras exactas de clase no están disponibles. La práctica inicial será original y el banco b/v provisional; no bloquear la entrega por esta información pendiente.
+Las páginas completas y las palabras exactas de clase no están disponibles. El adulto autorizó un banco de palabras cotidianas; continuar sin esperar más fotos ni listas.
 
 - [ ] Añadir orden de acontecimientos y reconocimiento de expresiones de sucesión temporal.
 - [ ] Añadir relaciones de causa y consecuencia.
@@ -77,7 +77,12 @@ Las páginas completas y las palabras exactas de clase no están disponibles. La
 - [ ] Practicar moralejas con justificación en la fábula.
 - [ ] Relacionar refranes con situaciones y explicar su sentido implícito.
 - [ ] Añadir práctica de completar b/v con feedback y repaso de errores.
-- [ ] Añadir banco editable de palabras desde Parent Mode; identificar el inicial como práctica general.
+- [x] Crear content/spanish/bv-common-words.v1.json con 24 palabras cotidianas, tres niveles, frases, huecos b/v y feedback; validar estructura y soluciones.
+- [ ] Integrar el banco inicial en completar b/v y dictado; identificarlo como práctica general.
+- [ ] Añadir edición de palabras desde Parent Mode.
+- [ ] Alternar sesiones de 6–8 palabras y reintroducir las falladas después de otras preguntas.
+- [ ] Ocultar palabra, frase escrita y solución durante el dictado infantil; el adulto lee el contexto en voz alta.
+- [ ] Evitar enseñar una distinción artificial de pronunciación entre b y v.
 - [ ] Implementar dictado con el adulto: consulta protegida, regreso a pantalla infantil sin respuesta visible, respuesta escrita y corrección.
 - [ ] Hacer funcionar el dictado básico offline sin audio automático ni reconocimiento de voz.
 - [ ] Diferenciar errores b/v, tildes y otros; normalizar espacios y mayúsculas.

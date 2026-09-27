@@ -34,7 +34,7 @@ Salida: inicio navegable y base persistente preparada para construir las dos mat
 - Añadir un ejemplo guiado por habilidad.
 - Revisar claridad, respuestas y evidencia antes de habilitar el contenido.
 - Aplicar el temario recibido el 27 de septiembre: relatos históricos (orden temporal, causa/consecuencia, párrafos y punto y coma; pp. 12–27), fábulas/refranes (moraleja y significado implícito; pp. 28–31) y dictado/b-v con palabras de clase.
-- Las páginas del libro y palabras exactas no se han proporcionado. Crear práctica original y mantener editable el banco provisional b/v sin afirmar correspondencia exacta con el libro.
+- Las páginas del libro y palabras exactas no se han proporcionado. El adulto autorizó vocabulario cotidiano; usar content/spanish/bv-common-words.v1.json sin esperar la lista escolar y sin afirmar correspondencia exacta con el libro.
 - Verificar los hechos de los relatos históricos reales y la interpretación de fábulas/refranes antes de publicar.
 
 ### Recorrido completo
@@ -58,7 +58,7 @@ Explicación guiada → texto → pregunta → respuesta → feedback → eviden
 
 Registrar PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING y DICTATION separadamente de las habilidades lectoras. No construir todavía SpellingModule ni GrammarModule completos.
 
-Añadir banco b/v editable desde Parent Mode. Usar palabras provisionales identificadas como práctica general hasta recibir las trabajadas en clase. Diferenciar errores b/v de tildes u otros errores; normalizar espacios y mayúsculas.
+Integrar el banco content/spanish/bv-common-words.v1.json: 24 palabras cotidianas en tres niveles, frases para dictado, huecos b/v y feedback. Permitir edición desde Parent Mode. Sesiones sugeridas de 6–8 palabras, repitiendo errores después de otras preguntas. Diferenciar errores b/v de tildes u otros errores; normalizar espacios y mayúsculas. El adulto lee la frase y repite la palabra; ocultar frase escrita y solución durante la respuesta infantil. No enseñar una distinción artificial de sonido entre b y v.
 
 No depender de audio automático, reconocimiento de voz ni conexión para dictado. Incluir repaso de todos los bloques con feedback por tema y sin cronómetro.
 
@@ -122,7 +122,7 @@ Ahora sí, después de terminar ambos módulos:
 6. Registran errores, claridad de instrucciones, dificultad y comprensión de los textos.
 7. Corregir fallos que impidan estudiar antes de ampliar funcionalidades.
 
-Priorizar la utilidad para el repaso de Español. El temario general está confirmado; las páginas del libro y las palabras exactas de clase siguen pendientes. No presentar la práctica general como reproducción del examen.
+Priorizar la utilidad para el repaso de Español. El temario general está confirmado y se ha aprobado un banco de vocabulario cotidiano. No se dispone de las páginas del libro ni de la lista exacta de clase; no son dependencias para continuar. No presentar la práctica general como reproducción del examen.
 
 ## R2 — Completar el MVP después de la primera prueba
 
