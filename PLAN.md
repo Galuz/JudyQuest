@@ -1,5 +1,89 @@
 # JudyQuest — Implementation Plan
 
+## Phase 0 — Technical Foundation
+
+Definir JudyQuest como PWA local-first.
+
+Stack oficial:
+
+- React;
+- TypeScript;
+- Vite;
+- PWA / Service Worker;
+- Web App Manifest;
+- IndexedDB;
+- Dexie recomendado como capa de persistencia.
+
+Objetivo de distribución inicial:
+
+URL
+→ instalar en pantalla de inicio
+→ ejecutar como aplicación standalone en la tablet.
+
+No implementar backend en el MVP.
+
+### Persistence Architecture
+
+Definir interfaces:
+
+ProfileRepository
+
+ProgressRepository
+
+SessionRepository
+
+RewardRepository
+
+ChallengeRepository
+
+SettingsRepository
+
+Implementación inicial:
+
+Repository interfaces
+↓
+IndexedDB adapter
+
+Los motores educativos y sistemas globales no deben depender directamente de IndexedDB.
+
+### PWA Foundation
+
+Implementar:
+
+- manifest;
+- app icons;
+- standalone display;
+- Service Worker;
+- application-shell cache;
+- offline strategy;
+- offline fallback;
+- update strategy.
+
+Validar instalación real en tablet.
+
+### Deployment
+
+Usar Vercel como deployment inicial recomendado.
+
+Mantener la aplicación compatible con hosting estático HTTPS.
+
+### Future Sync Boundary
+
+Dejar preparado un adapter de sincronización futuro sin implementarlo en el MVP.
+
+Evolución prevista:
+
+IndexedDB local
++
+optional cloud sync
+
+Supabase puede evaluarse cuando se requiera:
+
+- sincronización entre dispositivos;
+- dashboard del adulto desde otro dispositivo;
+- backups;
+- recuperación remota.
+
 ## Phase 1 — Platform Foundation
 
 Crear:
