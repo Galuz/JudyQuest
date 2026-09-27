@@ -18,7 +18,141 @@ Su objetivo es desarrollar habilidades escolares mediante:
 
 La plataforma debe ser modular y crecer por materias sin duplicar la lógica principal.
 
-## 2. Product Philosophy
+## 2. Technical Product Requirements
+
+### Application Type
+
+JudyQuest será una Progressive Web App (PWA).
+
+Objetivos principales:
+
+- poder abrirse desde una URL;
+- poder instalarse fácilmente en la pantalla de inicio de la tablet;
+- comportarse visualmente como una aplicación independiente;
+- funcionar correctamente en tablets y móviles;
+- soportar funcionamiento offline para las actividades incluidas en el dispositivo;
+- actualizarse desde la web sin depender de una tienda de aplicaciones.
+
+### Official Frontend Stack
+
+Stack inicial oficial:
+
+- React;
+- TypeScript;
+- Vite;
+- PWA / Service Worker;
+- Web App Manifest;
+- IndexedDB para persistencia local.
+
+Se recomienda utilizar Dexie como capa de acceso a IndexedDB para simplificar consultas, migraciones y versionado de datos.
+
+### Local-First Architecture
+
+El MVP será local-first.
+
+La aplicación debe poder utilizarse sin conexión después de haber sido instalada y de tener disponibles sus recursos educativos.
+
+El dispositivo local almacenará inicialmente:
+
+- perfiles;
+- configuración;
+- progreso;
+- sesiones;
+- intentos;
+- tiempos de respuesta;
+- mastery;
+- XP;
+- rachas;
+- achievements;
+- bosses;
+- Challenge history;
+- Reward Ledger;
+- pagos marcados;
+- metas de ahorro.
+
+No se requiere backend para el MVP.
+
+### Persistence Abstraction
+
+Los módulos educativos no deben acceder directamente a IndexedDB.
+
+La persistencia debe quedar detrás de interfaces/repositories como:
+
+- ProgressRepository;
+- RewardRepository;
+- SessionRepository;
+- SettingsRepository;
+- ProfileRepository;
+- ChallengeRepository.
+
+Implementación MVP:
+
+Repositories
+↓
+IndexedDB / Dexie
+
+Evolución futura:
+
+Repositories
+↓
+Local IndexedDB
++
+Cloud Sync Provider
+
+Esto permitirá añadir sincronización sin reescribir MathModule, ReadingModule, RewardEngine o Parent Mode.
+
+### Future Cloud Synchronization
+
+La sincronización cloud queda fuera del MVP.
+
+Una futura fase podrá permitir:
+
+- consultar desde otro dispositivo el progreso de Judy;
+- sincronizar tablet y teléfono del adulto;
+- respaldo remoto;
+- recuperación de datos;
+- múltiples dispositivos.
+
+Supabase es una opción prevista para esa evolución, pero no debe ser una dependencia del MVP.
+
+### PWA Requirements
+
+El MVP debe incluir:
+
+- manifest instalable;
+- iconos de aplicación;
+- nombre y short name;
+- theme/background metadata;
+- modo standalone;
+- Service Worker;
+- cache del application shell;
+- estrategia offline;
+- fallback offline apropiado;
+- actualización segura de nuevas versiones.
+
+La aplicación no debe asumir conexión permanente para realizar actividades educativas ya disponibles localmente.
+
+### Device & UX Target
+
+Dispositivo principal inicial:
+
+tablet de Judy.
+
+Prioridades:
+
+1. tablet;
+2. móvil;
+3. escritorio.
+
+La interfaz debe ser touch-first, con botones grandes y navegación sencilla.
+
+### Deployment
+
+El deployment inicial recomendado es Vercel por simplicidad de despliegue y previews.
+
+La arquitectura PWA no debe depender de Vercel y debe poder hospedarse posteriormente en cualquier hosting estático compatible con HTTPS.
+
+## 3. Product Philosophy
 
 JudyQuest debe sentirse como:
 
@@ -99,7 +233,7 @@ Habilidades:
 - intención del autor;
 - resumen.
 
-## 4. Future Learning Modules
+## 5. Future Learning Modules
 
 Los siguientes módulos forman parte oficial del roadmap, aunque no son necesarios para liberar el MVP.
 
@@ -229,7 +363,7 @@ por qué ocurrió
 qué pasó después  
 cómo se relacionan los acontecimientos
 
-## 5. Module Architecture
+## 6. Module Architecture
 
 Arquitectura conceptual:
 
@@ -255,7 +389,7 @@ JudyQuest Core
 
 Los módulos educativos no implementan sus propios sistemas de dinero, XP o retos globales.
 
-## 6. Shared Platform Core
+## 7. Shared Platform Core
 
 Todos los módulos comparten:
 
@@ -274,7 +408,7 @@ Todos los módulos comparten:
 - celebrations;
 - common UI components.
 
-## 7. User Roles
+## 8. User Roles
 
 ### Child Profile
 
@@ -320,7 +454,7 @@ El adulto puede:
 - marcar dinero como pagado;
 - administrar metas de ahorro.
 
-## 8. Shared Weekly Reward Budget
+## 9. Shared Weekly Reward Budget
 
 Valor predeterminado:
 
@@ -344,7 +478,7 @@ $40
 
 Agregar nuevas materias no crea nuevos presupuestos independientes.
 
-## 9. Weekly Reset
+## 10. Weekly Reset
 
 Periodo:
 
@@ -368,7 +502,7 @@ Se conservan:
 - pagos;
 - estadísticas.
 
-## 10. Anti-Farming System
+## 11. Anti-Farming System
 
 Requisito crítico.
 
@@ -391,7 +525,7 @@ Repetir puede dar:
 
 Pero no dinero adicional.
 
-## 11. Reward Periods
+## 12. Reward Periods
 
 Tipos:
 
@@ -417,7 +551,7 @@ Las recompensas monetarias deben concentrarse principalmente en:
 - ACHIEVEMENT;
 - BOSS.
 
-## 12. Reward Ledger
+## 13. Reward Ledger
 
 Cada reward registra:
 
@@ -455,7 +589,7 @@ CANCELLED
 
 RewardEngine es la única parte autorizada para generar dinero.
 
-## 13. Weekly Cap
+## 14. Weekly Cap
 
 remainingBudget =
 weeklyLimit - weeklyEarned
@@ -476,7 +610,7 @@ Pero siguen activos:
 - records;
 - progression.
 
-## 14. Partial Rewards
+## 15. Partial Rewards
 
 Ejemplo:
 
@@ -495,7 +629,7 @@ $100 / $100
 
 Los $3 restantes no se transfieren automáticamente.
 
-## 15. No Money for Normal Practice
+## 16. No Money for Normal Practice
 
 Una respuesta correcta puede generar:
 
@@ -510,7 +644,7 @@ El dinero proviene de:
 - milestones;
 - achievements.
 
-## 16. XP Economy
+## 17. XP Economy
 
 XP no tiene límite semanal.
 
@@ -534,7 +668,7 @@ Challenge:
 Boss:
 +500 XP
 
-## 17. Streak System
+## 18. Streak System
 
 Registrar:
 
@@ -546,7 +680,7 @@ Debe existir actividad mínima para que una sesión cuente.
 
 Abrir la aplicación y contestar una sola pregunta no mantiene la racha.
 
-## 18. Mathematics Module
+## 19. Mathematics Module
 
 ### Initial Scope
 
@@ -569,7 +703,7 @@ Progresión sugerida:
 
 Puede adaptarse según rendimiento.
 
-## 19. Mathematics Learning Mode
+## 20. Mathematics Learning Mode
 
 Enseñar:
 
@@ -586,7 +720,7 @@ Trucos:
 ×9 → patrones  
 ×10 → agregar cero
 
-## 20. Mathematics Practice
+## 21. Mathematics Practice
 
 Registrar:
 
@@ -604,7 +738,7 @@ timestamp
 
 Los errores deben reaparecer posteriormente mediante spaced retry.
 
-## 21. Mathematics Mastery
+## 22. Mathematics Mastery
 
 Estados:
 
@@ -626,7 +760,7 @@ Considerar:
 - recent performance;
 - attempt count.
 
-## 22. Mathematics Speed Mode
+## 23. Mathematics Speed Mode
 
 La velocidad sí forma parte del dominio de multiplicaciones.
 
@@ -647,7 +781,7 @@ Platinum
 
 Precisión siempre antes de velocidad.
 
-## 23. Mathematics Bosses
+## 24. Mathematics Bosses
 
 Un boss por tabla.
 
@@ -663,7 +797,7 @@ Replay:
 - récord;
 - sin dinero adicional.
 
-## 24. Reading Module
+## 25. Reading Module
 
 Forma parte de:
 
@@ -675,7 +809,7 @@ comprender lo leído.
 
 No medir únicamente velocidad.
 
-## 25. Reading Skills
+## 26. Reading Skills
 
 LITERAL
 
@@ -699,7 +833,7 @@ EVIDENCE
 
 SUMMARY
 
-## 26. Reading Learning Mode
+## 27. Reading Learning Mode
 
 Cada habilidad debe explicar:
 
@@ -717,7 +851,7 @@ ejercicio asistido
 
 ejercicio independiente
 
-## 27. Reading Practice
+## 28. Reading Practice
 
 Flujo:
 
@@ -745,7 +879,7 @@ Explicación
 
 Un error debe enseñar por qué la respuesta correcta es correcta.
 
-## 28. Reading Detective Mode
+## 29. Reading Detective Mode
 
 Objetivo:
 
@@ -760,7 +894,7 @@ El sistema evalúa:
 - respuesta;
 - evidencia seleccionada.
 
-## 29. Reading Inference Mode
+## 30. Reading Inference Mode
 
 La respuesta no aparece literalmente.
 
@@ -776,7 +910,7 @@ conocimiento contextual
 
 inferencia
 
-## 30. Reading Mastery
+## 31. Reading Mastery
 
 Dominio independiente por skill.
 
@@ -789,7 +923,7 @@ Cause & Effect: 78%
 Inference: 57%  
 Vocabulary: 69%
 
-## 31. Reading Adaptive Learning
+## 32. Reading Adaptive Learning
 
 Priorizar:
 
@@ -802,7 +936,7 @@ Reducir progresivamente:
 
 - contenido consistentemente dominado.
 
-## 32. Reading Difficulty
+## 33. Reading Difficulty
 
 Considerar:
 
@@ -815,7 +949,7 @@ Considerar:
 - distractores;
 - pasos de razonamiento.
 
-## 33. Reading Timers
+## 34. Reading Timers
 
 En comprensión lectora:
 
@@ -828,7 +962,7 @@ El cronómetro solo aparece después de cierto dominio.
 
 Nunca premiar lectura apresurada con baja comprensión.
 
-## 34. Reading Bosses
+## 35. Reading Bosses
 
 Un boss mezcla varias habilidades.
 
@@ -855,7 +989,7 @@ Replay:
 
 sin dinero adicional.
 
-## 35. Future Module Pattern
+## 36. Future Module Pattern
 
 Todos los módulos futuros deben implementar:
 
@@ -889,7 +1023,7 @@ Achievements
 
 WeeklyBudget
 
-## 36. Cross-Module Missions
+## 37. Cross-Module Missions
 
 Ejemplo:
 
@@ -906,7 +1040,7 @@ $15 MXN.
 
 Permite incentivar equilibrio entre materias.
 
-## 37. Child Dashboard
+## 38. Child Dashboard
 
 Mostrar:
 
@@ -920,7 +1054,7 @@ Mostrar:
 - misión semanal;
 - achievements.
 
-## 38. Subject Dashboard
+## 39. Subject Dashboard
 
 Cada materia muestra:
 
@@ -932,7 +1066,7 @@ Cada materia muestra:
 - bosses;
 - progreso reciente.
 
-## 39. Parent Dashboard
+## 40. Parent Dashboard
 
 General:
 
@@ -952,7 +1086,7 @@ Por materia:
 - recent improvement;
 - session history.
 
-## 40. Reward Goals
+## 41. Reward Goals
 
 “Estoy ahorrando para…”
 
@@ -964,7 +1098,7 @@ Juguete — $300
 
 No realiza transacciones reales.
 
-## 41. Adventure Mode
+## 42. Adventure Mode
 
 Post-MVP.
 
@@ -980,7 +1114,7 @@ Ejemplos:
 - geografía para viajar;
 - historia para ordenar eventos.
 
-## 42. MVP Scope
+## 43. MVP Scope
 
 El MVP incluye únicamente:
 
@@ -1021,7 +1155,7 @@ El MVP incluye únicamente:
 - Adaptive Learning;
 - Reading Boss.
 
-## 43. Post-MVP Roadmap
+## 44. Post-MVP Roadmap
 
 ### Phase 2
 
@@ -1051,7 +1185,7 @@ Español:
 
 El orden podrá cambiar según las necesidades reales de Judy.
 
-## 44. Critical Product Rules
+## 45. Critical Product Rules
 
 ### Rule A
 
