@@ -7,6 +7,7 @@ import type {
   Reward,
 } from "../domain/types";
 import { challengeProgress, grade, summarize, weekId } from "../domain/engines";
+import { upgradeSessionWording } from "./plain-language-upgrade";
 export interface SessionRepository {
   all(): Promise<LearningSession[]>;
   get(id: string): Promise<LearningSession | undefined>;
@@ -42,6 +43,14 @@ export class JudyDatabase extends Dexie {
       rewards: "id,weekId,status",
       profiles: "id",
     });
+    this.version(2)
+      .stores({})
+      .upgrade((transaction) =>
+        transaction
+          .table<LearningSession>("sessions")
+          .toCollection()
+          .modify(upgradeSessionWording),
+      );
   }
 }
 export const defaults: ParentSettings = {

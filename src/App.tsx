@@ -104,7 +104,7 @@ function Shell() {
         )}
         {needRefresh && !location.pathname.startsWith("/sesion/") && (
           <div className="update-notice">
-            <p>Hay una nueva versión. Tus resultados se conservarán.</p>
+            <p>Hay una nueva versión de la app. Tu avance seguirá guardado.</p>
             <button
               className="secondary"
               onClick={() => void updateServiceWorker(true)}
@@ -126,8 +126,9 @@ function Shell() {
             </p>
             <p>
               La primera vez necesitas internet. Espera el aviso «Lista para
-              usar sin conexión» antes de desconectarte. Tus datos se guardan en
-              este navegador: no lo borres ni uses modo privado para estudiar.
+              usar sin internet» antes de desconectarte. Tus datos se guardan en
+              este navegador. Pide ayuda a un adulto para instalar la app. No
+              borren sus datos ni usen el modo privado para estudiar.
             </p>
             <button className="secondary" onClick={() => setInstallHelp(false)}>
               Entendido
@@ -139,11 +140,11 @@ function Shell() {
         <span>
           {!online ? (
             <>
-              <WifiOff size={15} /> Sin conexión · puedes seguir practicando
+              <WifiOff size={15} /> Sin internet · puedes seguir practicando
             </>
           ) : offlineReady ? (
             <>
-              <CheckCircle2 size={15} /> Lista para usar sin conexión
+              <CheckCircle2 size={15} /> Lista para usar sin internet
             </>
           ) : (
             <>JudyQuest · Aprende a tu ritmo</>

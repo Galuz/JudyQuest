@@ -19,16 +19,16 @@ export function MathLesson({ table }: { table: number }) {
   const a = table || 3,
     b = 4;
   const tricks: Record<number, string> = {
-    1: "Multiplicar por 1 conserva el número.",
-    2: "Multiplicar por 2 es duplicar.",
-    3: "Suma el mismo número tres veces.",
-    4: "Duplica el número y vuelve a duplicar.",
-    5: "Los resultados terminan en 0 o 5.",
-    6: "Puedes hacer ×5 y sumar una vez más.",
-    7: "Puedes hacer ×5 y sumar dos veces más.",
-    8: "Duplica tres veces: ×2, ×4 y ×8.",
-    9: "Haz ×10 y resta una vez el número.",
-    10: "Para estos números enteros positivos, añade un cero.",
+    1: "Al multiplicar por 1, el número queda igual: 1 × 4 = 4.",
+    2: "Multiplicar por 2 es sumar el número dos veces: 4 + 4 = 8.",
+    3: "Multiplicar por 3 es sumar el número tres veces: 4 + 4 + 4 = 12.",
+    4: "Suma el número consigo mismo. Luego suma el resultado consigo mismo: 4 + 4 = 8 y 8 + 8 = 16.",
+    5: "Cuenta de 5 en 5: 5, 10, 15, 20… Los resultados terminan en 0 o 5.",
+    6: "Para 6 × 4, calcula 5 × 4 = 20 y suma otro 4: 20 + 4 = 24.",
+    7: "Para 7 × 4, calcula 5 × 4 = 20 y suma dos veces más el 4: 20 + 4 + 4 = 28.",
+    8: "Para 8 × 4, empieza con 4 y suma cada resultado consigo mismo: 4 + 4 = 8, 8 + 8 = 16 y 16 + 16 = 32.",
+    9: "Para 9 × 4, calcula 10 × 4 = 40 y quita un 4: 40 − 4 = 36.",
+    10: "En las tablas del 1 al 10, basta con poner un cero al final del otro número: 10 × 4 = 40.",
   };
   return (
     <div className="math-lesson">
@@ -81,11 +81,11 @@ export function SessionRunner() {
           if (s) setSession(s);
           else
             setError(
-              "No encontramos esta sesión. Puedes comenzar otra desde el inicio.",
+              "No encontramos esta misión. Puedes empezar otra desde el inicio.",
             );
         }
       })
-      .catch(() => setError("No pudimos abrir la sesión."));
+      .catch(() => setError("No pudimos abrir la misión."));
     return () => {
       active = false;
     };
@@ -149,12 +149,12 @@ export function SessionRunner() {
           </div>
           <div>
             <strong>+{correct * 2}</strong>
-            <span>XP ganados</span>
+            <span>Puntos ganados (XP)</span>
           </div>
         </div>
         <p>
-          Los repasos refuerzan lo aprendido; no cambian tus aciertos del primer
-          intento.
+          Volver a intentar te ayuda a aprender. Aquí contamos las respuestas
+          correctas de la primera vez.
         </p>
         {original.some((a) => !a.correct) && (
           <div className="review-list">
@@ -266,7 +266,7 @@ export function SessionRunner() {
           {s.index + 1} de {s.questions.length}
         </span>
       </div>
-      <div className="progress-track" aria-label="Avance de la sesión">
+      <div className="progress-track" aria-label="Avance de la misión">
         <span style={{ width: `${(s.index / s.questions.length) * 100}%` }} />
       </div>
       <div className={`exercise-layout ${passage ? "with-reader" : ""}`}>
@@ -287,7 +287,7 @@ export function SessionRunner() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Fuente de los hechos: {passage.source.label}
+                ¿De dónde viene esta historia? {passage.source.label}
               </a>
             )}
           </article>
@@ -307,8 +307,8 @@ export function SessionRunner() {
             <>
               <h2>Turno del adulto</h2>
               <p>
-                Entrega la tablet al adulto para preparar la palabra. Después te
-                la dictará.
+                Dale la tablet a un adulto. Él leerá una palabra para que tú la
+                escribas.
               </p>
               {!reveal ? (
                 <button className="secondary" onClick={() => setReveal(true)}>
@@ -383,7 +383,9 @@ export function SessionRunner() {
                 )}
                 {q.kind === "sequence" && (
                   <div className="sequence">
-                    <p>Selecciona del primero al último.</p>
+                    <p>
+                      Toca las opciones en orden: primero, después y al final.
+                    </p>
                     <div className="sequence-order">
                       {sequence.map((item, i) => (
                         <span key={item}>
@@ -471,7 +473,7 @@ export function SessionRunner() {
                           answer.length !== q.correct.length))
                     }
                   >
-                    {busy ? "Guardando…" : "Comprobar respuesta"}
+                    {busy ? "Guardando…" : "Revisar mi respuesta"}
                   </button>
                 )}
               </form>
@@ -497,7 +499,7 @@ export function SessionRunner() {
                 <p>
                   Tu respuesta: <strong>{last.answer}</strong>
                   {last.errorType === "tilde"
-                    ? " · Revisa la tilde; elegiste bien b/v."
+                    ? " · Usaste bien la b y la v. Revisa el acento escrito (la tilde)."
                     : ""}
                 </p>
               )}

@@ -59,8 +59,8 @@ export function PinGate({ children }: { children: ReactNode }) {
       <h2>{setup ? "Un momento para el adulto" : "Zona de adultos"}</h2>
       <p>
         {setup
-          ? "Crea un PIN para proteger los ajustes y preparar los dictados. Guárdalo en un lugar seguro."
-          : "Introduce tu PIN para continuar."}
+          ? "Crea una clave de 4 a 8 números (PIN) para proteger los ajustes y preparar los dictados. Guárdala en un lugar seguro."
+          : "Escribe tu clave de números (PIN) para entrar."}
       </p>
       <form onSubmit={submit}>
         <label>

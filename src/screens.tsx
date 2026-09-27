@@ -121,7 +121,7 @@ export function Home() {
           <div>
             <Star size={19} />
             <strong>{progress.xp}</strong>
-            <span>XP totales</span>
+            <span>Puntos (XP)</span>
           </div>
           <div>
             <Flag size={19} />
@@ -142,7 +142,7 @@ export function Home() {
       )}
       <div className="section-heading">
         <h2>Elige tu próxima misión</h2>
-        <span>A tu ritmo, sin cronómetro</span>
+        <span>A tu ritmo, sin límite de tiempo</span>
       </div>
       <div className="subject-grid">
         <Link className="subject-card spanish-card" to="/espanol">
@@ -156,8 +156,8 @@ export function Home() {
             <p className="eyebrow">PALABRAS QUE CUENTAN HISTORIAS</p>
             <h2>Español</h2>
             <p>
-              Lee, encuentra pistas y descubre
-              <br className="desktop" /> lo que hay detrás de las palabras.
+              Lee historias, encuentra pistas
+              <br className="desktop" /> y entiende lo que cuentan.
             </p>
           </div>
           <div className="card-bottom">
@@ -178,8 +178,8 @@ export function Home() {
             <p className="eyebrow">PEQUEÑOS NÚMEROS, GRANDES IDEAS</p>
             <h2>Matemáticas</h2>
             <p>
-              Descubre patrones, resuelve
-              <br className="desktop" /> multiplicaciones y gana confianza.
+              Aprende las tablas paso a paso
+              <br className="desktop" /> y practica multiplicaciones.
             </p>
           </div>
           <div className="card-bottom">
@@ -216,8 +216,10 @@ export function Home() {
           </div>
           <h3>Exploradora de dos mundos</h3>
           <p>
-            Una sesión de cada materia con 80% de aciertos y al menos 4
-            preguntas.
+            Termina una misión de Español y una de Matemáticas. Cada una debe
+            tener al menos 4 preguntas y 80% de respuestas correctas a la
+            primera. Por ejemplo, en una misión de 5 preguntas necesitas acertar
+            4.
           </p>
           <div className="check-list">
             <span className={cp.spanish ? "done" : ""}>
@@ -228,14 +230,15 @@ export function Home() {
             </span>
           </div>
           <div className="weekly-reward">
-            <span>{reward ? "Recompensa registrada" : "Recompensa única"}</span>
+            <span>{reward ? "Premio guardado" : "Premio de esta semana"}</span>
             <strong>
               {money(reward?.amountGranted ?? app.settings.rewardAmount)}
             </strong>
           </div>
           <p className="fine-print">
-            Hasta {money(app.settings.weeklyLimit)} semanales entre todas las
-            materias. El adulto entrega el dinero.
+            Puedes ganar este premio una vez por semana. El máximo entre todas
+            las materias es {money(app.settings.weeklyLimit)} por semana. Un
+            adulto te entrega el dinero.
           </p>
         </section>
       </div>
@@ -263,7 +266,10 @@ export function Spanish() {
         <div>
           <span className="chip">REPASO DEL EXAMEN</span>
           <h2>Una misión con todos los temas</h2>
-          <p>Relatos, párrafos, punto y coma, moralejas, refranes y b/v.</p>
+          <p>
+            Historias, párrafos, punto y coma, enseñanzas de las fábulas,
+            consejos de los refranes y palabras con b y v.
+          </p>
         </div>
         <button
           disabled={busy}
@@ -361,7 +367,7 @@ export function Spanish() {
           <Lightbulb />
           <div>
             <h3>Refranes</h3>
-            <p>Descubre el consejo que esconden.</p>
+            <p>Descubre qué consejo te dan.</p>
           </div>
           <ArrowRight />
         </button>
@@ -417,7 +423,7 @@ export function MathScreen() {
         <div>
           <p className="eyebrow">MUNDO DE LOS NÚMEROS</p>
           <h1>Matemáticas</h1>
-          <p>Primero entiende. Después practica. La velocidad puede esperar.</p>
+          <p>Aprende con ejemplos y luego practica. No hay prisa.</p>
         </div>
         <span className="big-subject mint">
           <Calculator size={36} />
@@ -425,8 +431,8 @@ export function MathScreen() {
       </div>
       <div className="math-layout">
         <section className="panel">
-          <h2>¿Qué tabla exploramos?</h2>
-          <p>Elige una tabla o mezcla lo que ya sabes.</p>
+          <h2>¿Qué tabla quieres practicar?</h2>
+          <p>Elige una tabla o practica todas juntas.</p>
           <div className="table-picker">
             {[1, 2, 5, 10, 3, 4, 6, 9, 7, 8].map((n) => (
               <button
@@ -491,7 +497,10 @@ export function ProgressScreen() {
         <div>
           <p className="eyebrow">CADA PASO CUENTA</p>
           <h1>Mis descubrimientos</h1>
-          <p>Tu progreso se guarda en este dispositivo.</p>
+          <p>
+            Tu avance se guarda aquí, en la tablet, el celular o la computadora
+            que usas.
+          </p>
         </div>
         <Compass size={44} />
       </div>
@@ -499,7 +508,7 @@ export function ProgressScreen() {
         <div className="panel stat">
           <Star />
           <strong>{p.xp}</strong>
-          <span>XP ganados</span>
+          <span>Puntos ganados (XP)</span>
         </div>
         <div className="panel stat">
           <Flag />
@@ -555,8 +564,8 @@ export function ProgressScreen() {
               ))
           )}
           <p className="fine-print">
-            Estos resultados muestran tu práctica, no una calificación
-            definitiva de dominio.
+            Aquí ves cómo te fue al practicar. No es una calificación de la
+            escuela.
           </p>
         </section>
         <section className="panel">
@@ -680,7 +689,7 @@ function ParentControls() {
             prompt: word.replace(/[bv]/g, "_"),
             answers: [...word].filter((c) => /[bv]/.test(c)),
           },
-          feedback: `La forma correcta es «${word}». Revisa sus letras y vuelve a practicar.`,
+          feedback: `Así se escribe: «${word}». Mira cada letra con calma.`,
         };
       });
       if (new Set(entries.map((w) => w.word)).size !== entries.length)
@@ -692,7 +701,7 @@ function ParentControls() {
       await app.refresh();
       setEditing(false);
       setMessage(
-        "Banco de palabras guardado. Se usará en las nuevas sesiones.",
+        "Lista de palabras guardada. Se usará en las nuevas misiones.",
       );
     } catch (e) {
       setError((e as Error).message);
@@ -728,7 +737,7 @@ function ParentControls() {
           </p>
           <form onSubmit={save}>
             <label>
-              Límite global semanal (MXN)
+              Máximo para premios por semana (pesos)
               <input
                 type="number"
                 min="0"
@@ -740,7 +749,7 @@ function ParentControls() {
               />
             </label>
             <label>
-              Premio del reto (MXN)
+              Premio del reto (pesos)
               <input
                 type="number"
                 min="0"
@@ -756,17 +765,19 @@ function ParentControls() {
             </button>
           </form>
           <p className="fine-print">
-            Se paga una vez por semana. Si falta presupuesto, se concede solo lo
-            disponible; el resto no se acumula. Completarlo sin presupuesto
-            registra $0 y consume el reto de esa semana. Los cambios no
-            modifican premios ya registrados.
+            El premio se gana una sola vez por semana. Si queda poco dinero para
+            premios, se guarda solo esa cantidad. Si ya no queda dinero, el
+            premio es de $0 y el reto cuenta como terminado esa semana. Lo que
+            falte no pasa a la siguiente semana. Cambiar estos ajustes no cambia
+            los premios que ya se ganaron.
           </p>
         </section>
         <section className="panel">
           <h2>Historial de recompensas</h2>
           {!app.rewards.length ? (
             <p>
-              Aún no hay recompensas. Las sesiones de práctica siguen dando XP.
+              Aún no hay premios. Judy puede seguir ganando puntos (XP) al
+              practicar.
             </p>
           ) : (
             [...app.rewards]
@@ -802,14 +813,15 @@ function ParentControls() {
                       Marcar entregado
                     </button>
                   ) : (
-                    <span className="chip">Sin importe</span>
+                    <span className="chip">Sin dinero para entregar</span>
                   )}
                 </div>
               ))
           )}
           <p className="fine-print">
-            Aquí solo registras el dinero: la app no realiza pagos. Marcarlo
-            entregado no libera presupuesto de la semana.
+            Un adulto entrega el dinero. Aquí anotas qué premios ya entregaste.
+            Aunque marques un premio como entregado, ese dinero sigue contando
+            dentro del máximo de la semana.
           </p>
         </section>
       </div>
@@ -863,7 +875,7 @@ function ParentControls() {
         </p>
       )}
       <Link className="inline-link" to="/progreso">
-        Consultar resultados por tema <ArrowRight size={18} />
+        Ver resultados por tema <ArrowRight size={18} />
       </Link>
     </>
   );

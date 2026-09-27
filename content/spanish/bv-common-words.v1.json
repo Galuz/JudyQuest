@@ -34,11 +34,9 @@
       "dictationSentence": "El barco navega por el mar.",
       "completion": {
         "prompt": "_arco",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «barco». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «barco». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-002",
@@ -47,11 +45,9 @@
       "dictationSentence": "Llené mi botella con agua.",
       "completion": {
         "prompt": "_otella",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «botella». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «botella». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-003",
@@ -60,11 +56,9 @@
       "dictationSentence": "Una nube blanca cubrió el sol.",
       "completion": {
         "prompt": "nu_e",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «nube». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «nube». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-004",
@@ -73,11 +67,9 @@
       "dictationSentence": "Mi abuelo me contó una historia.",
       "completion": {
         "prompt": "a_uelo",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «abuelo». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «abuelo». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-005",
@@ -86,11 +78,9 @@
       "dictationSentence": "La vaca come pasto en el campo.",
       "completion": {
         "prompt": "_aca",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «vaca». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «vaca». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-006",
@@ -99,11 +89,9 @@
       "dictationSentence": "Puse agua en el vaso.",
       "completion": {
         "prompt": "_aso",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «vaso». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «vaso». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-007",
@@ -112,11 +100,9 @@
       "dictationSentence": "Abrí la ventana de mi cuarto.",
       "completion": {
         "prompt": "_entana",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «ventana». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «ventana». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-008",
@@ -125,11 +111,9 @@
       "dictationSentence": "El lápiz verde está sobre la mesa.",
       "completion": {
         "prompt": "_erde",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «verde». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «verde». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-009",
@@ -138,11 +122,9 @@
       "dictationSentence": "Voy al parque en bicicleta.",
       "completion": {
         "prompt": "_icicleta",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «bicicleta». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «bicicleta». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-010",
@@ -151,12 +133,9 @@
       "dictationSentence": "Busqué un cuento en la biblioteca.",
       "completion": {
         "prompt": "_i_lioteca",
-        "answers": [
-          "b",
-          "b"
-        ]
+        "answers": ["b", "b"]
       },
-      "feedback": "La forma correcta es «biblioteca». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «biblioteca». Lleva dos b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-011",
@@ -165,11 +144,9 @@
       "dictationSentence": "El caballo corre por el campo.",
       "completion": {
         "prompt": "ca_allo",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «caballo». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «caballo». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-012",
@@ -178,11 +155,9 @@
       "dictationSentence": "Me gusta escribir historias.",
       "completion": {
         "prompt": "escri_ir",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «escribir». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «escribir». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-013",
@@ -191,11 +166,9 @@
       "dictationSentence": "El vestido tiene flores.",
       "completion": {
         "prompt": "_estido",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «vestido». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «vestido». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-014",
@@ -204,11 +177,9 @@
       "dictationSentence": "Mi vecino tiene un perro.",
       "completion": {
         "prompt": "_ecino",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «vecino». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «vecino». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-015",
@@ -217,11 +188,9 @@
       "dictationSentence": "En verano vamos a la playa.",
       "completion": {
         "prompt": "_erano",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «verano». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «verano». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-016",
@@ -230,11 +199,9 @@
       "dictationSentence": "La lluvia mojó el patio.",
       "completion": {
         "prompt": "llu_ia",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «lluvia». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «lluvia». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-017",
@@ -243,12 +210,9 @@
       "dictationSentence": "El bebé duerme en su cuna.",
       "completion": {
         "prompt": "_e_é",
-        "answers": [
-          "b",
-          "b"
-        ]
+        "answers": ["b", "b"]
       },
-      "feedback": "La forma correcta es «bebé». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «bebé». Lleva dos b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-018",
@@ -257,11 +221,9 @@
       "dictationSentence": "El árbol del jardín tiene muchas hojas.",
       "completion": {
         "prompt": "ár_ol",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «árbol». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «árbol». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-019",
@@ -270,11 +232,9 @@
       "dictationSentence": "Yo también quiero leer ese cuento.",
       "completion": {
         "prompt": "tam_ién",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «también». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «también». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-020",
@@ -283,11 +243,9 @@
       "dictationSentence": "Voy a abrir mi cuaderno.",
       "completion": {
         "prompt": "a_rir",
-        "answers": [
-          "b"
-        ]
+        "answers": ["b"]
       },
-      "feedback": "La forma correcta es «abrir». Se escribe con b. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «abrir». Lleva b. Mira cada letra con calma."
     },
     {
       "id": "es-bv-021",
@@ -296,12 +254,9 @@
       "dictationSentence": "Debemos volver a casa antes de cenar.",
       "completion": {
         "prompt": "_ol_er",
-        "answers": [
-          "v",
-          "v"
-        ]
+        "answers": ["v", "v"]
       },
-      "feedback": "La forma correcta es «volver». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «volver». Lleva dos v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-022",
@@ -310,12 +265,9 @@
       "dictationSentence": "Me gusta vivir cerca del parque.",
       "completion": {
         "prompt": "_i_ir",
-        "answers": [
-          "v",
-          "v"
-        ]
+        "answers": ["v", "v"]
       },
-      "feedback": "La forma correcta es «vivir». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «vivir». Lleva dos v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-023",
@@ -324,11 +276,9 @@
       "dictationSentence": "Tengo un cuaderno nuevo.",
       "completion": {
         "prompt": "nue_o",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «nuevo». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «nuevo». Lleva v. Mira cada letra con calma."
     },
     {
       "id": "es-bv-024",
@@ -337,11 +287,9 @@
       "dictationSentence": "El avión vuela sobre las montañas.",
       "completion": {
         "prompt": "a_ión",
-        "answers": [
-          "v"
-        ]
+        "answers": ["v"]
       },
-      "feedback": "La forma correcta es «avión». Se escribe con v. Mira la palabra completa y después inténtalo de nuevo."
+      "feedback": "Así se escribe: «avión». Lleva v. Mira cada letra con calma."
     }
   ]
 }

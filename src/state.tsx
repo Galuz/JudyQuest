@@ -42,7 +42,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setError("");
     } catch {
       setError(
-        "No pudimos abrir el guardado en este dispositivo. Comprueba que el navegador permita almacenar datos y vuelve a intentarlo.",
+        "No pudimos abrir tu avance guardado. Pide ayuda a un adulto para revisar si el navegador permite guardar datos. Después intenta de nuevo.",
       );
     } finally {
       setLoading(false);
