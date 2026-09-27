@@ -1,5 +1,54 @@
 # JudyQuest — Product Specification
 
+## 0. Prioridad de entrega — Matemáticas y Lectura (R1)
+
+Decisión del 27 de septiembre de 2026: comenzar por los módulos de Matemáticas y Comprensión Lectora. El examen de Español de Judy es el 28 de septiembre de 2026; Lectura tiene prioridad dentro de la implementación.
+
+Orden obligatorio:
+
+1. Base mínima de la aplicación e inicio con acceso a ambas materias.
+2. Comprensión Lectora funcional, con contenido y explicaciones.
+3. Matemáticas funcionales, con aprendizaje y práctica de tablas 1–10.
+4. Integración de progreso, XP básico, un reto semanal y controles mínimos del adulto.
+5. Verificación técnica de ambos módulos y de su persistencia.
+6. Entrega de URL, instalación por el adulto y prueba con Judy.
+7. Mejoras del MVP completo y, después, nuevas materias.
+
+La urgencia orienta las prioridades; no constituye una promesa de que la aplicación ya esté terminada ni sustituye las verificaciones. La instalación y la prueba del usuario ocurren después de terminar AMBOS módulos en el alcance R1. Las comprobaciones técnicas durante el desarrollo sí se realizan desde el inicio.
+
+### Alcance R1 y significado de “módulo terminado”
+
+| Área | Incluido en R1 | Posterior a la primera prueba |
+| --- | --- | --- |
+| Inicio | Elegir Lectura o Matemáticas, volver al inicio y consultar progreso básico. | Dashboards completos y personalización. |
+| Lectura | Explicación guiada, lectura, preguntas, corrección, evidencia, explicación del error, resumen y guardado. Habilidades: LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE. | Adaptación avanzada, mastery formal, bosses, temporizadores y modos especializados independientes. |
+| Matemáticas | Tablas 1–10; lecciones de grupos, suma repetida y conmutatividad; práctica por tabla y mixta; entrada numérica; corrección; repaso de errores; resumen y guardado. | Speed, tiers, bosses y adaptación/mastery avanzados. |
+| Progreso | Sesiones, respuestas y aciertos por tabla/habilidad; XP básico. | Niveles, rachas, logros y gráficas avanzadas. |
+| Recompensas | Un reto semanal sencillo, RewardEngine central, pago único por periodo, ledger, límite global y Parent Mode mínimo con PIN. | Catálogo de retos, recompensas por bosses/hitos, misiones complejas y metas de ahorro. |
+| Distribución | PWA local-first, contenido inicial disponible offline y persistencia tras cerrar/reabrir. | Sincronización cloud y múltiples dispositivos. |
+
+R1 es una primera entrega utilizable, previa al MVP completo descrito en la sección 43. Las características posteriores se conservan en el roadmap, pero no bloquean la instalación ni la primera prueba de R1.
+
+### Contenido de Lectura para R1
+
+- Incluir un catálogo inicial concreto: mínimo 8 textos breves, 4 preguntas por texto y al menos 4 preguntas por cada una de las 8 habilidades R1.
+- Cada pregunta debe incluir respuesta verificable, explicación y evidencia textual; revisar manualmente que no haya respuestas ambiguas.
+- Incorporar al menos un ejemplo guiado por habilidad. Estos ejemplos no cuentan como intentos independientes.
+- Permitir consultar el texto al responder; no imponer cronómetro en Lectura R1.
+- Incluir lectura de secuencias e identificación de idea principal y evidencias.
+- No asumir que comprensión lectora cubre todo el examen de Español. El temario escolar está pendiente de recibir; avanzar con este alcance sin bloquear el desarrollo.
+- Si se recibe el temario, priorizar dentro del módulo el contenido correspondiente y registrar cualquier ampliación explícita de alcance.
+
+### Criterios de aceptación de R1
+
+- Judy puede completar una sesión de Lectura y una de Matemáticas, recibir explicación de errores y consultar sus resultados.
+- Ambas materias conservan sesiones, respuestas y progreso después de cerrar y reabrir.
+- Los contenidos iniciales de ambos módulos funcionan offline tras la primera carga y la preparación de su caché.
+- El reto semanal utiliza el mismo RewardEngine y presupuesto global; recargar, repetir o enviar dos veces no duplica dinero.
+- El adulto puede consultar resultados, configurar el presupuesto y marcar recompensas pagadas mediante Parent Mode.
+- Antes de entregar la URL se comprueban los dos recorridos completos, persistencia, recompensas y funcionamiento offline.
+- Después de completar ambos módulos, el adulto instala en la tablet y prueba con Judy; se registran fallos y dificultades antes de ampliar el producto.
+
 ## 1. Product Vision
 
 JudyQuest es una plataforma educativa gamificada diseñada inicialmente para Judy, de 10 años.
@@ -1114,9 +1163,11 @@ Ejemplos:
 - geografía para viajar;
 - historia para ordenar eventos.
 
-## 43. MVP Scope
+## 43. MVP Scope — completo, posterior a R1
 
-El MVP incluye únicamente:
+La primera entrega R1 se rige por la sección 0. Este es el objetivo del MVP completo a desarrollar después de instalar y probar R1; no es una condición para la primera entrega.
+
+El MVP completo incluye únicamente:
 
 ### Core
 
@@ -1148,6 +1199,7 @@ El MVP incluye únicamente:
 - Literal;
 - Sequence;
 - Main Idea;
+- Details;
 - Cause/Effect;
 - Inference;
 - Vocabulary;

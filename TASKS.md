@@ -1,413 +1,193 @@
 # JudyQuest — Tasks
 
-## 0. Project Setup
+## Cómo ejecutar este backlog
+
+Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.
+
+Ejecutar R1.0 → R1.1 Lectura → R1.2 Matemáticas → R1.3 integración → R1.4 verificación → R1.5 instalación y prueba del adulto.
+
+R1 se considera terminado según SPEC.md, sección 0. Las funcionalidades R2 y R3 se mantienen pendientes y NO bloquean la primera entrega. Las comprobaciones técnicas se hacen durante el desarrollo; no pedir al adulto instalar/probar antes de completar ambos módulos.
+
+## Preparación ya realizada
 
 - [x] Create repository
 - [x] Select React + TypeScript + Vite as frontend stack
-- [ ] Bootstrap React + TypeScript + Vite application
-- [ ] Configure linting
-- [ ] Configure formatting
-- [ ] Configure unit testing
-- [ ] Configure routing
-- [ ] Create module-based architecture
-- [ ] Add README
 - [x] Add SPEC.md
 - [x] Add PLAN.md
 - [x] Add TASKS.md
 
-## 0.1. PWA & Local-First Foundation
+## R1.0 — Base mínima e inicio
 
-- [ ] Configure PWA support
-- [ ] Create Web App Manifest
-- [ ] Add app name and short name
-- [ ] Add installable app icons
-- [ ] Configure standalone display mode
-- [ ] Configure Service Worker
-- [ ] Cache application shell
-- [ ] Define offline caching strategy
-- [ ] Add offline fallback
-- [ ] Define PWA update strategy
-- [ ] Validate installability on Judy's tablet
-- [ ] Validate launch from home screen
-- [ ] Validate offline launch
-- [ ] Validate offline Math session
-- [ ] Validate offline Reading session
-- [ ] Configure Vercel deployment
-- [ ] Validate HTTPS production deployment
+- [ ] Crear aplicación React + TypeScript + Vite.
+- [ ] Configurar linting, formato, comprobación de tipos y pruebas unitarias.
+- [ ] Configurar routing e inicio con accesos a Lectura y Matemáticas.
+- [ ] Implementar navegación de vuelta al inicio y diseño touch-first para tablet.
+- [ ] Crear ChildProfile, ParentSettings, Subject, Skill, LearningSession y Attempt.
+- [ ] Registrar MathModule y LanguageModule/ReadingModule sin implementar materias futuras.
+- [ ] Crear interfaces ProfileRepository, SettingsRepository, SessionRepository, ProgressRepository, RewardRepository y ChallengeRepository.
+- [ ] Implementar IndexedDB; evaluar/añadir Dexie y definir esquema/migraciones.
+- [ ] Asegurar que los módulos no accedan directamente a IndexedDB.
+- [ ] Preparar manifest, nombre, short name, theme/background, iconos y display standalone.
+- [ ] Configurar service worker, caché del shell y contenido inicial, fallback y estrategia offline.
+- [ ] Definir actualización segura que no interrumpa sesiones.
+- [ ] Comprobar restauración de estado y migración básica sin pérdida de datos.
 
-## 0.2. Local Persistence Architecture
+## R1.1 — Lectura: prioridad por el examen
 
-- [ ] Add IndexedDB persistence
-- [ ] Evaluate/add Dexie as IndexedDB wrapper
-- [ ] Create database schema and versioning strategy
-- [ ] Create ProfileRepository interface
-- [ ] Create ProgressRepository interface
-- [ ] Create SessionRepository interface
-- [ ] Create RewardRepository interface
-- [ ] Create ChallengeRepository interface
-- [ ] Create SettingsRepository interface
-- [ ] Implement IndexedDB repository adapters
-- [ ] Ensure domain modules do not access IndexedDB directly
-- [ ] Persist Reward Ledger locally
-- [ ] Persist mastery locally
-- [ ] Persist XP and streaks locally
-- [ ] Persist Parent Settings locally
-- [ ] Test database migration path
-- [ ] Test application restart with persisted state
+### Contenido y aprendizaje
 
-## 0.3. Future Cloud Sync Boundary
+- [ ] Crear ReadingText, ReadingQuestion, ReadingAttempt, ReadingSession y ReadingSkill.
+- [ ] Definir IDs estables, título, texto, edad, dificultad, wordCount, contentType y habilidades.
+- [ ] Definir opciones, correctAnswer, distractores, explicación y referencia de evidencia por pregunta.
+- [ ] Escribir y revisar mínimo 8 textos breves con 4 preguntas cada uno.
+- [ ] Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE con al menos 4 preguntas por habilidad.
+- [ ] Incluir un ejemplo guiado por cada habilidad, separado de intentos independientes.
+- [ ] Revisar exactitud, claridad y ausencia de respuestas ambiguas.
+- [ ] Dejar el catálogo disponible offline junto con la primera versión.
 
-- [ ] Define optional SyncProvider interface
-- [ ] Keep cloud sync disabled for MVP
-- [ ] Document future multi-device synchronization
-- [ ] Document future remote backup/recovery
-- [ ] Evaluate Supabase only when cloud sync is required
+### Recorrido funcional
 
-## 1. Platform Core
+- [ ] Implementar explicación guiada → lector → preguntas → feedback → resumen.
+- [ ] Permitir consultar el texto mientras se responde.
+- [ ] Implementar preguntas con respuestas verificables, secuencias y selección de evidencia por frases.
+- [ ] Mostrar explicación y evidencia tanto en respuestas correctas como incorrectas.
+- [ ] Implementar inferencias con pistas y explicación del razonamiento.
+- [ ] Mantener Lectura R1 sin cronómetro.
+- [ ] Guardar respuestas, sesión, aciertos y errores por habilidad.
+- [ ] Mostrar resultados básicos sin etiquetar precisión como mastery definitivo.
+- [ ] Recuperar progreso después de cerrar/reabrir.
+- [ ] Verificar una sesión lectora completa con contenido real.
 
-- [ ] ChildProfile
-- [ ] ParentSettings
-- [ ] Subject model
-- [ ] LearningModule interface
-- [ ] Skill model
-- [ ] LearningSession
-- [ ] Attempt base model
-- [ ] Module registry
-- [ ] Persistence abstraction
-- [ ] Restore state after restart
+Temario escolar: pendiente de recibir. Si se proporciona, priorizar sus contenidos y registrar cualquier ampliación necesaria. Esta dependencia informativa no bloquea la implementación y no implica que todo el examen sea comprensión lectora.
 
-## 2. Shared Systems
+## R1.2 — Matemáticas: tablas 1–10
 
-- [ ] Challenge
-- [ ] ChallengeResult
-- [ ] Reward
-- [ ] RewardLedgerEntry
-- [ ] WeeklyBudget
-- [ ] PaymentRecord
-- [ ] Achievement
-- [ ] Streak
-- [ ] SavingsGoal
+- [ ] Crear MultiplicationFact, MathAttempt, MathSession y progreso por tabla.
+- [ ] Crear lecciones de ×1, ×2, ×5, ×10, ×3, ×4, ×6, ×9, ×7 y ×8.
+- [ ] Enseñar grupos, suma repetida, patrones y propiedad conmutativa.
+- [ ] Implementar práctica por tabla y práctica mixta.
+- [ ] Generar preguntas válidas sin repeticiones inmediatas.
+- [ ] Implementar entrada numérica y validación de respuestas.
+- [ ] Registrar precisión y tiempo de respuesta sin exigir velocidad para aprender.
+- [ ] Mostrar feedback y explicación de errores.
+- [ ] Reintroducir errores después de otras preguntas.
+- [ ] Mostrar resumen y guardar sesión, respuestas y resultados por tabla.
+- [ ] Recuperar progreso después de cerrar/reabrir.
+- [ ] Verificar una sesión matemática completa.
 
-## 3. Reward Engine
+## R1.3 — Progreso y recompensa mínima compartida
 
-- [ ] Default limit $100 MXN
-- [ ] Configurable limit
-- [ ] Shared limit across subjects
-- [ ] ONCE rewards
-- [ ] DAILY rewards
-- [ ] WEEKLY rewards
-- [ ] SKILL_MILESTONE
-- [ ] MODULE_MILESTONE
-- [ ] ACHIEVEMENT
-- [ ] BOSS
-- [ ] Partial rewards
-- [ ] Reward ledger
-- [ ] Duplicate prevention
-- [ ] Idempotent reward processing
+- [ ] Mostrar progreso básico de Lectura y Matemáticas desde el inicio.
+- [ ] Implementar XP básico por respuesta correcta independiente.
+- [ ] Persistir XP, sesiones y progreso de ambas materias.
+- [ ] Definir condiciones exactas y monto configurado de un reto semanal sencillo antes de activarlo.
+- [ ] Crear Challenge, ChallengeResult, RewardLedgerEntry, WeeklyBudget y PaymentRecord.
+- [ ] Implementar RewardEngine como única vía para conceder dinero.
+- [ ] Configurar presupuesto global predeterminado de $100 MXN y edición por el adulto.
+- [ ] Definir periodos semanales en America/Mexico_City, de lunes 00:00 al siguiente lunes 00:00 exclusivo.
+- [ ] Implementar clave única por perfil/reto/periodo y procesamiento idempotente.
+- [ ] Guardar finalización, recompensa y consumo de presupuesto en una operación atómica.
+- [ ] Aplicar recompensas parciales sin trasladar automáticamente el resto.
+- [ ] Definir y comprobar finalización con presupuesto agotado y cambios del límite a mitad de semana.
+- [ ] Registrar amountRequested, amountGranted, earnedAt, periodId, weekId, status y reason.
+- [ ] Implementar PIN, consulta de resultados, presupuesto, ledger y marcado como pagado.
+- [ ] Evitar que marcar PAID libere presupuesto semanal.
+- [ ] Mantener práctica y XP activos después del límite.
+- [ ] Evitar dinero por práctica normal o repetición del reto.
 
-## 4. Anti-Farming Tests
+## R1.4 — Verificación técnica antes de entregar
 
-- [ ] Same challenge twice → one payment
-- [ ] Same challenge 20 times → one payment
-- [ ] Boss replay → no money
-- [ ] App reload → no duplicate
-- [ ] App restart → no duplicate
-- [ ] Back navigation → no duplicate
-- [ ] Duplicate reward request → one reward
-- [ ] Weekly cap respected
-- [ ] Partial reward at cap
-- [ ] Cross-subject cap respected
-- [ ] Practice repetition → no money
-- [ ] Easy-content farming → no money
+- [ ] Compilar y comprobar tipos.
+- [ ] Verificar respuestas y feedback de Matemáticas y Lectura.
+- [ ] Verificar cobertura de las ocho habilidades lectoras y revisión editorial.
+- [ ] Comprobar recorridos completos de ambas materias con guardado.
+- [ ] Comprobar cierre/reapertura y conservación de sesiones, XP, ledger y ajustes.
+- [ ] Probar reto repetido dos veces y veinte veces: una sola recompensa.
+- [ ] Probar recarga, reinicio, navegación atrás y solicitud duplicada sin doble recompensa.
+- [ ] Probar dos solicitudes concurrentes sin doble pago ni exceso del presupuesto.
+- [ ] Probar límite compartido entre materias, recompensa parcial y presupuesto agotado.
+- [ ] Probar cambio de semana sin borrar historial, XP ni pagos.
+- [ ] Comprobar que la práctica normal no concede dinero.
+- [ ] Comprobar inicio y sesión de Lectura offline tras preparar caché.
+- [ ] Comprobar inicio y sesión de Matemáticas offline tras preparar caché.
+- [ ] Comprobar actualización segura y persistencia.
+- [ ] Revisar controles táctiles, contraste, lenguaje infantil, navegación y layout de tablet/móvil.
+- [ ] Respetar preferencia de movimiento reducido si hay animaciones.
+- [ ] Configurar despliegue HTTPS, preferentemente Vercel.
+- [ ] Añadir README con ejecución, alcance, instalación, preparación offline y límites del almacenamiento local.
+- [ ] Verificar ambos módulos en la versión desplegada.
+- [ ] Entregar URL e instrucciones cuando ambos módulos cumplan aceptación R1.
 
-## 5. XP & Levels
+## R1.5 — Instalación y prueba del adulto con Judy
 
-- [ ] XP service
-- [ ] Level progression
-- [ ] Correct-answer XP
-- [ ] Mastery XP
-- [ ] Challenge XP
-- [ ] Boss XP
-- [ ] XP after monetary cap
+Este bloque se realiza DESPUÉS de terminar ambos módulos. No marcarlo completado por una comprobación del desarrollador.
 
-## 6. Streaks
+- [ ] El adulto instala la PWA en la tablet.
+- [ ] El adulto verifica apertura desde la pantalla de inicio.
+- [ ] Judy completa una sesión de Lectura.
+- [ ] Judy completa una sesión de Matemáticas.
+- [ ] El adulto comprueba resultados y conservación al cerrar/reabrir.
+- [ ] El adulto prueba offline con contenido previamente disponible.
+- [ ] Registrar fallos, comprensión de instrucciones, dificultad y utilidad para estudiar.
+- [ ] Corregir bloqueos detectados antes de ampliar funcionalidades.
 
-- [ ] Valid session rules
-- [ ] Current streak
-- [ ] Best streak
-- [ ] Prevent one-question farming
+## R2 — Completar el MVP después de la primera prueba
 
-## 7. Mathematics — Domain
+### Dominio y adaptación
 
-- [ ] MultiplicationFact
-- [ ] MathAttempt
-- [ ] MathSession
-- [ ] MathSkillProgress
-- [ ] MathMasteryEngine
-- [ ] MathAdaptiveEngine
-- [ ] MultiplicationEngine
+- [ ] Definir umbrales de mastery: intentos, precisión, días/sesiones, dificultad, ayudas y rendimiento reciente.
+- [ ] Implementar estados matemáticos NEW, LEARNING, PRACTICING, FAMILIAR y MASTERED.
+- [ ] Implementar MathMasteryEngine, MathAdaptiveEngine, weak facts y strong facts.
+- [ ] Implementar ReadingSkillProgress, ReadingMasteryEngine y ReadingAdaptiveEngine.
+- [ ] Ponderar precisión, dificultad, variedad de textos y desempeño reciente en Lectura.
+- [ ] Evitar mastery por repetir preguntas fáciles o memorizar un solo texto.
+- [ ] Priorizar habilidades débiles, errores recientes y habilidades olvidadas.
+- [ ] Ampliar y revisar el catálogo lector según uso real.
+- [ ] Completar modos Detective e Inferencia especializados.
+- [ ] Mantener CHARACTER_INTENT, AUTHOR_INTENT y SUMMARY como expansión posterior, fuera de R1.
 
-## 8. Mathematics — Practice
+### Velocidad y bosses
 
-- [ ] Tables 1–10
-- [ ] Random questions
-- [ ] Mixed tables
-- [ ] Avoid immediate duplicates
-- [ ] Numeric input
-- [ ] Response timing
-- [ ] Feedback
-- [ ] Spaced retry
-- [ ] Session summary
-- [ ] Persistence
+- [ ] Math Speed: timer, accuracy gate, Bronze, Silver, Gold, Platinum y récords personales.
+- [ ] Boss genérico de tabla y bosses ×1–×10.
+- [ ] Boss lector multi-skill, puntuación, precisión mínima y mejor resultado.
+- [ ] Primera victoria con badge, XP y recompensa elegible; replay sin dinero.
+- [ ] Documentar tratamiento de primera victoria sin presupuesto disponible.
+- [ ] Condicionar cualquier timer lector a dominio demostrado; precisión antes que rapidez.
 
-## 9. Mathematics — Learning
+### Sistemas compartidos
 
-- [ ] ×1
-- [ ] ×2
-- [ ] ×3
-- [ ] ×4
-- [ ] ×5
-- [ ] ×6
-- [ ] ×7
-- [ ] ×8
-- [ ] ×9
-- [ ] ×10
-- [ ] Repeated addition
-- [ ] Groups
-- [ ] Commutative property
-- [ ] Tricks
+- [ ] Completar contratos LearningEngine, MasteryEngine, AdaptiveEngine, ChallengeProvider, ProgressProvider y ContentProvider.
+- [ ] Ampliar ChallengeEngine para Math, Reading y misiones entre materias.
+- [ ] Soportar condiciones de precisión, mastery, sesiones, tiempo, racha, bosses y combinaciones.
+- [ ] Completar ONCE, DAILY, WEEKLY, SKILL_MILESTONE, MODULE_MILESTONE, ACHIEVEMENT y BOSS.
+- [ ] Definir cancelaciones y eventos del ledger preservando trazabilidad.
+- [ ] Completar pruebas de abuso para todos los tipos de recompensa.
+- [ ] Completar XP por dificultad, sesión perfecta, mastery, retos y bosses; reducir XP de replay donde corresponda.
+- [ ] Implementar niveles y progresión.
+- [ ] Implementar actividad mínima de racha, currentStreak y bestStreak; una pregunta no basta.
+- [ ] Implementar achievements y celebraciones.
+- [ ] Implementar misión semanal con condiciones de Matemáticas y Lectura.
+- [ ] Conservar XP, mastery, bosses, logros, pagos e historial al cambiar la semana.
+- [ ] Resolver cambios de reloj y límites de protección local; el PIN no equivale a seguridad de servidor.
 
-## 10. Mathematics — Mastery
+### Paneles, metas y calidad
 
-- [ ] NEW
-- [ ] LEARNING
-- [ ] PRACTICING
-- [ ] FAMILIAR
-- [ ] MASTERED
-- [ ] Accuracy
-- [ ] Speed
-- [ ] Practice days
-- [ ] Recent performance
-- [ ] Weak facts
-- [ ] Strong facts
+- [ ] Completar Child Home: nivel, racha, dinero semanal, disponible, siguiente reto, misión y logros.
+- [ ] Crear dashboard reusable por materia con fortalezas, debilidades, mastery y progreso reciente.
+- [ ] Completar Parent Dashboard: actividad, mejora, estadísticas por materia, pagos y ajustes de recompensas.
+- [ ] Permitir activar/desactivar retos desde Parent Mode.
+- [ ] Implementar SavingsGoal: nombre, objetivo, progreso, edición del adulto y completado.
+- [ ] Añadir exportación/restauración local y recuperación del PIN.
+- [ ] Completar animaciones de bosses/recompensas, controles de sonido y reduced motion.
+- [ ] Revisar analytics locales de sesiones, intentos, habilidad, tiempos, retos y recompensas.
+- [ ] Completar pruebas de XP, rachas, mastery, contratos de módulos y persistencia.
+- [ ] Validar utilidad, duración de sesiones, dificultad y equilibrio de recompensas con uso real.
+- [ ] Aceptar el MVP completo antes de iniciar nuevas materias.
 
-## 11. Mathematics — Speed
+## R3 — Nuevas materias; no bloquean R1 ni su instalación
 
-- [ ] Timer
-- [ ] Accuracy gate
-- [ ] Bronze
-- [ ] Silver
-- [ ] Gold
-- [ ] Platinum
-- [ ] Personal records
-
-## 12. Mathematics — Bosses
-
-- [ ] Generic Table Boss
-- [ ] Boss ×1
-- [ ] Boss ×2
-- [ ] Boss ×3
-- [ ] Boss ×4
-- [ ] Boss ×5
-- [ ] Boss ×6
-- [ ] Boss ×7
-- [ ] Boss ×8
-- [ ] Boss ×9
-- [ ] Boss ×10
-- [ ] First-clear reward
-- [ ] Replay without money
-
-## 13. Language Module
-
-- [ ] Create LanguageModule
-- [ ] Register ReadingModule
-- [ ] Reserve SpellingModule
-- [ ] Reserve VocabularyModule
-- [ ] Reserve GrammarModule
-
-## 14. Reading — Domain
-
-- [ ] ReadingText
-- [ ] ReadingQuestion
-- [ ] ReadingAttempt
-- [ ] ReadingSession
-- [ ] ReadingSkill
-- [ ] ReadingDifficulty
-- [ ] ReadingSkillProgress
-- [ ] ReadingMasteryEngine
-- [ ] ReadingAdaptiveEngine
-
-## 15. Reading — Skills
-
-- [ ] LITERAL
-- [ ] SEQUENCE
-- [ ] MAIN_IDEA
-- [ ] DETAILS
-- [ ] CAUSE_EFFECT
-- [ ] INFERENCE
-- [ ] CONTEXT_VOCABULARY
-- [ ] EVIDENCE
-- [ ] CHARACTER_INTENT
-- [ ] AUTHOR_INTENT
-- [ ] SUMMARY
-
-## 16. Reading — Content
-
-- [ ] Content schema
-- [ ] Age range
-- [ ] Difficulty
-- [ ] Word count
-- [ ] Content type
-- [ ] Supported skills
-- [ ] Questions
-- [ ] Distractors
-- [ ] Explanations
-- [ ] Evidence references
-
-## 17. Reading — Practice
-
-- [ ] Text reader
-- [ ] Questions
-- [ ] Save answers
-- [ ] Correct feedback
-- [ ] Incorrect feedback
-- [ ] Explanation
-- [ ] Evidence
-- [ ] Session summary
-- [ ] Persistence
-
-## 18. Reading — Learning
-
-- [ ] Literal explanation
-- [ ] Sequence explanation
-- [ ] Main Idea explanation
-- [ ] Cause/Effect explanation
-- [ ] Inference explanation
-- [ ] Vocabulary explanation
-- [ ] Evidence explanation
-- [ ] Guided examples
-- [ ] Independent examples
-
-## 19. Reading — Detective Mode
-
-- [ ] Evidence questions
-- [ ] Sentence selection
-- [ ] Evidence validation
-- [ ] Feedback
-- [ ] Mastery tracking
-
-## 20. Reading — Inference Mode
-
-- [ ] Inference exercises
-- [ ] Clues
-- [ ] Explanation
-- [ ] Accuracy tracking
-- [ ] Adaptive difficulty
-
-## 21. Reading — Mastery
-
-- [ ] Mastery per skill
-- [ ] Accuracy weighting
-- [ ] Difficulty weighting
-- [ ] Recent performance
-- [ ] Practice days
-- [ ] Text variety
-- [ ] Prevent easy-question mastery
-- [ ] Weak skills
-- [ ] Strong skills
-
-## 22. Reading — Bosses
-
-- [ ] Generic Reading Boss
-- [ ] Multi-skill challenge
-- [ ] Score
-- [ ] Accuracy requirement
-- [ ] First clear
-- [ ] Best score
-- [ ] First-clear reward
-- [ ] Replay without money
-
-## 23. Shared Challenge Engine
-
-- [ ] Math challenges
-- [ ] Reading challenges
-- [ ] Cross-module challenges
-- [ ] Accuracy conditions
-- [ ] Mastery conditions
-- [ ] Session conditions
-- [ ] Time conditions
-- [ ] Streak conditions
-- [ ] Boss conditions
-- [ ] Multiple simultaneous conditions
-
-## 24. Cross-Module Missions
-
-- [ ] Math activity requirement
-- [ ] Reading activity requirement
-- [ ] Mixed mastery requirement
-- [ ] Weekly mission reward
-- [ ] Anti-farming validation
-
-## 25. Child Home
-
-- [ ] Level
-- [ ] XP
-- [ ] Streak
-- [ ] Weekly money
-- [ ] Remaining weekly money
-- [ ] Subject cards
-- [ ] Next challenge
-- [ ] Weekly mission
-- [ ] Achievements
-
-## 26. Parent Mode
-
-- [ ] PIN
-- [ ] Weekly limit
-- [ ] Edit weekly limit
-- [ ] Weekly earnings
-- [ ] Pending payments
-- [ ] Paid rewards
-- [ ] Mark as paid
-- [ ] Reward Ledger
-- [ ] Math analytics
-- [ ] Reading analytics
-- [ ] Subject-level progress
-
-## 27. Weekly Reset
-
-- [ ] Week identifier
-- [ ] Detect new week
-- [ ] Reset weekly earnings
-- [ ] Reset WEEKLY eligibility
-- [ ] Preserve XP
-- [ ] Preserve mastery
-- [ ] Preserve history
-- [ ] Preserve bosses
-- [ ] Preserve achievements
-
-## 28. Savings Goals
-
-- [ ] Create goal
-- [ ] Goal name
-- [ ] Target amount
-- [ ] Progress
-- [ ] Parent edit
-- [ ] Mark completed
-
-## 29. UX & Accessibility
-
-- [ ] Mobile-first
-- [ ] Tablet layout
-- [ ] Large touch targets
-- [ ] Child-friendly language
-- [ ] Positive feedback
-- [ ] Celebration animations
-- [ ] Boss animations
-- [ ] Reward animations
-- [ ] Sound toggle
-- [ ] Reduced motion
-- [ ] Accessible contrast
+Las secciones siguientes conservan identificadores históricos. Ejecutarlas después de estabilizar Matemáticas y Lectura; ajustar el orden según las necesidades de Judy.
 
 ## 30. Phase 2 — Spelling Module
 
@@ -540,41 +320,10 @@
 - [ ] Mixed bosses
 - [ ] Unlockable areas
 
-# MVP Release Checklist
 
-- [ ] Judy can choose Math or Reading
-- [ ] Math Learning works
-- [ ] Math Practice works
-- [ ] Math adapts to weak facts
-- [ ] Math Speed works
-- [ ] Math Boss works
-- [ ] Reading works
-- [ ] Reading skill tracking works
-- [ ] Reading adapts to weaknesses
-- [ ] Inference works
-- [ ] Evidence exercises work
-- [ ] Reading Boss works
-- [ ] XP works
-- [ ] Streaks work
-- [ ] Weekly default is $100 MXN
-- [ ] Budget is shared
-- [ ] Rewards cannot be farmed
-- [ ] XP continues after $100
-- [ ] Parent can change weekly limit
-- [ ] Parent can inspect weaknesses
-- [ ] Parent can mark rewards paid
-- [ ] State survives restart
-- [ ] Reward ledger survives restart
-- [ ] Anti-farming tests pass
+## Evolución técnica fuera del MVP
 
-# Official Future Modules Checklist
-
-- [ ] Español — Ortografía
-- [ ] Español — Vocabulario
-- [ ] Español — Gramática
-- [ ] Inglés
-- [ ] Ciencias
-- [ ] Geografía
-- [ ] Historia
-- [ ] Matemáticas avanzadas
-- [ ] Adventure Mode
+- [ ] Documentar sincronización futura entre dispositivos y consulta del adulto desde su teléfono.
+- [ ] Incorporar SyncProvider solo cuando corresponda implementar sincronización.
+- [ ] Evaluar proveedor cloud, respaldo y recuperación remotos en esa fase.
+- [ ] Mantener cloud sync deshabilitado y sin dependencias cloud en el MVP.

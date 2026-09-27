@@ -1,517 +1,132 @@
 # JudyQuest — Implementation Plan
 
-## Phase 0 — Technical Foundation
+## Prioridad y regla de ejecución
 
-Definir JudyQuest como PWA local-first.
+Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.
 
-Stack oficial:
+Entregar primero R1 con Matemáticas y Comprensión Lectora completas en el alcance de SPEC.md, sección 0. Priorizar Lectura por la urgencia escolar. El adulto instalará y probará después de terminar ambos módulos.
 
-- React;
-- TypeScript;
-- Vite;
-- PWA / Service Worker;
-- Web App Manifest;
-- IndexedDB;
-- Dexie recomendado como capa de persistencia.
+Orden: base mínima → Lectura → Matemáticas → integración y controles → verificación técnica → instalación y prueba → MVP completo → nuevas materias.
 
-Objetivo de distribución inicial:
+No interpretar el catálogo de funcionalidades futuras como trabajo obligatorio antes de R1. Mantener TASKS.md actualizado con evidencia real; no marcar implementación por haber escrito documentación.
 
-URL
-→ instalar en pantalla de inicio
-→ ejecutar como aplicación standalone en la tablet.
+## R1.0 — Base mínima e inicio
 
-No implementar backend en el MVP.
+- Crear React + TypeScript + Vite, linting, pruebas unitarias y routing.
+- Crear inicio touch-first para tablet con dos accesos: Lectura y Matemáticas.
+- Configurar perfil infantil y ajustes del adulto; evitar construir dashboards completos.
+- Implementar solo los contratos necesarios: ProfileRepository, SettingsRepository, SessionRepository, ProgressRepository, RewardRepository y ChallengeRepository.
+- Usar IndexedDB, con Dexie recomendado, detrás de los repositories.
+- Crear esquema versionado y persistencia desde el primer recorrido funcional.
+- Preparar manifest, iconos, service worker, caché del shell y del contenido inicial, fallback offline y actualización que no interrumpa sesiones.
+- Mantener MathModule y LanguageModule/ReadingModule independientes de IndexedDB y del dinero.
+- Sin backend ni sincronización cloud en R1 o en el MVP.
 
-### Persistence Architecture
+Salida: inicio navegable y base persistente preparada para construir las dos materias. No solicitar todavía la instalación del usuario.
 
-Definir interfaces:
+## R1.1 — Comprensión Lectora funcional (primera prioridad)
 
-ProfileRepository
+### Contenido inicial
 
-ProgressRepository
+- Modelo ReadingText/ReadingQuestion con identificador estable, texto, dificultad, habilidad, opciones, respuesta, explicación y evidencia.
+- Mínimo 8 textos breves y 4 preguntas por texto.
+- Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE con al menos 4 preguntas por habilidad.
+- Añadir un ejemplo guiado por habilidad.
+- Revisar claridad, respuestas y evidencia antes de habilitar el contenido.
+- Incorporar el temario del examen si el adulto lo proporciona; no inventar sus contenidos ni bloquear la base lectora mientras llega.
 
-SessionRepository
+### Recorrido completo
 
-RewardRepository
+Explicación guiada → texto → pregunta → respuesta → feedback → evidencia y explicación → resumen → guardado → inicio.
 
-ChallengeRepository
+- Mantener el texto consultable y no usar cronómetro.
+- Resolver secuencias con un formato verificable y evidencia mediante selección de frases.
+- Registrar aciertos y errores por habilidad, diferenciando ejemplos guiados de práctica independiente.
+- Conservar respuestas y resultados al reiniciar.
+- No esperar a motores adaptativos, bosses ni mastery avanzado para completar este recorrido.
 
-SettingsRepository
+Salida: una sesión lectora completa con contenido real, feedback explicativo y progreso persistente.
 
-Implementación inicial:
+## R1.2 — Matemáticas funcionales
 
-Repository interfaces
-↓
-IndexedDB adapter
+- Modelos MultiplicationFact, MathAttempt y MathSession.
+- Tablas del 1 al 10; aprendizaje de grupos, suma repetida, patrones y conmutatividad.
+- Progresión sugerida: ×1, ×2, ×5, ×10, ×3, ×4, ×6, ×9, ×7, ×8.
+- Práctica por tabla y mixta, entrada numérica y prevención de repeticiones inmediatas.
+- Registrar respuestas, precisión y tiempos sin convertir la velocidad en barrera de acceso.
+- Ofrecer corrección explicativa y reintroducir errores después de otras preguntas.
+- Guardar sesión, resumen y resultados por tabla.
+- Posponer Speed, tiers, bosses y mastery/adaptación avanzados.
 
-Los motores educativos y sistemas globales no deben depender directamente de IndexedDB.
+Salida: una sesión matemática completa, desde aprendizaje hasta resumen guardado.
 
-### PWA Foundation
+## R1.3 — Integración mínima compartida
 
-Implementar:
+- Mostrar progreso básico de ambas materias y XP de respuestas correctas independientes.
+- Añadir un único reto semanal sencillo; concretar condiciones y monto configurado antes de activarlo.
+- Implementar RewardEngine central con límite global de $100 MXN por defecto, periodos, duplicados, recompensa parcial y ledger.
+- Usar America/Mexico_City para el periodo semanal, de lunes 00:00 hasta el siguiente lunes 00:00 exclusivo.
+- Registrar finalización y recompensa de forma atómica con unicidad por perfil/reto/periodo; no generar dinero directamente desde las materias.
+- Precisar antes de activar el reto cómo se registra una finalización con presupuesto agotado, los cambios del límite y el estado pagado.
+- Parent Mode mínimo con PIN: resultados por materia, presupuesto, ledger y marcado como pagado.
+- No descontar del gasto semanal una recompensa por marcarla como pagada.
+- Mantener práctica y XP disponibles al alcanzar el límite.
 
-- manifest;
-- app icons;
-- standalone display;
-- Service Worker;
-- application-shell cache;
-- offline strategy;
-- offline fallback;
-- update strategy.
+Salida: aprendizaje, progreso y un reto integrados para ambas materias.
 
-Validar instalación real en tablet.
+## R1.4 — Verificación técnica y preparación de entrega
 
-### Deployment
+Estas comprobaciones corresponden al desarrollo; la instalación y prueba del adulto siguen después de terminar ambos módulos.
 
-Usar Vercel como deployment inicial recomendado.
+- Compilar y comprobar tipos.
+- Verificar flujo completo de Lectura y Matemáticas, corrección y persistencia.
+- Revisar contenido lector y cobertura de las ocho habilidades.
+- Probar pago duplicado, concurrencia, cap entre materias, recompensa parcial, cambio de semana y continuidad de práctica sin dinero.
+- Comprobar inicio y sesiones de ambas materias offline después de preparar caché.
+- Comprobar cierre/reapertura y actualización segura sin perder datos.
+- Revisar navegación y controles táctiles en tamaños de tablet y móvil.
+- Preparar despliegue HTTPS, preferentemente Vercel, compatible con cualquier hosting estático.
+- Crear README con ejecución, alcance R1, instalación, uso offline y límites del almacenamiento local.
+- Entregar URL e instrucciones solamente cuando ambos módulos cumplan la aceptación R1.
 
-Mantener la aplicación compatible con hosting estático HTTPS.
+Salida: versión candidata R1 con verificación documentada; no equivale a aprobación del usuario ni a instalación realizada.
 
-### Future Sync Boundary
+## R1.5 — Instalación y prueba con Judy
 
-Dejar preparado un adapter de sincronización futuro sin implementarlo en el MVP.
+Ahora sí, después de terminar ambos módulos:
 
-Evolución prevista:
+1. El adulto instala desde la URL en la tablet.
+2. Verifica apertura desde la pantalla de inicio.
+3. Judy completa una sesión lectora y una matemática.
+4. Comprueban resultados y conservación al cerrar/reabrir.
+5. Prueban sin conexión con el contenido ya descargado.
+6. Registran errores, claridad de instrucciones, dificultad y comprensión de los textos.
+7. Corregir fallos que impidan estudiar antes de ampliar funcionalidades.
 
-IndexedDB local
-+
-optional cloud sync
+Priorizar la utilidad para el repaso de Español. La entrega no presupone conocer todo el temario ni garantiza un resultado de examen.
 
-Supabase puede evaluarse cuando se requiera:
+## R2 — Completar el MVP después de la primera prueba
 
-- sincronización entre dispositivos;
-- dashboard del adulto desde otro dispositivo;
-- backups;
-- recuperación remota.
+Implementar incrementalmente y validar cada mejora:
 
-## Phase 1 — Platform Foundation
+1. Definir criterios medibles de mastery por habilidad: intentos mínimos, precisión, sesiones/días, dificultad, ayudas y desempeño reciente.
+2. MathMasteryEngine y MathAdaptiveEngine; ReadingMasteryEngine y ReadingAdaptiveEngine.
+3. Ampliar y revisar catálogo lector; variar textos para distinguir comprensión de memorización.
+4. Math Speed: precisión mínima, tiempos, tiers Bronze/Silver/Gold/Platinum y récords.
+5. Bosses por tabla y boss lector multi-skill con first-clear reward y replay sin dinero.
+6. Ampliar ChallengeEngine y tipos de recompensas: ONCE, DAILY, WEEKLY, SKILL_MILESTONE, MODULE_MILESTONE, ACHIEVEMENT y BOSS.
+7. Completar reglas de ledger, cancelaciones, idempotencia y pruebas de abuso.
+8. Niveles, rachas con actividad mínima, logros y celebraciones.
+9. Misiones entre materias, dashboards completos, estadísticas y metas de ahorro.
+10. Modos Detective e Inferencia especializados, reutilizando la práctica básica de evidencia e inferencia de R1.
+11. Respaldo/restauración local, recuperación del PIN y endurecimiento frente a cambios de reloj.
+12. Consolidar pruebas de contratos de módulos y criterios del MVP completo.
 
-Crear:
+No añadir nuevas materias antes de estabilizar Matemáticas y Lectura con uso real. CHARACTER_INTENT, AUTHOR_INTENT y SUMMARY son expansiones posteriores de Lectura, no requisitos R1.
 
-- app shell;
-- routing;
-- Child Profile;
-- Parent Profile;
-- Parent PIN;
-- persistence;
-- settings;
-- module registry.
+## R3 — Nuevas materias y expansión
 
-La arquitectura debe soportar múltiples materias desde el inicio.
-
-## Phase 2 — Shared Domain
-
-Crear:
-
-UserProfile
-
-ParentSettings
-
-LearningModule
-
-Subject
-
-Skill
-
-LearningSession
-
-Attempt
-
-Challenge
-
-ChallengeResult
-
-Reward
-
-RewardLedgerEntry
-
-Achievement
-
-Streak
-
-WeeklyBudget
-
-PaymentRecord
-
-SavingsGoal
-
-## Phase 3 — Learning Module Contract
-
-Definir interfaces comunes:
-
-LearningEngine
-
-MasteryEngine
-
-AdaptiveEngine
-
-ChallengeProvider
-
-ProgressProvider
-
-ContentProvider
-
-Cada materia implementará su propia lógica educativa.
-
-## Phase 4 — Reward Engine
-
-Implementar:
-
-weeklyLimit = 100 MXN
-
-Proceso:
-
-1. validar challenge;
-2. comprobar reward period;
-3. consultar ledger;
-4. evitar duplicados;
-5. comprobar cap;
-6. calcular partial reward;
-7. registrar reward.
-
-## Phase 5 — Anti-Farming
-
-Implementar:
-
-- unique claims;
-- reward periods;
-- shared weekly cap;
-- idempotency;
-- immutable ledger;
-- no-money normal practice;
-- challenge randomization.
-
-Crear tests de abuso.
-
-## Phase 6 — XP, Levels, Streaks & Achievements
-
-Crear sistemas globales independientes del dinero.
-
-## Phase 7 — Mathematics Domain
-
-Crear:
-
-MultiplicationFact
-
-MathAttempt
-
-MathSession
-
-MathSkillProgress
-
-MultiplicationEngine
-
-MathMasteryEngine
-
-MathAdaptiveEngine
-
-## Phase 8 — Math Practice
-
-Implementar:
-
-- question generation;
-- answers;
-- timing;
-- feedback;
-- persistence;
-- spaced retry;
-- session summary.
-
-## Phase 9 — Math Mastery
-
-Usar:
-
-- accuracy;
-- speed;
-- practice days;
-- recent performance;
-- attempts.
-
-Estados:
-
-NEW
-
-LEARNING
-
-PRACTICING
-
-FAMILIAR
-
-MASTERED
-
-## Phase 10 — Math Learning
-
-Lecciones para:
-
-×1  
-×2  
-×5  
-×10  
-×3  
-×4  
-×6  
-×9  
-×7  
-×8
-
-## Phase 11 — Math Speed
-
-Crear:
-
-- timed runs;
-- accuracy gate;
-- Bronze;
-- Silver;
-- Gold;
-- Platinum;
-- records.
-
-## Phase 12 — Math Bosses
-
-Crear bosses por tabla y first-clear rewards.
-
-## Phase 13 — Language Module Foundation
-
-Crear LanguageModule como contenedor de:
-
-ReadingModule
-
-SpellingModule
-
-VocabularyModule
-
-GrammarModule
-
-Solo ReadingModule se implementa en MVP.
-
-## Phase 14 — Reading Domain
-
-Crear:
-
-ReadingText
-
-ReadingQuestion
-
-ReadingAttempt
-
-ReadingSession
-
-ReadingSkill
-
-ReadingSkillProgress
-
-ReadingDifficulty
-
-ReadingMasteryEngine
-
-ReadingAdaptiveEngine
-
-## Phase 15 — Reading Content Engine
-
-Metadata:
-
-id
-
-title
-
-text
-
-ageRange
-
-difficulty
-
-wordCount
-
-contentType
-
-skillsSupported
-
-questions
-
-Cada pregunta incluye:
-
-skill
-
-correctAnswer
-
-distractors
-
-explanation
-
-evidence
-
-difficulty
-
-## Phase 16 — Reading Practice
-
-Crear:
-
-- reader;
-- questions;
-- answer validation;
-- feedback;
-- explanations;
-- evidence;
-- session summary.
-
-## Phase 17 — Reading Skills
-
-Implementar MVP:
-
-LITERAL
-
-SEQUENCE
-
-MAIN_IDEA
-
-DETAILS
-
-CAUSE_EFFECT
-
-INFERENCE
-
-CONTEXT_VOCABULARY
-
-EVIDENCE
-
-Después:
-
-CHARACTER_INTENT
-
-AUTHOR_INTENT
-
-SUMMARY
-
-## Phase 18 — Reading Adaptive Engine
-
-Priorizar:
-
-- weak skills;
-- recent errors;
-- forgotten skills;
-- appropriate difficulty.
-
-## Phase 19 — Detective Mode
-
-Implementar selección de evidencia textual.
-
-## Phase 20 — Inference Mode
-
-Crear ejercicios con:
-
-clues
-
-reasoning
-
-conclusion
-
-explanation
-
-## Phase 21 — Reading Bosses
-
-Crear retos multi-skill.
-
-First clear:
-
-XP + reward + badge.
-
-Replay:
-
-sin reward monetario.
-
-## Phase 22 — Shared Challenge Engine
-
-Soportar:
-
-- Math;
-- Reading;
-- future modules;
-- cross-module missions.
-
-Requirements:
-
-accuracy
-
-mastery
-
-sessions
-
-time
-
-streak
-
-bosses
-
-skills
-
-module combinations
-
-## Phase 23 — Cross-Module Missions
-
-Crear misiones que requieran trabajo en más de una materia.
-
-## Phase 24 — Child Home
-
-Mostrar:
-
-- XP;
-- level;
-- streak;
-- weekly money;
-- materias;
-- next challenge;
-- weekly mission;
-- achievements.
-
-## Phase 25 — Subject Dashboards
-
-Crear componente reusable.
-
-Math añade:
-
-- tables;
-- weak facts;
-- speed records.
-
-Reading añade:
-
-- skill mastery;
-- comprehension;
-- weak skills.
-
-## Phase 26 — Parent Dashboard
-
-General:
-
-- weekly cap;
-- earnings;
-- pending payments;
-- reward ledger;
-- session activity.
-
-Por materia:
-
-- mastery;
-- accuracy;
-- weaknesses;
-- progress.
-
-## Phase 27 — Savings Goals
-
-Crear metas de ahorro visuales.
-
-## Phase 28 — MVP Validation
-
-Validar con uso real antes de añadir nuevas materias.
-
-Revisar:
-
-- engagement;
-- session length;
-- reward balance;
-- difficulty;
-- mastery reliability;
-- reading question quality.
+El orden puede ajustarse según las necesidades reales de Judy. Las siguientes fases conservan sus identificadores históricos como referencia; todas comienzan después de R1 y del MVP estabilizado.
 
 ## Phase 29 — Spelling Module
 
@@ -714,76 +329,11 @@ RewardEngine
 
 XPSystem
 
-## Phase 38 — Analytics
 
-Registrar:
+## Evolución técnica posterior
 
-sessions
-
-attempts
-
-skill progression
-
-mastery
-
-response time
-
-challenge outcomes
-
-reward events
-
-## Phase 39 — Testing
-
-Tests:
-
-RewardEngine
-
-RewardLedger
-
-WeeklyBudget
-
-ChallengeEngine
-
-XP
-
-Streaks
-
-Math
-
-Reading
-
-Future module contracts
-
-## Phase 40 — Roadmap Order
-
-### MVP
-
-Core  
-Math  
-Reading
-
-### Phase 2
-
-Spelling  
-Vocabulary
-
-### Phase 3
-
-English
-
-### Phase 4
-
-Science
-
-### Phase 5
-
-Geography  
-History
-
-### Phase 6
-
-Grammar  
-Math Expansion  
-Adventure Mode
-
-El orden puede modificarse según las necesidades reales observadas.
+- Mantener la persistencia detrás de repositories para añadir un SyncProvider cuando sea necesario.
+- Cloud sync, consulta desde el teléfono del adulto, recuperación remota y múltiples dispositivos quedan fuera del MVP.
+- Evaluar proveedor cloud en esa fase, sin incorporarlo como dependencia anticipada.
+- Registrar sesiones, respuestas, progreso y recompensas desde R1; las gráficas y análisis avanzados llegan en R2.
+- Ejecutar pruebas relevantes con cada entrega; no posponerlas hasta acabar el roadmap.
