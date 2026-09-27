@@ -1,5 +1,9 @@
 # JudyQuest — Tasks
 
+## Estado actual
+
+Código R1 implementado; pruebas automatizadas aprobadas. Las casillas de comprobación en tablet, instalación, offline real y prueba con Judy permanecen pendientes. Los checks de implementación no significan aceptación del usuario.
+
 ## Cómo ejecutar este backlog
 
 Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.
@@ -18,47 +22,47 @@ R1 se considera terminado según SPEC.md, sección 0. Las funcionalidades R2 y R
 
 ## R1.0 — Base mínima e inicio
 
-- [ ] Crear aplicación React + TypeScript + Vite.
-- [ ] Configurar linting, formato, comprobación de tipos y pruebas unitarias.
-- [ ] Configurar routing e inicio con accesos a Lectura y Matemáticas.
-- [ ] Implementar navegación de vuelta al inicio y diseño touch-first para tablet.
-- [ ] Crear ChildProfile, ParentSettings, Subject, Skill, LearningSession y Attempt.
-- [ ] Registrar MathModule y LanguageModule/ReadingModule sin implementar materias futuras.
-- [ ] Crear interfaces ProfileRepository, SettingsRepository, SessionRepository, ProgressRepository, RewardRepository y ChallengeRepository.
-- [ ] Implementar IndexedDB; evaluar/añadir Dexie y definir esquema/migraciones.
-- [ ] Asegurar que los módulos no accedan directamente a IndexedDB.
-- [ ] Preparar manifest, nombre, short name, theme/background, iconos y display standalone.
-- [ ] Configurar service worker, caché del shell y contenido inicial, fallback y estrategia offline.
-- [ ] Definir actualización segura que no interrumpa sesiones.
+- [x] Crear aplicación React + TypeScript + Vite.
+- [x] Configurar linting, formato, comprobación de tipos y pruebas unitarias.
+- [x] Configurar routing e inicio con accesos a Lectura y Matemáticas.
+- [x] Implementar navegación de vuelta al inicio y diseño touch-first para tablet.
+- [x] Crear ChildProfile, ParentSettings, Subject, Skill, LearningSession y Attempt.
+- [x] Registrar MathModule y LanguageModule/ReadingModule sin implementar materias futuras.
+- [x] Crear interfaces ProfileRepository, SettingsRepository, SessionRepository, ProgressRepository, RewardRepository y ChallengeRepository.
+- [x] Implementar IndexedDB; evaluar/añadir Dexie y definir esquema/migraciones.
+- [x] Asegurar que los módulos no accedan directamente a IndexedDB.
+- [x] Preparar manifest, nombre, short name, theme/background, iconos y display standalone.
+- [x] Configurar service worker, caché del shell y contenido inicial, fallback y estrategia offline.
+- [x] Definir actualización segura que no interrumpa sesiones.
 - [ ] Comprobar restauración de estado y migración básica sin pérdida de datos.
 
 ## R1.1 — Español: Lectura y repaso del temario confirmado
 
 ### Contenido y aprendizaje
 
-- [ ] Crear ReadingText, ReadingQuestion, ReadingAttempt, ReadingSession y ReadingSkill.
-- [ ] Definir IDs estables, título, texto, edad, dificultad, wordCount, contentType y habilidades.
-- [ ] Definir opciones, correctAnswer, distractores, explicación y referencia de evidencia por pregunta.
-- [ ] Crear y revisar 2 relatos históricos breves, 2 fábulas y 4 refranes con situaciones de ejemplo.
-- [ ] Incluir al menos 4 preguntas por relato/fábula y una actividad de interpretación por refrán.
-- [ ] Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE al menos una vez en el conjunto.
-- [ ] Verificar hechos de los relatos históricos reales; no presentar ficción como historia real.
-- [ ] Incluir un ejemplo guiado por cada habilidad, separado de intentos independientes.
-- [ ] Revisar exactitud, claridad y ausencia de respuestas ambiguas.
-- [ ] Dejar el catálogo disponible offline junto con la primera versión.
+- [x] Crear ReadingText, ReadingQuestion, ReadingAttempt, ReadingSession y ReadingSkill.
+- [x] Definir IDs estables, título, texto, edad, dificultad, wordCount, contentType y habilidades.
+- [x] Definir opciones, correctAnswer, distractores, explicación y referencia de evidencia por pregunta.
+- [x] Crear y revisar 2 relatos históricos breves, 2 fábulas y 4 refranes con situaciones de ejemplo.
+- [x] Incluir al menos 4 preguntas por relato/fábula y una actividad de interpretación por refrán.
+- [x] Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE al menos una vez en el conjunto.
+- [x] Verificar hechos de los relatos históricos reales; no presentar ficción como historia real.
+- [x] Incluir un ejemplo guiado por cada habilidad, separado de intentos independientes.
+- [x] Revisar exactitud, claridad y ausencia de respuestas ambiguas.
+- [x] Dejar el catálogo disponible offline junto con la primera versión.
 
 ### Recorrido funcional
 
-- [ ] Implementar explicación guiada → lector → preguntas → feedback → resumen.
-- [ ] Permitir consultar el texto mientras se responde.
-- [ ] Implementar preguntas con respuestas verificables, secuencias y selección de evidencia por frases.
-- [ ] Mostrar explicación y evidencia tanto en respuestas correctas como incorrectas.
-- [ ] Implementar inferencias con pistas y explicación del razonamiento.
-- [ ] Mantener Lectura R1 sin cronómetro.
-- [ ] Guardar respuestas, sesión, aciertos y errores por habilidad.
-- [ ] Mostrar resultados básicos sin etiquetar precisión como mastery definitivo.
-- [ ] Recuperar progreso después de cerrar/reabrir.
-- [ ] Verificar una sesión lectora completa con contenido real.
+- [x] Implementar explicación guiada → lector → preguntas → feedback → resumen.
+- [x] Permitir consultar el texto mientras se responde.
+- [x] Implementar preguntas con respuestas verificables, secuencias y selección de evidencia por frases.
+- [x] Mostrar explicación y evidencia tanto en respuestas correctas como incorrectas.
+- [x] Implementar inferencias con pistas y explicación del razonamiento.
+- [x] Mantener Lectura R1 sin cronómetro.
+- [x] Guardar respuestas, sesión, aciertos y errores por habilidad.
+- [x] Mostrar resultados básicos sin etiquetar precisión como mastery definitivo.
+- [x] Recuperar progreso después de cerrar/reabrir.
+- [x] Verificar una sesión lectora completa con contenido real.
 
 ### Repaso específico de Español — obligatorio en R1
 
@@ -69,85 +73,85 @@ Temario recibido por fotografía el 27 de septiembre de 2026:
 
 Las páginas completas y las palabras exactas de clase no están disponibles. El adulto autorizó un banco de palabras cotidianas; continuar sin esperar más fotos ni listas.
 
-- [ ] Añadir orden de acontecimientos y reconocimiento de expresiones de sucesión temporal.
-- [ ] Añadir relaciones de causa y consecuencia.
-- [ ] Explicar y practicar separación de párrafos y agrupación por idea.
-- [ ] Explicar el signo «;» y crear ejercicios inequívocos de punto y coma.
-- [ ] Evitar penalizar otras puntuaciones válidas en preguntas abiertas.
-- [ ] Practicar moralejas con justificación en la fábula.
-- [ ] Relacionar refranes con situaciones y explicar su sentido implícito.
-- [ ] Añadir práctica de completar b/v con feedback y repaso de errores.
+- [x] Añadir orden de acontecimientos y reconocimiento de expresiones de sucesión temporal.
+- [x] Añadir relaciones de causa y consecuencia.
+- [x] Explicar y practicar separación de párrafos y agrupación por idea.
+- [x] Explicar el signo «;» y crear ejercicios inequívocos de punto y coma.
+- [x] Evitar penalizar otras puntuaciones válidas en preguntas abiertas.
+- [x] Practicar moralejas con justificación en la fábula.
+- [x] Relacionar refranes con situaciones y explicar su sentido implícito.
+- [x] Añadir práctica de completar b/v con feedback y repaso de errores.
 - [x] Crear content/spanish/bv-common-words.v1.json con 24 palabras cotidianas, tres niveles, frases, huecos b/v y feedback; validar estructura y soluciones.
-- [ ] Integrar el banco inicial en completar b/v y dictado; identificarlo como práctica general.
-- [ ] Añadir edición de palabras desde Parent Mode.
-- [ ] Alternar sesiones de 6–8 palabras y reintroducir las falladas después de otras preguntas.
-- [ ] Ocultar palabra, frase escrita y solución durante el dictado infantil; el adulto lee el contexto en voz alta.
-- [ ] Evitar enseñar una distinción artificial de pronunciación entre b y v.
-- [ ] Implementar dictado con el adulto: consulta protegida, regreso a pantalla infantil sin respuesta visible, respuesta escrita y corrección.
-- [ ] Hacer funcionar el dictado básico offline sin audio automático ni reconocimiento de voz.
-- [ ] Diferenciar errores b/v, tildes y otros; normalizar espacios y mayúsculas.
-- [ ] Registrar PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING y DICTATION sin mezclarlos con precisión lectora.
-- [ ] Integrar un repaso de todos los bloques con resumen de errores por tema.
-- [ ] Mantener estos ejercicios acotados dentro de LanguageModule; posponer SpellingModule/GrammarModule completos.
+- [x] Integrar el banco inicial en completar b/v y dictado; identificarlo como práctica general.
+- [x] Añadir edición de palabras desde Parent Mode.
+- [x] Alternar sesiones de 6–8 palabras y reintroducir las falladas después de otras preguntas.
+- [x] Ocultar palabra, frase escrita y solución durante el dictado infantil; el adulto lee el contexto en voz alta.
+- [x] Evitar enseñar una distinción artificial de pronunciación entre b y v.
+- [x] Implementar dictado con el adulto: consulta protegida, regreso a pantalla infantil sin respuesta visible, respuesta escrita y corrección.
+- [x] Hacer funcionar el dictado básico offline sin audio automático ni reconocimiento de voz.
+- [x] Diferenciar errores b/v, tildes y otros; normalizar espacios y mayúsculas.
+- [x] Registrar PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING y DICTATION sin mezclarlos con precisión lectora.
+- [x] Integrar un repaso de todos los bloques con resumen de errores por tema.
+- [x] Mantener estos ejercicios acotados dentro de LanguageModule; posponer SpellingModule/GrammarModule completos.
 
 ## R1.2 — Matemáticas: tablas 1–10
 
-- [ ] Crear MultiplicationFact, MathAttempt, MathSession y progreso por tabla.
-- [ ] Crear lecciones de ×1, ×2, ×5, ×10, ×3, ×4, ×6, ×9, ×7 y ×8.
-- [ ] Enseñar grupos, suma repetida, patrones y propiedad conmutativa.
-- [ ] Implementar práctica por tabla y práctica mixta.
-- [ ] Generar preguntas válidas sin repeticiones inmediatas.
-- [ ] Implementar entrada numérica y validación de respuestas.
-- [ ] Registrar precisión y tiempo de respuesta sin exigir velocidad para aprender.
-- [ ] Mostrar feedback y explicación de errores.
-- [ ] Reintroducir errores después de otras preguntas.
-- [ ] Mostrar resumen y guardar sesión, respuestas y resultados por tabla.
-- [ ] Recuperar progreso después de cerrar/reabrir.
-- [ ] Verificar una sesión matemática completa.
+- [x] Crear MultiplicationFact, MathAttempt, MathSession y progreso por tabla.
+- [x] Crear lecciones de ×1, ×2, ×5, ×10, ×3, ×4, ×6, ×9, ×7 y ×8.
+- [x] Enseñar grupos, suma repetida, patrones y propiedad conmutativa.
+- [x] Implementar práctica por tabla y práctica mixta.
+- [x] Generar preguntas válidas sin repeticiones inmediatas.
+- [x] Implementar entrada numérica y validación de respuestas.
+- [x] Registrar precisión y tiempo de respuesta sin exigir velocidad para aprender.
+- [x] Mostrar feedback y explicación de errores.
+- [x] Reintroducir errores después de otras preguntas.
+- [x] Mostrar resumen y guardar sesión, respuestas y resultados por tabla.
+- [x] Recuperar progreso después de cerrar/reabrir.
+- [x] Verificar una sesión matemática completa.
 
 ## R1.3 — Progreso y recompensa mínima compartida
 
-- [ ] Mostrar progreso básico de Lectura y Matemáticas desde el inicio.
-- [ ] Implementar XP básico por respuesta correcta independiente.
-- [ ] Persistir XP, sesiones y progreso de ambas materias.
-- [ ] Definir condiciones exactas y monto configurado de un reto semanal sencillo antes de activarlo.
-- [ ] Crear Challenge, ChallengeResult, RewardLedgerEntry, WeeklyBudget y PaymentRecord.
-- [ ] Implementar RewardEngine como única vía para conceder dinero.
-- [ ] Configurar presupuesto global predeterminado de $100 MXN y edición por el adulto.
-- [ ] Definir periodos semanales en America/Mexico_City, de lunes 00:00 al siguiente lunes 00:00 exclusivo.
-- [ ] Implementar clave única por perfil/reto/periodo y procesamiento idempotente.
-- [ ] Guardar finalización, recompensa y consumo de presupuesto en una operación atómica.
-- [ ] Aplicar recompensas parciales sin trasladar automáticamente el resto.
-- [ ] Definir y comprobar finalización con presupuesto agotado y cambios del límite a mitad de semana.
-- [ ] Registrar amountRequested, amountGranted, earnedAt, periodId, weekId, status y reason.
-- [ ] Implementar PIN, consulta de resultados, presupuesto, ledger y marcado como pagado.
-- [ ] Evitar que marcar PAID libere presupuesto semanal.
-- [ ] Mantener práctica y XP activos después del límite.
-- [ ] Evitar dinero por práctica normal o repetición del reto.
+- [x] Mostrar progreso básico de Lectura y Matemáticas desde el inicio.
+- [x] Implementar XP básico por respuesta correcta independiente.
+- [x] Persistir XP, sesiones y progreso de ambas materias.
+- [x] Definir condiciones exactas y monto configurado de un reto semanal sencillo antes de activarlo.
+- [x] Crear Challenge, ChallengeResult, RewardLedgerEntry, WeeklyBudget y PaymentRecord.
+- [x] Implementar RewardEngine como única vía para conceder dinero.
+- [x] Configurar presupuesto global predeterminado de $100 MXN y edición por el adulto.
+- [x] Definir periodos semanales en America/Mexico_City, de lunes 00:00 al siguiente lunes 00:00 exclusivo.
+- [x] Implementar clave única por perfil/reto/periodo y procesamiento idempotente.
+- [x] Guardar finalización, recompensa y consumo de presupuesto en una operación atómica.
+- [x] Aplicar recompensas parciales sin trasladar automáticamente el resto.
+- [x] Definir y comprobar finalización con presupuesto agotado y cambios del límite a mitad de semana.
+- [x] Registrar amountRequested, amountGranted, earnedAt, periodId, weekId, status y reason.
+- [x] Implementar PIN, consulta de resultados, presupuesto, ledger y marcado como pagado.
+- [x] Evitar que marcar PAID libere presupuesto semanal.
+- [x] Mantener práctica y XP activos después del límite.
+- [x] Evitar dinero por práctica normal o repetición del reto.
 
 ## R1.4 — Verificación técnica antes de entregar
 
-- [ ] Compilar y comprobar tipos.
-- [ ] Verificar respuestas y feedback de Matemáticas y Lectura.
-- [ ] Verificar cobertura de las ocho habilidades lectoras, temas del examen y revisión editorial.
+- [x] Compilar y comprobar tipos.
+- [x] Verificar respuestas y feedback de Matemáticas y Lectura.
+- [x] Verificar cobertura de las ocho habilidades lectoras, temas del examen y revisión editorial.
 - [ ] Verificar párrafos, punto y coma «;», moralejas/refranes, b/v y dictado con respuesta oculta.
 - [ ] Comprobar edición del banco de palabras, clasificación de errores y guardado por tema.
 - [ ] Comprobar dictado con adulto y repaso específico de Español offline.
 - [ ] Comprobar recorridos completos de ambas materias con guardado.
 - [ ] Comprobar cierre/reapertura y conservación de sesiones, XP, ledger y ajustes.
-- [ ] Probar reto repetido dos veces y veinte veces: una sola recompensa.
+- [x] Probar reto repetido dos veces y veinte veces: una sola recompensa.
 - [ ] Probar recarga, reinicio, navegación atrás y solicitud duplicada sin doble recompensa.
-- [ ] Probar dos solicitudes concurrentes sin doble pago ni exceso del presupuesto.
-- [ ] Probar límite compartido entre materias, recompensa parcial y presupuesto agotado.
-- [ ] Probar cambio de semana sin borrar historial, XP ni pagos.
-- [ ] Comprobar que la práctica normal no concede dinero.
+- [x] Probar dos solicitudes concurrentes sin doble pago ni exceso del presupuesto.
+- [x] Probar límite compartido entre materias, recompensa parcial y presupuesto agotado.
+- [x] Probar cambio de semana sin borrar historial, XP ni pagos.
+- [x] Comprobar que la práctica normal no concede dinero.
 - [ ] Comprobar inicio y sesión de Lectura offline tras preparar caché.
 - [ ] Comprobar inicio y sesión de Matemáticas offline tras preparar caché.
 - [ ] Comprobar actualización segura y persistencia.
 - [ ] Revisar controles táctiles, contraste, lenguaje infantil, navegación y layout de tablet/móvil.
-- [ ] Respetar preferencia de movimiento reducido si hay animaciones.
+- [x] Respetar preferencia de movimiento reducido si hay animaciones.
 - [ ] Configurar despliegue HTTPS, preferentemente Vercel.
-- [ ] Añadir README con ejecución, alcance, instalación, preparación offline y límites del almacenamiento local.
+- [x] Añadir README con ejecución, alcance, instalación, preparación offline y límites del almacenamiento local.
 - [ ] Verificar ambos módulos en la versión desplegada.
 - [ ] Entregar URL e instrucciones cuando ambos módulos cumplan aceptación R1.
 

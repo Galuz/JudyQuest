@@ -1,5 +1,9 @@
 # JudyQuest — Implementation Plan
 
+## Estado de implementación
+
+R1 implementada en React/TypeScript: Español, Matemáticas, sesiones persistentes, XP, reto semanal, PIN y PWA. Se verifican tipos, build, lint, pruebas automatizadas y recorridos en navegador. La prueba de instalación/offline en la tablet corresponde a R1.5 y no se marca realizada. README.md documenta reglas concretas, uso y límites.
+
 ## Prioridad y regla de ejecución
 
 Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.

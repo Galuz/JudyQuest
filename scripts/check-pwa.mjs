@@ -1,0 +1,12 @@
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import assert from 'node:assert/strict';
+const sw=readFileSync('dist/sw.js','utf8');
+const manifest=JSON.parse(readFileSync('dist/manifest.webmanifest','utf8'));
+assert.equal(manifest.display,'standalone');
+assert.equal(manifest.start_url,'/');
+const cached=[...sw.matchAll(/url:"([^"]+)"/g)].map(x=>x[1]);
+for(const p of cached)assert(existsSync(`dist/${p}`),`Missing precached asset ${p}`);
+for(const p of ['index.html','manifest.webmanifest',...manifest.icons.map(i=>i.src.replace(/^\//,'')),...readdirSync('dist/assets').filter(p=>/\.(js|css|woff2)$/.test(p)).map(p=>`assets/${p}`)])assert(cached.includes(p),`Not precached: ${p}`);
+const html=readFileSync('dist/index.html','utf8');
+assert(!/https?:\/\//.test(html),'Shell depends on external assets');
+console.log(`PWA verified: ${new Set(cached).size} cached assets; shell, fonts, bundled content and icons included.`);

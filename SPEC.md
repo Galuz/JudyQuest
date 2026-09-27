@@ -84,7 +84,7 @@ La dificultad es una propuesta didáctica inicial y podrá ajustarse al desempe�
 - No enseñar una diferencia artificial de pronunciación entre b y v.
 - Ocultar tanto la palabra como la frase escrita y la solución durante el dictado infantil.
 - Registrar las tildes por separado: una tilde omitida no implica que haya fallado la elección de b/v.
-- El banco ya existe como contenido; su interfaz, almacenamiento de intentos e integración con la app siguen pendientes.
+- El banco está integrado en completar b/v, dictado y edición del adulto; los intentos y resultados se guardan localmente. La instalación y validación en la tablet siguen pendientes del adulto.
 
 ### Criterios de aceptación de R1
 
