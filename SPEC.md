@@ -22,6 +22,7 @@ La urgencia orienta las prioridades; no constituye una promesa de que la aplicac
 | --- | --- | --- |
 | Inicio | Elegir Lectura o Matemáticas, volver al inicio y consultar progreso básico. | Dashboards completos y personalización. |
 | Lectura | Explicación guiada, lectura, preguntas, corrección, evidencia, explicación del error, resumen y guardado. Habilidades: LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE. | Adaptación avanzada, mastery formal, bosses, temporizadores y modos especializados independientes. |
+| Español: repaso del examen | Párrafos, punto y coma, moralejas/refranes, b/v y dictado con apoyo del adulto; resultados por tema. | Módulos completos de Ortografía y Gramática, audio automático y reconocimiento de voz. |
 | Matemáticas | Tablas 1–10; lecciones de grupos, suma repetida y conmutatividad; práctica por tabla y mixta; entrada numérica; corrección; repaso de errores; resumen y guardado. | Speed, tiers, bosses y adaptación/mastery avanzados. |
 | Progreso | Sesiones, respuestas y aciertos por tabla/habilidad; XP básico. | Niveles, rachas, logros y gráficas avanzadas. |
 | Recompensas | Un reto semanal sencillo, RewardEngine central, pago único por periodo, ledger, límite global y Parent Mode mínimo con PIN. | Catálogo de retos, recompensas por bosses/hitos, misiones complejas y metas de ahorro. |
@@ -29,19 +30,48 @@ La urgencia orienta las prioridades; no constituye una promesa de que la aplicac
 
 R1 es una primera entrega utilizable, previa al MVP completo descrito en la sección 43. Las características posteriores se conservan en el roadmap, pero no bloquean la instalación ni la primera prueba de R1.
 
-### Contenido de Lectura para R1
+### Contenido de Español para R1
 
-- Incluir un catálogo inicial concreto: mínimo 8 textos breves, 4 preguntas por texto y al menos 4 preguntas por cada una de las 8 habilidades R1.
+- Catálogo inicial enfocado al examen: 2 relatos históricos breves, 2 fábulas y 4 refranes con situaciones de ejemplo. Al menos 4 preguntas por relato/fábula y una actividad de interpretación por refrán; cubrir las 8 habilidades lectoras R1 al menos una vez en el conjunto. Este catálogo sustituye el requisito anterior de 8 textos genéricos.
 - Cada pregunta debe incluir respuesta verificable, explicación y evidencia textual; revisar manualmente que no haya respuestas ambiguas.
 - Incorporar al menos un ejemplo guiado por habilidad. Estos ejemplos no cuentan como intentos independientes.
 - Permitir consultar el texto al responder; no imponer cronómetro en Lectura R1.
 - Incluir lectura de secuencias e identificación de idea principal y evidencias.
-- No asumir que comprensión lectora cubre todo el examen de Español. El temario escolar está pendiente de recibir; avanzar con este alcance sin bloquear el desarrollo.
-- Si se recibe el temario, priorizar dentro del módulo el contenido correspondiente y registrar cualquier ampliación explícita de alcance.
+- Temario recibido del adulto mediante fotografía el 27 de septiembre de 2026. Incorporar los contenidos siguientes a R1; no tratarlos como ampliaciones opcionales.
+- La imagen aporta temas y referencias de páginas, no el contenido del libro ni la lista de palabras trabajadas en clase. No afirmar que se han revisado esas páginas.
+
+### Temario confirmado — examen de Español del 28 de septiembre
+
+| Bloque de la fotografía | Referencia indicada | Actividad R1 |
+| --- | --- | --- |
+| Relatos históricos: hechos en orden temporal | pp. 12–27 | Ordenar acontecimientos e identificar expresiones de sucesión temporal en el relato. |
+| Relatos históricos: causa y consecuencia | pp. 12–27 | Relacionar qué ocurrió, por qué ocurrió y qué sucedió como resultado. |
+| Párrafos | pp. 12–27 | Reconocer límites de párrafo y agrupar oraciones que desarrollan una misma idea. |
+| Punto y coma | pp. 12–27 | Explicación breve y ejercicios de uso del signo «;» en contextos inequívocos. Practicar específicamente «;», además de los conocimientos previos sobre punto («.») y coma («,»). |
+| Fábulas y refranes: moraleja y significado implícito | pp. 28–31 | Identificar y justificar la moraleja; relacionar refranes con situaciones y explicar su sentido no literal. |
+| Ortografía: dictado y uso de b y v en palabras trabajadas en clase | Sin páginas indicadas | Completar b/v y escribir palabras dictadas; explicar cada corrección y volver a practicar errores. |
+
+### Ajuste de alcance del módulo de Español
+
+R1 conserva ReadingModule y añade un bloque acotado de repaso de Español dentro de LanguageModule: párrafos, punto y coma, moralejas/refranes y ortografía b/v con dictado.
+
+Estos ejercicios son obligatorios en R1. No requieren construir el SpellingModule o GrammarModule completos del roadmap. Registrar resultados con habilidades específicas (PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING, DICTATION), separadas de las ocho habilidades de comprensión lectora.
+
+- Reutilizar sesiones, corrección, guardado y controles compartidos.
+- Usar contenidos originales; para relatos históricos basados en hechos reales, verificar hechos antes de publicarlos. No presentar narraciones inventadas como historia real.
+- Punto y coma: aceptar variantes válidas o plantear selección de ejemplos con una respuesta inequívoca; no marcar como universal una única puntuación posible.
+- Preparar un banco editable de palabras b/v desde Parent Mode. Mientras no lleguen las palabras de clase, usar un banco provisional claramente identificado como práctica general.
+- Dictado R1: el adulto consulta la palabra en Parent Mode, vuelve a la pantalla infantil con la respuesta oculta y dicta en voz alta. Judy escribe y la aplicación corrige.
+- El dictado básico debe funcionar offline; audio automático y reconocimiento de voz no son requisitos R1.
+- Distinguir en el feedback un error b/v de una tilde u otro error ortográfico; no penalizar como error de b/v una diferencia de mayúsculas o espacios.
+- No condicionar la entrega a recibir fotos adicionales. Incorporar después las palabras escolares cuando estén disponibles.
+- El repaso integra todos los bloques del temario y muestra errores por tema; sin cronómetro ni barrera monetaria para volver a practicar.
 
 ### Criterios de aceptación de R1
 
 - Judy puede completar una sesión de Lectura y una de Matemáticas, recibir explicación de errores y consultar sus resultados.
+- Puede practicar todos los bloques del temario de Español: orden temporal, causa/consecuencia, párrafos, punto y coma, moralejas/refranes y b/v con dictado.
+- Los resultados distinguen comprensión lectora, estructura/puntuación, interpretación y ortografía; el dictado no muestra la respuesta antes de contestar.
 - Ambas materias conservan sesiones, respuestas y progreso después de cerrar y reabrir.
 - Los contenidos iniciales de ambos módulos funcionan offline tras la primera carga y la preparación de su caché.
 - El reto semanal utiliza el mismo RewardEngine y presupuesto global; recargar, repetir o enviar dos veces no duplica dinero.
@@ -284,7 +314,7 @@ Habilidades:
 
 ## 5. Future Learning Modules
 
-Los siguientes módulos forman parte oficial del roadmap, aunque no son necesarios para liberar el MVP.
+Los siguientes módulos completos forman parte oficial del roadmap, aunque no son necesarios para liberar el MVP. Excepción acotada: los ejercicios de b/v, dictado, párrafos y punto y coma del temario confirmado sí forman parte de R1 (sección 0), sin exigir estos módulos completos.
 
 ### Español / Lengua — Expansiones
 
@@ -1206,6 +1236,8 @@ El MVP completo incluye únicamente:
 - Evidence;
 - Adaptive Learning;
 - Reading Boss.
+
+También se conservan las actividades de repaso de Español incluidas desde R1: párrafos, punto y coma, moralejas/refranes, b/v y dictado asistido por el adulto.
 
 ## 44. Post-MVP Roadmap
 

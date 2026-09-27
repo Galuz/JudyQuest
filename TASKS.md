@@ -32,15 +32,17 @@ R1 se considera terminado según SPEC.md, sección 0. Las funcionalidades R2 y R
 - [ ] Definir actualización segura que no interrumpa sesiones.
 - [ ] Comprobar restauración de estado y migración básica sin pérdida de datos.
 
-## R1.1 — Lectura: prioridad por el examen
+## R1.1 — Español: Lectura y repaso del temario confirmado
 
 ### Contenido y aprendizaje
 
 - [ ] Crear ReadingText, ReadingQuestion, ReadingAttempt, ReadingSession y ReadingSkill.
 - [ ] Definir IDs estables, título, texto, edad, dificultad, wordCount, contentType y habilidades.
 - [ ] Definir opciones, correctAnswer, distractores, explicación y referencia de evidencia por pregunta.
-- [ ] Escribir y revisar mínimo 8 textos breves con 4 preguntas cada uno.
-- [ ] Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE con al menos 4 preguntas por habilidad.
+- [ ] Crear y revisar 2 relatos históricos breves, 2 fábulas y 4 refranes con situaciones de ejemplo.
+- [ ] Incluir al menos 4 preguntas por relato/fábula y una actividad de interpretación por refrán.
+- [ ] Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE al menos una vez en el conjunto.
+- [ ] Verificar hechos de los relatos históricos reales; no presentar ficción como historia real.
 - [ ] Incluir un ejemplo guiado por cada habilidad, separado de intentos independientes.
 - [ ] Revisar exactitud, claridad y ausencia de respuestas ambiguas.
 - [ ] Dejar el catálogo disponible offline junto con la primera versión.
@@ -58,7 +60,30 @@ R1 se considera terminado según SPEC.md, sección 0. Las funcionalidades R2 y R
 - [ ] Recuperar progreso después de cerrar/reabrir.
 - [ ] Verificar una sesión lectora completa con contenido real.
 
-Temario escolar: pendiente de recibir. Si se proporciona, priorizar sus contenidos y registrar cualquier ampliación necesaria. Esta dependencia informativa no bloquea la implementación y no implica que todo el examen sea comprensión lectora.
+### Repaso específico de Español — obligatorio en R1
+
+Temario recibido por fotografía el 27 de septiembre de 2026:
+- Relatos históricos: orden temporal, causa y consecuencia, párrafos y punto y coma (pp. 12–27).
+- Fábulas y refranes: moraleja y significado implícito (pp. 28–31).
+- Ortografía: dictado y uso de b/v en las palabras trabajadas en clase.
+
+Las páginas completas y las palabras exactas de clase no están disponibles. La práctica inicial será original y el banco b/v provisional; no bloquear la entrega por esta información pendiente.
+
+- [ ] Añadir orden de acontecimientos y reconocimiento de expresiones de sucesión temporal.
+- [ ] Añadir relaciones de causa y consecuencia.
+- [ ] Explicar y practicar separación de párrafos y agrupación por idea.
+- [ ] Explicar el signo «;» y crear ejercicios inequívocos de punto y coma.
+- [ ] Evitar penalizar otras puntuaciones válidas en preguntas abiertas.
+- [ ] Practicar moralejas con justificación en la fábula.
+- [ ] Relacionar refranes con situaciones y explicar su sentido implícito.
+- [ ] Añadir práctica de completar b/v con feedback y repaso de errores.
+- [ ] Añadir banco editable de palabras desde Parent Mode; identificar el inicial como práctica general.
+- [ ] Implementar dictado con el adulto: consulta protegida, regreso a pantalla infantil sin respuesta visible, respuesta escrita y corrección.
+- [ ] Hacer funcionar el dictado básico offline sin audio automático ni reconocimiento de voz.
+- [ ] Diferenciar errores b/v, tildes y otros; normalizar espacios y mayúsculas.
+- [ ] Registrar PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING y DICTATION sin mezclarlos con precisión lectora.
+- [ ] Integrar un repaso de todos los bloques con resumen de errores por tema.
+- [ ] Mantener estos ejercicios acotados dentro de LanguageModule; posponer SpellingModule/GrammarModule completos.
 
 ## R1.2 — Matemáticas: tablas 1–10
 
@@ -99,7 +124,10 @@ Temario escolar: pendiente de recibir. Si se proporciona, priorizar sus contenid
 
 - [ ] Compilar y comprobar tipos.
 - [ ] Verificar respuestas y feedback de Matemáticas y Lectura.
-- [ ] Verificar cobertura de las ocho habilidades lectoras y revisión editorial.
+- [ ] Verificar cobertura de las ocho habilidades lectoras, temas del examen y revisión editorial.
+- [ ] Verificar párrafos, punto y coma «;», moralejas/refranes, b/v y dictado con respuesta oculta.
+- [ ] Comprobar edición del banco de palabras, clasificación de errores y guardado por tema.
+- [ ] Comprobar dictado con adulto y repaso específico de Español offline.
 - [ ] Comprobar recorridos completos de ambas materias con guardado.
 - [ ] Comprobar cierre/reapertura y conservación de sesiones, XP, ledger y ajustes.
 - [ ] Probar reto repetido dos veces y veinte veces: una sola recompensa.
@@ -124,7 +152,8 @@ Este bloque se realiza DESPUÉS de terminar ambos módulos. No marcarlo completa
 
 - [ ] El adulto instala la PWA en la tablet.
 - [ ] El adulto verifica apertura desde la pantalla de inicio.
-- [ ] Judy completa una sesión de Lectura.
+- [ ] Judy completa una sesión de Lectura y el repaso de los temas de Español.
+- [ ] El adulto realiza un dictado con Judy y revisan sus errores.
 - [ ] Judy completa una sesión de Matemáticas.
 - [ ] El adulto comprueba resultados y conservación al cerrar/reabrir.
 - [ ] El adulto prueba offline con contenido previamente disponible.

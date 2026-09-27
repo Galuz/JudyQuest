@@ -24,16 +24,18 @@ No interpretar el catálogo de funcionalidades futuras como trabajo obligatorio 
 
 Salida: inicio navegable y base persistente preparada para construir las dos materias. No solicitar todavía la instalación del usuario.
 
-## R1.1 — Comprensión Lectora funcional (primera prioridad)
+## R1.1 — Español: Lectura y repaso del temario (primera prioridad)
 
 ### Contenido inicial
 
 - Modelo ReadingText/ReadingQuestion con identificador estable, texto, dificultad, habilidad, opciones, respuesta, explicación y evidencia.
-- Mínimo 8 textos breves y 4 preguntas por texto.
-- Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE con al menos 4 preguntas por habilidad.
+- Catálogo: 2 relatos históricos breves, 2 fábulas y 4 refranes con situaciones. Al menos 4 preguntas por relato/fábula y una interpretación por refrán.
+- Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE al menos una vez en el conjunto.
 - Añadir un ejemplo guiado por habilidad.
 - Revisar claridad, respuestas y evidencia antes de habilitar el contenido.
-- Incorporar el temario del examen si el adulto lo proporciona; no inventar sus contenidos ni bloquear la base lectora mientras llega.
+- Aplicar el temario recibido el 27 de septiembre: relatos históricos (orden temporal, causa/consecuencia, párrafos y punto y coma; pp. 12–27), fábulas/refranes (moraleja y significado implícito; pp. 28–31) y dictado/b-v con palabras de clase.
+- Las páginas del libro y palabras exactas no se han proporcionado. Crear práctica original y mantener editable el banco provisional b/v sin afirmar correspondencia exacta con el libro.
+- Verificar los hechos de los relatos históricos reales y la interpretación de fábulas/refranes antes de publicar.
 
 ### Recorrido completo
 
@@ -45,7 +47,22 @@ Explicación guiada → texto → pregunta → respuesta → feedback → eviden
 - Conservar respuestas y resultados al reiniciar.
 - No esperar a motores adaptativos, bosses ni mastery avanzado para completar este recorrido.
 
-Salida: una sesión lectora completa con contenido real, feedback explicativo y progreso persistente.
+### Repaso específico del examen — obligatorio en R1
+
+1. Relatos: ordenar hechos, identificar marcadores temporales y vincular causas/consecuencias.
+2. Párrafos: reconocer separaciones y agrupar oraciones por idea.
+3. Punto y coma: explicar y practicar el signo «;» con ejercicios inequívocos.
+4. Fábulas y refranes: identificar moralejas y relacionar significado implícito con situaciones.
+5. Ortografía: completar b/v, corregir con explicación y repetir palabras falladas.
+6. Dictado offline con adulto: consultar palabra en Parent Mode, ocultarla al volver a la pantalla infantil, dictar, recibir respuesta escrita y corregir.
+
+Registrar PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING y DICTATION separadamente de las habilidades lectoras. No construir todavía SpellingModule ni GrammarModule completos.
+
+Añadir banco b/v editable desde Parent Mode. Usar palabras provisionales identificadas como práctica general hasta recibir las trabajadas en clase. Diferenciar errores b/v de tildes u otros errores; normalizar espacios y mayúsculas.
+
+No depender de audio automático, reconocimiento de voz ni conexión para dictado. Incluir repaso de todos los bloques con feedback por tema y sin cronómetro.
+
+Salida: sesión lectora y actividades de todos los temas de Español, con explicaciones y resultados persistentes.
 
 ## R1.2 — Matemáticas funcionales
 
@@ -80,7 +97,9 @@ Estas comprobaciones corresponden al desarrollo; la instalación y prueba del ad
 
 - Compilar y comprobar tipos.
 - Verificar flujo completo de Lectura y Matemáticas, corrección y persistencia.
-- Revisar contenido lector y cobertura de las ocho habilidades.
+- Revisar contenido lector, cobertura de las ocho habilidades y todos los bloques del temario confirmado.
+- Verificar ejercicios de párrafos, signo «;», moralejas/refranes, b/v y dictado con respuesta oculta.
+- Comprobar que el banco de palabras se puede editar y los errores se clasifican correctamente.
 - Probar pago duplicado, concurrencia, cap entre materias, recompensa parcial, cambio de semana y continuidad de práctica sin dinero.
 - Comprobar inicio y sesiones de ambas materias offline después de preparar caché.
 - Comprobar cierre/reapertura y actualización segura sin perder datos.
@@ -97,13 +116,13 @@ Ahora sí, después de terminar ambos módulos:
 
 1. El adulto instala desde la URL en la tablet.
 2. Verifica apertura desde la pantalla de inicio.
-3. Judy completa una sesión lectora y una matemática.
+3. Judy completa una sesión lectora, el repaso de Español (incluido dictado con el adulto) y una sesión matemática.
 4. Comprueban resultados y conservación al cerrar/reabrir.
 5. Prueban sin conexión con el contenido ya descargado.
 6. Registran errores, claridad de instrucciones, dificultad y comprensión de los textos.
 7. Corregir fallos que impidan estudiar antes de ampliar funcionalidades.
 
-Priorizar la utilidad para el repaso de Español. La entrega no presupone conocer todo el temario ni garantiza un resultado de examen.
+Priorizar la utilidad para el repaso de Español. El temario general está confirmado; las páginas del libro y las palabras exactas de clase siguen pendientes. No presentar la práctica general como reproducción del examen.
 
 ## R2 — Completar el MVP después de la primera prueba
 
