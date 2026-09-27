@@ -2,6 +2,13 @@ import type { Passage, Question, WordEntry } from "../domain/types";
 import bank from "../../content/spanish/bv-common-words.v1.json";
 import { shuffle } from "../domain/engines";
 export const words: WordEntry[] = bank.words;
+// Keep the notebook list separate from suggested practice, and preserve its order.
+export const classroomWords = bank.classroomConfirmed.map((id) =>
+  words.find((w) => w.id === id)!,
+);
+export const supplementalVWords = bank.supplementalV.map((id) =>
+  words.find((w) => w.id === id)!,
+);
 export const skillNames: Record<string, string> = {
   VOCABULARY: "Aprender palabras nuevas",
   LITERAL: "Lo que dice el texto",

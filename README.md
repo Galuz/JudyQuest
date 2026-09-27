@@ -44,7 +44,9 @@ No uses navegación privada ni borres los datos del navegador: el progreso es lo
 
 En Español, elige **Dictado con un adulto**. En cada palabra, el adulto abre la tarjeta con su PIN, lee la frase y pulsa **Ocultar y dar la tablet a Judy** antes de devolverla. Se ocultan tanto la palabra como la frase escrita. Judy escribe la palabra; se distinguen errores b/v de tildes y otros errores.
 
-El banco inicial contiene 24 palabras cotidianas. No se presenta como lista exacta del salón ni como ranking de frecuencia. Se puede reemplazar en Adultos; las sesiones ya empezadas conservan su contenido original.
+El banco general contiene 34 palabras: las 24 iniciales, siete con b confirmadas del cuaderno y tres nuevas con v. No se presenta como ranking de frecuencia. Se puede reemplazar en Adultos; las sesiones ya empezadas conservan su contenido original.
+
+En Español → **Palabras de mi cuaderno** se pueden practicar o dictar las siete confirmadas juntas: bebamos, cabían, cabemos, deberíamos, habría, sabiendo y saben. La práctica adicional con v usa vivir, volver, vamos, venimos, ventana, vecino y viajar; no se presenta como lista confirmada del salón. Estos accesos usan las listas del cuaderno/práctica adicional incluso si el adulto personalizó el banco general, sin modificar esa personalización. La corrección del dictado distingue tildes y b/v. No requiere migrar ni borrar el avance guardado.
 
 ## Economía R1
 

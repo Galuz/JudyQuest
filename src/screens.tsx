@@ -26,6 +26,8 @@ import { challengeProgress, mathQuestions, weekId } from "./domain/engines";
 import { repositories } from "./data/repositories";
 import {
   bvQuestions,
+  classroomWords,
+  supplementalVWords,
   dictationQuestions,
   examQuestions,
   lessons,
@@ -215,6 +217,63 @@ export function Spanish() {
         </span>
       </div>
       <VocabularyInvitation reading />
+      <section className="panel">
+        <p className="eyebrow">REPASO DE ORTOGRAFÍA</p>
+        <h2>Palabras de mi cuaderno</h2>
+        <p>
+          Estas siete palabras con b están en tu cuaderno:{" "}
+          <strong>{classroomWords.map((w) => w.word).join(", ")}</strong>.
+        </p>
+        <div className="button-row">
+          <button
+            className="primary"
+            disabled={busy}
+            onClick={() =>
+              void start(
+                "spanish",
+                "Las 7 palabras con b de mi cuaderno",
+                "bv",
+                bvQuestions(classroomWords, classroomWords.length),
+              )
+            }
+          >
+            Practicar las 7 con b
+          </button>
+          <button
+            className="secondary"
+            disabled={busy}
+            onClick={() =>
+              void start(
+                "spanish",
+                "Dictado: las 7 palabras de mi cuaderno",
+                "dictation",
+                dictationQuestions(classroomWords, classroomWords.length),
+              )
+            }
+          >
+            Dictar las 7 con b <Headphones size={18} />
+          </button>
+        </div>
+        <p>
+          También puedes practicar con v:{" "}
+          {supplementalVWords.map((w) => w.word).join(", ")}. Son palabras
+          extra; no sabemos cuáles anotaron en clase.
+        </p>
+        <button
+          className="secondary"
+          disabled={busy}
+          onClick={() =>
+            void start(
+              "spanish",
+              "Palabras extra con v",
+              "bv",
+              bvQuestions(supplementalVWords, supplementalVWords.length),
+            )
+          }
+        >
+          Practicar palabras con v
+        </button>
+      </section>
       <section className="exam-banner">
         <div>
           <span className="chip">REPASO DEL EXAMEN</span>

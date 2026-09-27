@@ -3,7 +3,25 @@
   "id": "es-bv-cotidianas-v1",
   "locale": "es-MX",
   "title": "Palabras cotidianas con b y v",
-  "selection": "Selección didáctica de casa y escuela; no es un ranking de frecuencia ni la lista exacta del salón.",
+  "selection": "Banco general de práctica. El grupo classroomConfirmed contiene las siete palabras con b del cuaderno, confirmadas por el adulto. El grupo supplementalV es práctica adicional, no una lista confirmada del salón.",
+  "classroomConfirmed": [
+    "es-bv-025",
+    "es-bv-026",
+    "es-bv-027",
+    "es-bv-028",
+    "es-bv-029",
+    "es-bv-030",
+    "es-bv-031"
+  ],
+  "supplementalV": [
+    "es-bv-022",
+    "es-bv-021",
+    "es-bv-032",
+    "es-bv-033",
+    "es-bv-007",
+    "es-bv-014",
+    "es-bv-034"
+  ],
   "levels": [
     {
       "id": 1,
@@ -290,6 +308,86 @@
         "answers": ["v"]
       },
       "feedback": "Así se escribe: «avión». Lleva v. Mira cada letra con calma."
+    },
+    {
+      "id": "es-bv-025",
+      "word": "bebamos",
+      "level": 3,
+      "dictationSentence": "Bebamos agua después de jugar.",
+      "completion": { "prompt": "_e_amos", "answers": ["b", "b"] },
+      "feedback": "«Bebamos» viene de «beber» y lleva dos b: una al principio y otra después de la e."
+    },
+    {
+      "id": "es-bv-026",
+      "word": "cabían",
+      "level": 3,
+      "dictationSentence": "Todos los libros cabían en la mochila.",
+      "completion": { "prompt": "ca_ían", "answers": ["b"] },
+      "feedback": "«Cabían» viene de «caber». Lleva b y una tilde en la í: cabían."
+    },
+    {
+      "id": "es-bv-027",
+      "word": "cabemos",
+      "level": 2,
+      "dictationSentence": "Los tres cabemos en esta banca.",
+      "completion": { "prompt": "ca_emos", "answers": ["b"] },
+      "feedback": "«Cabemos» viene de «caber» y lleva b. Significa que tenemos espacio para estar en un lugar."
+    },
+    {
+      "id": "es-bv-028",
+      "word": "deberíamos",
+      "level": 3,
+      "dictationSentence": "Deberíamos guardar los juguetes antes de cenar.",
+      "completion": { "prompt": "de_eríamos", "answers": ["b"] },
+      "feedback": "«Deberíamos» viene de «deber». Lleva b y una tilde en la í: deberíamos."
+    },
+    {
+      "id": "es-bv-029",
+      "word": "habría",
+      "level": 3,
+      "dictationSentence": "Con otra silla, habría lugar para todos.",
+      "completion": { "prompt": "ha_ría", "answers": ["b"] },
+      "feedback": "«Habría» viene de «haber». Empieza con h, lleva b y tiene una tilde en la í: habría."
+    },
+    {
+      "id": "es-bv-030",
+      "word": "sabiendo",
+      "level": 2,
+      "dictationSentence": "Sabiendo que iba a llover, llevé mi paraguas.",
+      "completion": { "prompt": "sa_iendo", "answers": ["b"] },
+      "feedback": "«Sabiendo» viene de «saber» y lleva b. En esta frase, la persona ya sabía que iba a llover."
+    },
+    {
+      "id": "es-bv-031",
+      "word": "saben",
+      "level": 2,
+      "dictationSentence": "Mis amigas saben jugar ajedrez.",
+      "completion": { "prompt": "sa_en", "answers": ["b"] },
+      "feedback": "«Saben» viene de «saber» y lleva b. Mis amigas saben cómo se juega."
+    },
+    {
+      "id": "es-bv-032",
+      "word": "vamos",
+      "level": 1,
+      "dictationSentence": "Hoy vamos al parque.",
+      "completion": { "prompt": "_amos", "answers": ["v"] },
+      "feedback": "«Vamos» se escribe con v al principio. La usamos para decir que iremos o nos dirigimos a un lugar."
+    },
+    {
+      "id": "es-bv-033",
+      "word": "venimos",
+      "level": 2,
+      "dictationSentence": "Venimos de la biblioteca.",
+      "completion": { "prompt": "_enimos", "answers": ["v"] },
+      "feedback": "«Venimos» viene de «venir» y empieza con v."
+    },
+    {
+      "id": "es-bv-034",
+      "word": "viajar",
+      "level": 2,
+      "dictationSentence": "Me gusta viajar con mi familia.",
+      "completion": { "prompt": "_iajar", "answers": ["v"] },
+      "feedback": "«Viajar» empieza con v. Es ir de un lugar a otro, como cuando visitamos otra ciudad."
     }
   ]
 }
