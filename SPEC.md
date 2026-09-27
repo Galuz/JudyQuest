@@ -190,7 +190,7 @@ No premia:
 - velocidad sin comprensión;
 - repetir contenido ya dominado únicamente para ganar dinero.
 
-## 3. Subjects Roadmap
+## 4. Subjects Roadmap
 
 JudyQuest contempla oficialmente las siguientes materias.
 
