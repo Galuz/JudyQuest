@@ -13,6 +13,10 @@ export type Question = {
   a?: number;
   b?: number;
   retry?: boolean;
+  vocabularyWordId?: string;
+  vocabularyActivity?: number;
+  readingText?: string;
+  helpUsed?: boolean;
 };
 export type Attempt = {
   questionId: string;
@@ -23,6 +27,7 @@ export type Attempt = {
   responseMs: number;
   at: string;
   retry: boolean;
+  assisted?: boolean;
 };
 export type LearningSession = {
   id: string;
@@ -87,4 +92,20 @@ export type Passage = {
   paragraphs: string[];
   source?: { label: string; url: string };
   questions: Question[];
+};
+export type VocabularyStatus =
+  "discover" | "learning" | "practicing" | "remembered" | "retained" | "review";
+export type VocabularyProgress = {
+  id: string;
+  status: VocabularyStatus;
+  attempts: number;
+  independentCorrect: number;
+  helpCount: number;
+  lastHelpAt?: string;
+  firstPracticedAt?: string;
+  lastPracticedAt?: string;
+  nextReviewAt?: string;
+  lastActivity?: number;
+  reviewStep: number;
+  evidence: { activity: number; at: string }[];
 };

@@ -1,6 +1,6 @@
 # JudyQuest: análisis de vocabulario para 4.º y 5.º de primaria
 
-Fecha: 27 de septiembre de 2026. Estado: propuesta pedagógica previa a la implementación. La sección «Aprender palabras nuevas» y su seguimiento NO están implementados por este documento. Sexto grado queda fuera de esta propuesta.
+Fecha: 27 de septiembre de 2026. Estado del análisis: propuesta pedagógica elaborada antes de implementar. Actualización de implementación: ya se incorporaron las primeras 20 palabras y su seguimiento local; las otras 100 siguen siendo candidatas. Las reglas concretas implementadas se documentan en README.md (tres días distintos para «La recuerdo»). Los umbrales que aparecen más abajo son la propuesta original. Sexto grado queda fuera de esta propuesta.
 
 ## Decisión recomendada
 

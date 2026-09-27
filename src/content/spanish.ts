@@ -3,6 +3,7 @@ import bank from "../../content/spanish/bv-common-words.v1.json";
 import { shuffle } from "../domain/engines";
 export const words: WordEntry[] = bank.words;
 export const skillNames: Record<string, string> = {
+  VOCABULARY: "Aprender palabras nuevas",
   LITERAL: "Lo que dice el texto",
   SEQUENCE: "Orden de los hechos",
   MAIN_IDEA: "Idea principal",

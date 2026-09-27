@@ -13,6 +13,21 @@ Código R1 implementado; pruebas automatizadas aprobadas. Las casillas de compro
 - [ ] Probar con Judy qué definiciones necesitan más claridad.
 - Criterio permanente: revisar y ampliar el glosario al agregar contenido nuevo.
 
+## Aprender palabras nuevas — ampliación autorizada
+
+- [x] Analizar candidatas de 4.º/5.º antes de implementar; sexto queda para después.
+- [x] Preparar las primeras 20 fichas con 80 actividades y lecturas distintas.
+- [x] Añadir diagnóstico breve, opción de desconocimiento y ejemplos guiados.
+- [x] Persistir estados, ayudas, respuestas y calendario en IndexedDB v3.
+- [x] Evitar dominio por consultas, reintentos, práctica temprana o repetición el mismo día.
+- [x] Integrar «Leer con mis palabras» en Español y reanudar sesiones guardadas.
+- [x] Probar migración conservando sesiones, ajustes, perfil y recompensas.
+- [x] Aprobar 29 pruebas automatizadas, tipos/build, lint y verificación del precache.
+- [x] Comprobar en navegador desconocimiento, ayuda, acierto, salida y reanudación tras cerrar la pestaña.
+- [x] Verificar que Español habilita lecturas con palabras practicadas y contextos nuevos.
+- [ ] Validar con Judy las primeras 20 palabras antes de ampliar a las otras 100 candidatas.
+- [ ] Comprobar instalación/offline y conservación en su tablet.
+
 ## Cómo ejecutar este backlog
 
 Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.
@@ -256,15 +271,15 @@ Las secciones siguientes conservan identificadores históricos. Ejecutarlas desp
 
 ## 31. Phase 2 — Vocabulary Module
 
-- [ ] VocabularyModule
-- [ ] Definitions
+- [x] VocabularyModule inicial (20 palabras; alcance completo pendiente)
+- [x] Definitions iniciales (20 palabras)
 - [ ] Synonyms
 - [ ] Antonyms
-- [ ] Context meaning
+- [x] Context meaning inicial (lecturas de las primeras 20 palabras)
 - [ ] Prefixes
 - [ ] Suffixes
 - [ ] Word families
-- [ ] Vocabulary mastery
+- [x] Vocabulary mastery inicial (reglas locales descritas en README; ampliar tras validación)
 - [ ] Vocabulary Boss
 
 ## 32. Phase 3 — English Module

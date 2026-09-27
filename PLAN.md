@@ -6,7 +6,11 @@ R1 implementada en React/TypeScript: Español, Matemáticas, sesiones persistent
 
 ## Mantenimiento de vocabulario
 
-Antes de publicar contenido nuevo, revisar el lenguaje para 10 años. Simplificar instrucciones y registrar en el glosario las palabras educativas que conviene aprender, con definición y ejemplo. Comprobar que consultar una palabra no selecciona respuestas ni cambia el avance.
+Antes de publicar contenido nuevo, revisar el lenguaje para 10 años. Simplificar instrucciones y registrar en el glosario las palabras educativas que conviene aprender, con definición y ejemplo. Comprobar que consultar una palabra no selecciona respuestas ni aumenta el dominio; registrar la ayuda en el seguimiento de vocabulario.
+
+## Ampliación autorizada: aprender palabras nuevas
+
+Implementadas las primeras 20 palabras tras el análisis previo: contenido, comprobación inicial, ayudas registradas, calendario y persistencia v3. Integración en Español mediante lecturas curadas seleccionadas con el historial. Los 100 candidatos restantes y sexto grado quedan pendientes. Esta ampliación no activa el resto de R2/R3. Siguiente validación de producto: probar las instrucciones y la carga de dos palabras nuevas con Judy.
 
 ## Prioridad y regla de ejecución
 

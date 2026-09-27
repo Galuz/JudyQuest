@@ -7,18 +7,62 @@ import {
   type ReactNode,
 } from "react";
 import { glossaryParts, type GlossaryEntry } from "../content/glossary";
+import { repositories } from "../data/repositories";
+import { useApp } from "../state";
 
-const GlossaryContext = createContext<(entry: GlossaryEntry) => void>(() => {});
+type BeforeHelp = () => Promise<void>;
+const GlossaryContext = createContext<
+  (entry: GlossaryEntry, before?: BeforeHelp) => void
+>(() => {});
+const HelpContext = createContext<BeforeHelp | undefined>(undefined);
+export function GlossaryHelpScope({
+  children,
+  beforeOpen,
+}: {
+  children: ReactNode;
+  beforeOpen: BeforeHelp;
+}) {
+  return (
+    <HelpContext.Provider value={beforeOpen}>{children}</HelpContext.Provider>
+  );
+}
 
 export function GlossaryProvider({ children }: { children: ReactNode }) {
+  const app = useApp();
+  const [error, setError] = useState("");
+  const opening = useRef(false);
   const [entry, setEntry] = useState<GlossaryEntry | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     if (entry && !dialog.current?.open) dialog.current?.showModal();
   }, [entry]);
+  async function show(entry: GlossaryEntry, before?: BeforeHelp) {
+    if (opening.current) return;
+    opening.current = true;
+    setError("");
+    try {
+      // Save assistance before displaying the answer, including across reloads.
+      await before?.();
+      if (entry.vocabularyId)
+        await repositories.vocabulary.consult(entry.vocabularyId);
+      await app.refresh();
+      setEntry(entry);
+    } catch {
+      setError("No pudimos abrir la palabra. Intenta tocarla otra vez.");
+    } finally {
+      opening.current = false;
+    }
+  }
   return (
-    <GlossaryContext.Provider value={setEntry}>
+    <GlossaryContext.Provider
+      value={(entry, before) => void show(entry, before)}
+    >
       {children}
+      {error && (
+        <p role="alert" className="glossary-error">
+          {error}
+        </p>
+      )}
       <dialog
         ref={dialog}
         className="glossary-dialog"
@@ -55,6 +99,7 @@ export function GlossaryProvider({ children }: { children: ReactNode }) {
 
 export function GlossaryText({ children }: { children: string }) {
   const show = useContext(GlossaryContext);
+  const before = useContext(HelpContext);
   return (
     <>
       {glossaryParts(children).map((part, index) =>
@@ -68,7 +113,7 @@ export function GlossaryText({ children }: { children: string }) {
             aria-haspopup="dialog"
             onClick={(event) => {
               event.stopPropagation();
-              show(part.entry!);
+              show(part.entry!, before);
             }}
           >
             {part.text}

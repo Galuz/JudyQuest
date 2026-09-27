@@ -71,7 +71,12 @@ export function challengeProgress(
   week = weekId(),
 ) {
   const eligible = sessions
-    .filter((s) => s.phase === "done" && s.weekId === week)
+    .filter(
+      (s) =>
+        s.phase === "done" &&
+        s.weekId === week &&
+        !s.mode.startsWith("vocabulary"),
+    )
     .filter((s) => {
       const a = s.attempts.filter((a) => !a.retry);
       return (

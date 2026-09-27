@@ -7,10 +7,16 @@ import {
 } from "react";
 import { repositories, defaults } from "./data/repositories";
 import { summarize } from "./domain/engines";
-import type { LearningSession, ParentSettings, Reward } from "./domain/types";
+import type {
+  LearningSession,
+  ParentSettings,
+  Reward,
+  VocabularyProgress,
+} from "./domain/types";
 type State = {
   sessions: LearningSession[];
   rewards: Reward[];
+  vocabulary: VocabularyProgress[];
   settings: ParentSettings;
   refresh: () => Promise<void>;
   parentUnlocked: boolean;
@@ -25,20 +31,23 @@ export const useProgress = () => summarize(useApp().sessions);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [sessions, setSessions] = useState<LearningSession[]>([]),
     [rewards, setRewards] = useState<Reward[]>([]),
+    [vocabulary, setVocabulary] = useState<VocabularyProgress[]>([]),
     [settings, setSettings] = useState(defaults),
     [loading, setLoading] = useState(true),
     [error, setError] = useState(""),
     [parentUnlocked, setParentUnlocked] = useState(false);
   async function refresh() {
     try {
-      const [s, r, c] = await Promise.all([
+      const [s, r, c, v] = await Promise.all([
         repositories.sessions.all(),
         repositories.rewards.all(),
         repositories.settings.get(),
+        repositories.vocabulary.all(),
       ]);
       setSessions(s);
       setRewards(r);
       setSettings(c);
+      setVocabulary(v);
       setError("");
     } catch {
       setError(
@@ -70,6 +79,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       value={{
         sessions,
         rewards,
+        vocabulary,
         settings,
         refresh,
         parentUnlocked,

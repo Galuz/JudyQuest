@@ -26,6 +26,7 @@ import {
 } from "./screens";
 import { SessionRunner } from "./components/SessionRunner";
 import { GlossaryProvider } from "./components/Glossary";
+import { VocabularyScreen } from "./components/VocabularyScreen";
 function Shell() {
   const app = useApp(),
     location = useLocation();
@@ -96,6 +97,7 @@ function Shell() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/espanol" element={<Spanish />} />
+            <Route path="/palabras" element={<VocabularyScreen />} />
             <Route path="/matematicas" element={<MathScreen />} />
             <Route path="/progreso" element={<ProgressScreen />} />
             <Route path="/adultos" element={<ParentScreen />} />
@@ -163,12 +165,12 @@ function Shell() {
 }
 export default function App() {
   return (
-    <GlossaryProvider>
-      <AppProvider>
+    <AppProvider>
+      <GlossaryProvider>
         <HashRouter>
           <Shell />
         </HashRouter>
-      </AppProvider>
-    </GlossaryProvider>
+      </GlossaryProvider>
+    </AppProvider>
   );
 }

@@ -9,6 +9,14 @@ Mostrar esas palabras subrayadas en lecturas, preguntas, opciones, guías y expl
 Aplicar este criterio a todo contenido futuro de Español, Matemáticas y nuevas materias. No reemplazar automáticamente palabras escritas por Judy ni alterar respuestas o puntuaciones.
 
 
+## Vocabulario inicial — ampliación autorizada del 27 de septiembre de 2026
+
+Implementado «Aprender palabras nuevas» con las primeras 20 entradas del análisis de 4.º/5.º, 80 actividades curadas, diagnóstico breve sin límite de tiempo, ejemplos, colección y repasos adaptados al historial local. Esta ampliación se adelanta al módulo completo de vocabulario de R3 por petición del adulto; no implica implementar sinónimos, familias, bosses ni sexto grado.
+
+Persistencia en IndexedDB v3: estado por sentido de palabra, ayudas, primera/última práctica, evidencia independiente y próxima revisión. Tres actividades distintas en tres días, incluida una lectura, habilitan «La recuerdo»; una recuperación posterior al menos siete días después de la primera habilita «La sigo recordando». Revisiones a 1/3/7/14/30 días, sin adelantar nivel por repetir el mismo día. Las consultas y el feedback se registran como ayuda para esa palabra durante el día local. Los reintentos son guiados. Errores reinician evidencia reciente, no totales históricos. Criterios editoriales ajustables, no baremos clínicos ni escolares.
+
+Hasta dos palabras nuevas por día y tres repasos por sesión. Español incorpora «Leer con mis palabras» para reutilizar hasta tres palabras ya practicadas en contextos distintos. Los modos `vocabulary-*` no habilitan dinero; los XP de práctica no equivalen a recuerdo independiente. La aplicación sigue siendo local, sin cuenta infantil, servidor ni sincronización. README.md detalla las reglas implementadas.
+
 ## 0. Prioridad de entrega — Matemáticas y Lectura (R1)
 
 Decisión del 27 de septiembre de 2026: comenzar por los módulos de Matemáticas y Comprensión Lectora. El examen de Español de Judy es el 28 de septiembre de 2026; Lectura tiene prioridad dentro de la implementación.

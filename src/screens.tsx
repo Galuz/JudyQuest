@@ -1,5 +1,7 @@
+import { useStart } from "./useStart";
+import { VocabularyInvitation } from "./components/VocabularyScreen";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BookOpen,
@@ -20,12 +22,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { useApp, useProgress } from "./state";
-import {
-  challengeProgress,
-  mathQuestions,
-  shuffle,
-  weekId,
-} from "./domain/engines";
+import { challengeProgress, mathQuestions, weekId } from "./domain/engines";
 import { repositories } from "./data/repositories";
 import {
   bvQuestions,
@@ -38,7 +35,7 @@ import {
   skillNames,
   words,
 } from "./content/spanish";
-import type { Question, Subject, WordEntry } from "./domain/types";
+import type { WordEntry } from "./domain/types";
 import { PinGate } from "./components/PinGate";
 import { MathLesson } from "./components/SessionRunner";
 import { GlossaryText } from "./components/Glossary";
@@ -50,54 +47,6 @@ export const money = (cents: number) =>
   }).format(cents / 100);
 const pct = (c: number, t: number) =>
   t ? `${Math.round((c / t) * 100)}%` : "—";
-function useStart() {
-  const app = useApp(),
-    navigate = useNavigate();
-  const [busy, setBusy] = useState(false),
-    [error, setError] = useState("");
-  return {
-    busy,
-    error,
-    start: async (
-      subject: Subject,
-      title: string,
-      mode: string,
-      questions: Question[],
-    ) => {
-      if (busy) return;
-      setBusy(true);
-      setError("");
-      try {
-        const id =
-          crypto.randomUUID?.() ??
-          Array.from(crypto.getRandomValues(new Uint8Array(16)), (n) =>
-            n.toString(16).padStart(2, "0"),
-          ).join("");
-        await repositories.sessions.create({
-          id,
-          subject,
-          title,
-          mode,
-          questions: questions.map((q) => ({
-            ...q,
-            choices: q.choices ? shuffle(q.choices) : undefined,
-          })),
-          attempts: [],
-          index: 0,
-          createdAt: new Date().toISOString(),
-          phase: "intro",
-          feedbackPending: false,
-        });
-        await app.refresh();
-        navigate(`/sesion/${id}`);
-      } catch {
-        setError("No se pudo iniciar la misión. Intenta de nuevo.");
-      } finally {
-        setBusy(false);
-      }
-    },
-  };
-}
 export function Home() {
   const app = useApp(),
     progress = useProgress();
@@ -191,6 +140,7 @@ export function Home() {
           </div>
         </Link>
       </div>
+      <VocabularyInvitation />
       <div className="home-bottom">
         <section className="panel study-note">
           <span className="icon-tile amber">
@@ -220,7 +170,8 @@ export function Home() {
             Termina una misión de Español y una de Matemáticas. Cada una debe
             tener al menos 4 preguntas y 80% de respuestas correctas a la
             primera. Por ejemplo, en una misión de 5 preguntas necesitas acertar
-            4.
+            4. Aprender palabras nuevas tiene sus propios repasos y no cuenta
+            para este premio.
           </p>
           <div className="check-list">
             <span className={cp.spanish ? "done" : ""}>
@@ -263,6 +214,7 @@ export function Spanish() {
           <BookOpen size={36} />
         </span>
       </div>
+      <VocabularyInvitation reading />
       <section className="exam-banner">
         <div>
           <span className="chip">REPASO DEL EXAMEN</span>

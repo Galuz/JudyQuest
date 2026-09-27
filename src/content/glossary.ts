@@ -1,4 +1,6 @@
+import { vocabulary } from "./vocabulary";
 export type GlossaryEntry = {
+  vocabularyId?: string;
   word: string;
   forms: string[];
   meaning: string;
@@ -7,7 +9,7 @@ export type GlossaryEntry = {
 
 // Keep explanations concrete and useful to a ten-year-old reader.
 // Add word forms here when introducing new educational vocabulary.
-export const glossary: GlossaryEntry[] = [
+const existingGlossary: GlossaryEntry[] = [
   {
     word: "Moraleja",
     forms: ["moraleja", "moralejas"],
@@ -208,6 +210,27 @@ export const glossary: GlossaryEntry[] = [
     example:
       "«Ana bostezó y cerró los ojos». Esas pistas te ayudan a pensar que tenía sueño.",
   },
+];
+
+export const glossary: GlossaryEntry[] = [
+  ...existingGlossary.filter(
+    (e) =>
+      !vocabulary.some((w) => w.word === e.word.toLocaleLowerCase("es-MX")),
+  ),
+  ...vocabulary.map((w) => ({
+    vocabularyId: w.id,
+    word: w.word,
+    forms: [
+      ...new Set([
+        ...w.forms,
+        ...(existingGlossary.find(
+          (e) => e.word.toLocaleLowerCase("es-MX") === w.word,
+        )?.forms ?? []),
+      ]),
+    ],
+    meaning: w.meaning,
+    example: w.example,
+  })),
 ];
 
 const entriesByForm = new Map(

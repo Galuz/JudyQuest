@@ -903,7 +903,7 @@ summary svg {
   pointer-events: none;
   z-index: 1;
 }
-.option-with-glossary > .option-letter {
+.option-with-glossary > span.option-letter {
   flex: 0 0 28px;
 }
 .option-with-glossary > .option-text {
@@ -1632,5 +1632,91 @@ footer > span {
     transition: none !important;
     animation: none !important;
     scroll-behavior: auto !important;
+  }
+}
+/* Vocabulary shares the existing learning cards and touch-sized controls. */
+.vocabulary-invitation,
+.vocabulary-daily {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+.vocabulary-invitation > div,
+.vocabulary-daily > div {
+  flex: 1;
+  min-width: 220px;
+}
+.vocabulary-invitation h2,
+.vocabulary-daily h2 {
+  margin: 8px 0;
+}
+.vocabulary-invitation p,
+.vocabulary-daily p {
+  margin: 8px 0;
+}
+.vocabulary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.vocabulary-word-card h3 {
+  font-size: 1.35rem;
+  margin: 16px 0 10px;
+}
+.vocabulary-word-card .fine-print {
+  margin-bottom: 0;
+}
+.word-status {
+  white-space: normal;
+}
+.status-remembered,
+.status-retained {
+  background: #e3f2e8;
+  color: #23523c;
+}
+.status-review,
+.status-learning {
+  background: #fff0d2;
+  color: #765014;
+}
+.vocabulary-about {
+  margin: 24px 0;
+}
+.vocabulary-about summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 8px 0;
+}
+.unknown-word {
+  margin: 18px auto 0;
+  display: flex;
+  min-height: 44px;
+}
+.glossary-error {
+  position: fixed;
+  bottom: 16px;
+  left: 5%;
+  right: 5%;
+  z-index: 60;
+  padding: 16px;
+  background: #fff0d2;
+  color: #5e3f12;
+  border: 1px solid #ab772b;
+  border-radius: 12px;
+}
+@media (max-width: 760px) {
+  .vocabulary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .vocabulary-grid {
+    grid-template-columns: 1fr;
+  }
+  .vocabulary-daily > .primary,
+  .vocabulary-invitation > .secondary {
+    width: 100%;
   }
 }

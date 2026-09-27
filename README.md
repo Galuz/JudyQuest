@@ -4,6 +4,7 @@ Primera versión de la app educativa para Judy: Español y Matemáticas, instala
 
 ## Qué funciona
 
+- Aprender palabras nuevas: 20 palabras iniciales, 80 actividades, comprobación inicial, definiciones y repasos guardados por palabra.
 - Español: dos relatos históricos, dos fábulas originales, cuatro refranes, párrafos, punto y coma, b/v y dictado asistido por un adulto.
 - Repaso del temario: orden temporal, causa/consecuencia, moraleja, estructura del texto, puntuación y ortografía.
 - Matemáticas: aprendizaje de las tablas 1–10, práctica por tabla o mixta, explicaciones y repaso espaciado de errores.
@@ -48,6 +49,7 @@ El banco inicial contiene 24 palabras cotidianas. No se presenta como lista exac
 ## Economía R1
 
 - Perfil local inicial: `judy`. Presupuesto global predeterminado: $100 MXN semanales.
+- Los modos de vocabulario no habilitan premios en dinero. Sus aciertos originales conservan los 2 XP habituales, incluso con ayuda; esos puntos no equivalen a dominio.
 - Reto **Exploradora de dos mundos**: terminar una sesión de cada materia, con al menos cuatro preguntas originales y 80% de aciertos al primer intento en cada una. Premio inicial: $10 MXN, configurable.
 - Semana: lunes 00:00 a lunes siguiente 00:00, en `America/Mexico_City`; se asigna la sesión a la semana en que termina.
 - Una transacción IndexedDB registra cierre de sesión y premio; una clave única por perfil/reto/semana evita duplicados, también entre pestañas.
@@ -89,3 +91,23 @@ El temario de Español fue proporcionado por el adulto. No se han reproducido la
 ## Palabras con ayuda
 
 Las palabras educativas subrayadas abren un significado sencillo y un ejemplo sin salir de la misión. El glosario se incluye en la app para uso offline. Agregar términos y variantes en `src/content/glossary.ts`; usar `GlossaryText` en nuevos textos y `AnswerOption` para opciones consultables sin anidar botones ni elegir una respuesta al tocar una palabra. Mantener lenguaje para 10 años según SPEC.md.
+
+
+## Aprender palabras nuevas
+
+Desde Inicio → **Mis palabras** o Español → **Aprender palabras nuevas**. Se presentan hasta dos palabras nuevas por día y hasta tres repasos vencidos por sesión, sin tiempo límite. Primero se pregunta qué significa una palabra; **Todavía no la conozco** enseña la respuesta y prepara otro ejemplo guiado. La colección muestra el estado de las 20 entradas y la próxima fecha de repaso. **Leer con mis palabras**, dentro de Español, elige hasta tres palabras ya practicadas y cambia su contexto.
+
+El catálogo revisado de 120 candidatas está en `docs/vocabulario-4to-5to-analisis.md`. Esta entrega implementa únicamente las primeras 20; no es una prueba oficial de grado ni mide producción oral o escritura libre. Sexto sigue fuera de alcance.
+
+IndexedDB versión 3 añade `vocabulary` sin modificar sesiones, ajustes, perfiles ni recompensas existentes. Cada palabra tiene intentos, ayudas, historial acotado de recuerdos independientes y próxima fecha. La respuesta y el avance de la palabra se guardan juntos. Las sesiones conservan sus preguntas al reabrirse.
+
+Reglas de esta primera versión:
+
+- Consultar una definición guarda la ayuda antes de abrirla. No cuenta como acierto ni error. Si se consulta durante una pregunta, esa respuesta se registra con ayuda; las consultas a una palabra y el feedback también hacen que sus siguientes intentos de ese día sean práctica apoyada.
+- «La recuerdo» requiere tres actividades distintas acertadas sin ayuda en tres días distintos, incluyendo una lectura. Solo los repasos que ya correspondían ese día añaden evidencia; practicar antes no pospone su fecha.
+- «La sigo recordando» añade otra recuperación independiente en un día distinto, al menos siete días después de la primera evidencia. El calendario habitual hace que sea posterior.
+- Intervalos progresivos de 1, 3, 7, 14 y 30 días, según el calendario de Ciudad de México. Son reglas iniciales del producto, ajustables tras probar con Judy.
+- Un error vuelve a programar para el día siguiente y reinicia la evidencia de la racha, conservando totales históricos. Pedir ayuda no borra lo ya aprendido. Los reintentos guiados nunca demuestran recuerdo independiente.
+- Los primeros veinte significados se practican con opciones y lecturas curadas; no se modifica automáticamente el texto de lecciones empezadas ni se generan relatos con IA en ejecución.
+
+Verificación: pruebas de migración v2→v3, atomicidad/doble respuesta, ayudas antes y durante la misión, desconocimiento/reintento, fechas, diversidad, retención y separación del premio monetario. La instalación y el uso offline reales en la tablet siguen pendientes del adulto.

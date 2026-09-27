@@ -14,7 +14,9 @@ import type { LearningSession } from "../domain/types";
 import { lessons, passages, skillNames } from "../content/spanish";
 import { useApp } from "../state";
 import { PinGate } from "./PinGate";
-import { AnswerOption, GlossaryText } from "./Glossary";
+import { AnswerOption, GlossaryText, GlossaryHelpScope } from "./Glossary";
+import { vocabulary } from "../content/vocabulary";
+import { UNKNOWN_WORD, vocabularyStatus } from "../domain/vocabulary";
 export function MathLesson({ table }: { table: number }) {
   const a = table || 3,
     b = 4;
@@ -128,7 +130,57 @@ export function SessionRunner() {
   const last = s.attempts.at(-1);
   const original = s.attempts.filter((a) => !a.retry),
     correct = original.filter((a) => a.correct).length;
-  const back = s.subject === "math" ? "/matematicas" : "/espanol";
+  const isVocabulary = s.mode.startsWith("vocabulary");
+  const back =
+    s.mode === "vocabulary-daily"
+      ? "/palabras"
+      : s.subject === "math"
+        ? "/matematicas"
+        : "/espanol";
+  if (s.phase === "done" && isVocabulary) {
+    const ids = [...new Set(s.questions.map((q) => q.vocabularyWordId))];
+    return (
+      <section className="panel result">
+        <div className="result-icon">
+          <Star size={42} />
+        </div>
+        <p className="eyebrow">UN PASO MÁS</p>
+        <h1>¡Tu colección está creciendo!</h1>
+        <p>
+          Hoy practicaste {ids.length} palabras. Las volveremos a encontrar poco
+          a poco.
+        </p>
+        <div className="review-list">
+          {ids.map((id) => {
+            const word = vocabulary.find((w) => w.id === id);
+            const p = app.vocabulary.find((p) => p.id === id);
+            return (
+              word && (
+                <div key={id}>
+                  <strong>
+                    <GlossaryText>{word.word}</GlossaryText>
+                  </strong>
+                  <p>{vocabularyStatus[p?.status ?? "discover"]}</p>
+                </div>
+              )
+            );
+          })}
+        </div>
+        <p>
+          Recordar una palabra lleva varios días. Pedir ayuda también sirve para
+          aprender.
+        </p>
+        <div className="button-row">
+          <Link className="primary" to="/palabras">
+            Ver mis palabras <ArrowRight size={18} />
+          </Link>
+          <Link className="secondary" to="/espanol">
+            Volver a Español
+          </Link>
+        </div>
+      </section>
+    );
+  }
   if (s.phase === "done")
     return (
       <section className="result panel">
@@ -255,6 +307,7 @@ export function SessionRunner() {
       </div>
     );
   const passage = passages.find((p) => p.id === q.passageId);
+  const targetWord = vocabulary.find((w) => w.id === q.vocabularyWordId);
   const isDictation = s.mode === "dictation";
   const submitted = s.feedbackPending;
   const canSubmit =
@@ -274,288 +327,348 @@ export function SessionRunner() {
     );
   }
   return (
-    <div className="session-shell">
-      <div className="session-top">
-        <Link className="back-link" to={back}>
-          <ArrowLeft size={18} /> Guardar y salir
-        </Link>
-        <span>
-          {s.index + 1} de {s.questions.length}
-        </span>
-      </div>
-      <div className="progress-track" aria-label="Avance de la misión">
-        <span style={{ width: `${(s.index / s.questions.length) * 100}%` }} />
-      </div>
-      <div className={`exercise-layout ${passage ? "with-reader" : ""}`}>
-        {passage && (
-          <article className="panel reader">
-            <span className="eyebrow">
-              <GlossaryText>{passage.type}</GlossaryText>
-            </span>
-            <h2>
-              <GlossaryText>{passage.title}</GlossaryText>
-            </h2>
-            {passage.paragraphs.map((p, i) => (
-              <p key={i}>
-                <GlossaryText>{p}</GlossaryText>
-              </p>
-            ))}
-            <p className="fine-print">
-              Puedes regresar al texto todas las veces que necesites.
-            </p>
-            {passage.source && (
-              <a
-                className="source"
-                href={passage.source.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                ¿De dónde viene esta historia? {passage.source.label}
-              </a>
-            )}
-          </article>
-        )}
-        <section className="panel exercise">
-          <div className="exercise-label">
-            <span className="eyebrow">
-              <GlossaryText>
-                {s.subject === "math" ? "MATEMÁTICAS" : skillNames[q.skill]}
-              </GlossaryText>
-            </span>
-            {q.retry && (
-              <span className="chip">
-                <RotateCcw size={13} /> Repaso
-              </span>
-            )}
-          </div>
-          {isDictation && !submitted && !dictated ? (
-            <>
-              <h2>Turno del adulto</h2>
-              <p>
-                Dale la tablet a un adulto. Él leerá una palabra para que tú la
-                escribas.
-              </p>
-              {!reveal ? (
-                <button className="secondary" onClick={() => setReveal(true)}>
-                  Preparar palabra
-                </button>
-              ) : (
-                <PinGate>
-                  <div className="dictation-card">
-                    <span className="eyebrow">SOLO PARA EL ADULTO</span>
-                    <h3>{q.correct}</h3>
-                    <p>{q.dictationSentence}</p>
-                    <p>
-                      Lee la frase y repite la palabra. Oculta esta tarjeta
-                      antes de devolver la tablet.
-                    </p>
-                    <button
-                      className="primary"
-                      onClick={() => {
-                        setDictated(true);
-                        setReveal(false);
-                        app.lock();
-                        started.current = performance.now();
-                      }}
-                    >
-                      Ocultar y dar la tablet a Judy
-                    </button>
-                  </div>
-                </PinGate>
-              )}
-            </>
-          ) : (
-            <>
-              <h2
-                className={
-                  q.kind === "number"
-                    ? "math-question"
-                    : q.kind === "bv"
-                      ? "word-question"
-                      : ""
-                }
-              >
-                <GlossaryText>{q.prompt}</GlossaryText>
-              </h2>
-              {q.kind === "bv" && (
-                <p>
-                  Completa cada espacio con <strong>b</strong> o{" "}
-                  <strong>v</strong>.
+    <GlossaryHelpScope
+      beforeOpen={async () => {
+        const updated = await repositories.useHelp(s.id, s.index);
+        if (updated) setSession(updated);
+      }}
+    >
+      <div className="session-shell">
+        <div className="session-top">
+          <Link className="back-link" to={back}>
+            <ArrowLeft size={18} /> Guardar y salir
+          </Link>
+          <span>
+            {s.index + 1} de {s.questions.length}
+          </span>
+        </div>
+        <div className="progress-track" aria-label="Avance de la misión">
+          <span style={{ width: `${(s.index / s.questions.length) * 100}%` }} />
+        </div>
+        <div
+          className={`exercise-layout ${passage || q.readingText ? "with-reader" : ""}`}
+        >
+          {q.readingText && (
+            <article className="panel reader">
+              <p className="eyebrow">LEER CON MIS PALABRAS</p>
+              <h2>Una pequeña historia</h2>
+              {q.readingText.split("\n\n").map((p, i) => (
+                <p key={i}>
+                  <GlossaryText>{p}</GlossaryText>
                 </p>
+              ))}
+              <p className="fine-print">
+                Puedes volver a leer todas las veces que quieras.
+              </p>
+            </article>
+          )}
+          {passage && (
+            <article className="panel reader">
+              <span className="eyebrow">
+                <GlossaryText>{passage.type}</GlossaryText>
+              </span>
+              <h2>
+                <GlossaryText>{passage.title}</GlossaryText>
+              </h2>
+              {passage.paragraphs.map((p, i) => (
+                <p key={i}>
+                  <GlossaryText>{p}</GlossaryText>
+                </p>
+              ))}
+              <p className="fine-print">
+                Puedes regresar al texto todas las veces que necesites.
+              </p>
+              {passage.source && (
+                <a
+                  className="source"
+                  href={passage.source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  ¿De dónde viene esta historia? {passage.source.label}
+                </a>
               )}
-              <form onSubmit={submit}>
-                {q.kind === "choice" && (
-                  <div className="options">
-                    {q.choices?.map((choice, i) => (
-                      <AnswerOption
-                        key={choice}
-                        text={choice}
-                        disabled={submitted || busy}
-                        selected={answer === choice}
-                        correct={submitted && choice === q.correct}
-                        letter={String.fromCharCode(65 + i)}
-                        onChoose={() => setAnswer(choice)}
-                      />
-                    ))}
-                  </div>
-                )}
-                {q.kind === "sequence" && (
-                  <div className="sequence">
-                    <p>
-                      Toca las opciones en orden: primero, después y al final.
-                    </p>
-                    <div className="sequence-order">
-                      {sequence.map((item, i) => (
-                        <span key={item}>
-                          {i + 1}. <GlossaryText>{item}</GlossaryText>
-                        </span>
-                      ))}
-                    </div>
-                    {q.choices?.map((choice) => (
-                      <AnswerOption
-                        text={choice}
-                        disabled={
-                          submitted || busy || sequence.includes(choice)
-                        }
-                        key={choice}
-                        onChoose={() => setSequence([...sequence, choice])}
-                      />
-                    ))}
-                    {!submitted && (
+            </article>
+          )}
+          <section className="panel exercise">
+            <div className="exercise-label">
+              <span className="eyebrow">
+                <GlossaryText>
+                  {s.subject === "math"
+                    ? "MATEMÁTICAS"
+                    : (skillNames[q.skill] ?? "Español")}
+                </GlossaryText>
+              </span>
+              {q.retry && (
+                <span className="chip">
+                  <RotateCcw size={13} /> Repaso
+                </span>
+              )}
+            </div>
+            {isDictation && !submitted && !dictated ? (
+              <>
+                <h2>Turno del adulto</h2>
+                <p>
+                  Dale la tablet a un adulto. Él leerá una palabra para que tú
+                  la escribas.
+                </p>
+                {!reveal ? (
+                  <button className="secondary" onClick={() => setReveal(true)}>
+                    Preparar palabra
+                  </button>
+                ) : (
+                  <PinGate>
+                    <div className="dictation-card">
+                      <span className="eyebrow">SOLO PARA EL ADULTO</span>
+                      <h3>{q.correct}</h3>
+                      <p>{q.dictationSentence}</p>
+                      <p>
+                        Lee la frase y repite la palabra. Oculta esta tarjeta
+                        antes de devolver la tablet.
+                      </p>
                       <button
-                        type="button"
-                        className="text-button"
-                        onClick={() => setSequence([])}
+                        className="primary"
+                        onClick={() => {
+                          setDictated(true);
+                          setReveal(false);
+                          app.lock();
+                          started.current = performance.now();
+                        }}
                       >
-                        Volver a ordenar
+                        Ocultar y dar la tablet a Judy
                       </button>
-                    )}
-                  </div>
+                    </div>
+                  </PinGate>
+                )}
+              </>
+            ) : (
+              <>
+                <h2
+                  className={
+                    q.kind === "number"
+                      ? "math-question"
+                      : q.kind === "bv"
+                        ? "word-question"
+                        : ""
+                  }
+                >
+                  <GlossaryText>{q.prompt}</GlossaryText>
+                </h2>
+                {targetWord && !submitted && (
+                  <p className="glossary-hint">
+                    ¿Quieres una pista? Toca:{" "}
+                    <GlossaryText>{targetWord.word}</GlossaryText>.{" "}
+                    {q.helpUsed
+                      ? "Esta vez practicamos con ayuda."
+                      : "También puedes decir que aún no la conoces."}
+                  </p>
                 )}
                 {q.kind === "bv" && (
-                  <div className="bv-inputs">
-                    {Array.from({ length: q.correct.length }, (_, i) => (
-                      <label key={i}>
-                        Espacio {i + 1}
-                        <select
-                          disabled={submitted}
-                          aria-label={`Espacio ${i + 1}`}
-                          value={
-                            answer[i] && answer[i] !== "_" ? answer[i] : ""
+                  <p>
+                    Completa cada espacio con <strong>b</strong> o{" "}
+                    <strong>v</strong>.
+                  </p>
+                )}
+                <form onSubmit={submit}>
+                  {q.kind === "choice" && (
+                    <div className="options">
+                      {q.choices?.map((choice, i) => (
+                        <AnswerOption
+                          key={choice}
+                          text={choice}
+                          disabled={submitted || busy}
+                          selected={answer === choice}
+                          correct={submitted && choice === q.correct}
+                          letter={String.fromCharCode(65 + i)}
+                          onChoose={() => setAnswer(choice)}
+                        />
+                      ))}
+                    </div>
+                  )}
+                  {q.kind === "sequence" && (
+                    <div className="sequence">
+                      <p>
+                        Toca las opciones en orden: primero, después y al final.
+                      </p>
+                      <div className="sequence-order">
+                        {sequence.map((item, i) => (
+                          <span key={item}>
+                            {i + 1}. <GlossaryText>{item}</GlossaryText>
+                          </span>
+                        ))}
+                      </div>
+                      {q.choices?.map((choice) => (
+                        <AnswerOption
+                          text={choice}
+                          disabled={
+                            submitted || busy || sequence.includes(choice)
                           }
-                          onChange={(e) => {
-                            const a = Array.from(
-                              { length: q.correct.length },
-                              (_, j) => answer[j] || "_",
-                            );
-                            a[i] = e.target.value || "_";
-                            setAnswer(a.join(""));
-                          }}
+                          key={choice}
+                          onChoose={() => setSequence([...sequence, choice])}
+                        />
+                      ))}
+                      {!submitted && (
+                        <button
+                          type="button"
+                          className="text-button"
+                          onClick={() => setSequence([])}
                         >
-                          <option value="">Elige</option>
-                          <option value="b">b</option>
-                          <option value="v">v</option>
-                        </select>
-                      </label>
-                    ))}
-                  </div>
-                )}
-                {(q.kind === "number" || q.kind === "word") && (
-                  <label className="answer-label">
-                    Tu respuesta
-                    <input
-                      autoFocus
-                      className="answer-input"
-                      type="text"
-                      inputMode={q.kind === "number" ? "numeric" : "text"}
-                      pattern={q.kind === "number" ? "[0-9]*" : undefined}
-                      autoComplete="off"
-                      autoCorrect="off"
-                      autoCapitalize="none"
-                      spellCheck={false}
-                      value={submitted ? (last?.answer ?? "") : answer}
-                      disabled={submitted || busy}
-                      onChange={(e) => setAnswer(e.target.value)}
-                    />
-                  </label>
-                )}
-                {!submitted && (
+                          Volver a ordenar
+                        </button>
+                      )}
+                    </div>
+                  )}
+                  {q.kind === "bv" && (
+                    <div className="bv-inputs">
+                      {Array.from({ length: q.correct.length }, (_, i) => (
+                        <label key={i}>
+                          Espacio {i + 1}
+                          <select
+                            disabled={submitted}
+                            aria-label={`Espacio ${i + 1}`}
+                            value={
+                              answer[i] && answer[i] !== "_" ? answer[i] : ""
+                            }
+                            onChange={(e) => {
+                              const a = Array.from(
+                                { length: q.correct.length },
+                                (_, j) => answer[j] || "_",
+                              );
+                              a[i] = e.target.value || "_";
+                              setAnswer(a.join(""));
+                            }}
+                          >
+                            <option value="">Elige</option>
+                            <option value="b">b</option>
+                            <option value="v">v</option>
+                          </select>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                  {(q.kind === "number" || q.kind === "word") && (
+                    <label className="answer-label">
+                      Tu respuesta
+                      <input
+                        autoFocus
+                        className="answer-input"
+                        type="text"
+                        inputMode={q.kind === "number" ? "numeric" : "text"}
+                        pattern={q.kind === "number" ? "[0-9]*" : undefined}
+                        autoComplete="off"
+                        autoCorrect="off"
+                        autoCapitalize="none"
+                        spellCheck={false}
+                        value={submitted ? (last?.answer ?? "") : answer}
+                        disabled={submitted || busy}
+                        onChange={(e) => setAnswer(e.target.value)}
+                      />
+                    </label>
+                  )}
+                  {!submitted && (
+                    <button
+                      className="primary full"
+                      disabled={
+                        !canSubmit ||
+                        busy ||
+                        (q.kind === "bv" &&
+                          (answer.includes("_") ||
+                            answer.length !== q.correct.length))
+                      }
+                    >
+                      {busy ? "Guardando…" : "Revisar mi respuesta"}
+                    </button>
+                  )}
+                </form>
+                {targetWord && !submitted && (
                   <button
-                    className="primary full"
-                    disabled={
-                      !canSubmit ||
-                      busy ||
-                      (q.kind === "bv" &&
-                        (answer.includes("_") ||
-                          answer.length !== q.correct.length))
+                    className="text-button unknown-word"
+                    disabled={busy}
+                    onClick={() =>
+                      void action(() =>
+                        repositories.answer(
+                          s.id,
+                          s.index,
+                          UNKNOWN_WORD,
+                          performance.now() - started.current,
+                        ),
+                      )
                     }
                   >
-                    {busy ? "Guardando…" : "Revisar mi respuesta"}
+                    {UNKNOWN_WORD}
                   </button>
                 )}
-              </form>
-            </>
-          )}
-          {submitted && last && (
-            <div
-              className={`feedback ${last.correct ? "positive" : "learning"}`}
-              role="status"
-            >
-              <h3>
-                {last.correct ? (
-                  <>
-                    <CheckCircle2 size={21} /> ¡Bien pensado!
-                  </>
-                ) : (
-                  <>
-                    <Lightbulb size={21} /> Vamos a descubrirlo
-                  </>
-                )}
-              </h3>
-              {!last.correct && (
-                <p>
-                  Tu respuesta: <strong>{last.answer}</strong>
-                  {last.errorType === "tilde"
-                    ? " · Usaste bien la b y la v. Revisa el acento escrito (la tilde)."
-                    : ""}
-                </p>
-              )}
-              <p>
-                <GlossaryText>{q.explanation}</GlossaryText>
-              </p>
-              {q.evidence && (
-                <blockquote>
-                  “<GlossaryText>{q.evidence}</GlossaryText>”
-                </blockquote>
-              )}
-              {!last.correct && !q.retry && (
-                <p className="fine-print">
-                  Esta pregunta volverá a aparecer para practicar.
-                </p>
-              )}
-              <button
-                className="primary full"
-                disabled={busy}
-                onClick={() => void action(() => repositories.next(s.id))}
+              </>
+            )}
+            {submitted && last && (
+              <div
+                className={`feedback ${last.correct ? "positive" : "learning"}`}
+                role="status"
               >
-                {s.index === s.questions.length - 1
-                  ? "Ver mi resultado"
-                  : "Siguiente"}{" "}
-                {s.index === s.questions.length - 1 ? (
-                  <Star size={18} />
-                ) : (
-                  <ArrowRight size={18} />
+                <h3>
+                  {last.correct ? (
+                    <>
+                      <CheckCircle2 size={21} /> ¡Bien pensado!
+                    </>
+                  ) : (
+                    <>
+                      <Lightbulb size={21} /> Vamos a descubrirlo
+                    </>
+                  )}
+                </h3>
+                {!last.correct && (
+                  <p>
+                    Tu respuesta: <strong>{last.answer}</strong>
+                    {last.errorType === "tilde"
+                      ? " · Usaste bien la b y la v. Revisa el acento escrito (la tilde)."
+                      : ""}
+                  </p>
                 )}
-              </button>
-            </div>
-          )}
-          {error && (
-            <p className="error" role="alert">
-              {error}
-            </p>
-          )}
-        </section>
+                <p>
+                  <GlossaryText>{q.explanation}</GlossaryText>
+                </p>
+                {targetWord && last.assisted && (
+                  <p className="fine-print">
+                    Esta respuesta fue con ayuda. ¡También cuenta como práctica!
+                    Otro día veremos si la recuerdas.
+                  </p>
+                )}
+                {q.evidence && (
+                  <blockquote>
+                    “<GlossaryText>{q.evidence}</GlossaryText>”
+                  </blockquote>
+                )}
+                {!last.correct && !q.retry && (
+                  <p className="fine-print">
+                    {targetWord
+                      ? "Probaremos otro ejemplo para practicar esta palabra."
+                      : "Esta pregunta volverá a aparecer para practicar."}
+                  </p>
+                )}
+                <button
+                  className="primary full"
+                  disabled={busy}
+                  onClick={() => void action(() => repositories.next(s.id))}
+                >
+                  {s.index === s.questions.length - 1
+                    ? "Ver mi resultado"
+                    : "Siguiente"}{" "}
+                  {s.index === s.questions.length - 1 ? (
+                    <Star size={18} />
+                  ) : (
+                    <ArrowRight size={18} />
+                  )}
+                </button>
+              </div>
+            )}
+            {error && (
+              <p className="error" role="alert">
+                {error}
+              </p>
+            )}
+          </section>
+        </div>
       </div>
-    </div>
+    </GlossaryHelpScope>
   );
 }
