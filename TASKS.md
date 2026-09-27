@@ -4,6 +4,15 @@
 
 Código R1 implementado; pruebas automatizadas aprobadas. Las casillas de comprobación en tablet, instalación, offline real y prueba con Judy permanecen pendientes. Los checks de implementación no significan aceptación del usuario.
 
+## Vocabulario con ayuda
+
+- [x] Añadir glosario local con significados sencillos y ejemplos.
+- [x] Subrayar palabras consultables en lecturas, preguntas, opciones y explicaciones.
+- [x] Abrir y cerrar la ayuda sin salir de la misión.
+- [x] Verificar en navegador que consultar una palabra no selecciona una respuesta (abrir «oraciones», cerrar, elegir y comprobar respuesta).
+- [ ] Probar con Judy qué definiciones necesitan más claridad.
+- Criterio permanente: revisar y ampliar el glosario al agregar contenido nuevo.
+
 ## Cómo ejecutar este backlog
 
 Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.

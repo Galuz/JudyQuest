@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
-  Check,
   CheckCircle2,
   Lightbulb,
   RotateCcw,
@@ -15,6 +14,7 @@ import type { LearningSession } from "../domain/types";
 import { lessons, passages, skillNames } from "../content/spanish";
 import { useApp } from "../state";
 import { PinGate } from "./PinGate";
+import { AnswerOption, GlossaryText } from "./Glossary";
 export function MathLesson({ table }: { table: number }) {
   const a = table || 3,
     b = 4;
@@ -54,7 +54,9 @@ export function MathLesson({ table }: { table: number }) {
       <p>
         {Array(a).fill(b).join(" + ")} = {a * b}
       </p>
-      <p>{tricks[a]}</p>
+      <p>
+        <GlossaryText>{tricks[a]}</GlossaryText>
+      </p>
       <p>
         Cambiar el orden no cambia el resultado: {b} × {a} también es {a * b}.
       </p>
@@ -168,11 +170,17 @@ export function SessionRunner() {
                 return (
                   <div key={a.questionId}>
                     <strong>
-                      {question.kind === "bv"
-                        ? question.explanation
-                        : question.prompt}
+                      <GlossaryText>
+                        {question.kind === "bv"
+                          ? question.explanation
+                          : question.prompt}
+                      </GlossaryText>
                     </strong>
-                    {question.kind !== "bv" && <p>{question.explanation}</p>}
+                    {question.kind !== "bv" && (
+                      <p>
+                        <GlossaryText>{question.explanation}</GlossaryText>
+                      </p>
+                    )}
                   </div>
                 );
               })}
@@ -199,7 +207,12 @@ export function SessionRunner() {
         </Link>
         <section className="panel lesson-panel">
           <p className="eyebrow">ANTES DE EMPEZAR</p>
-          <h1>{s.title}</h1>
+          <h1>
+            <GlossaryText>{s.title}</GlossaryText>
+          </h1>
+          <p className="glossary-hint">
+            Toca las palabras subrayadas para saber qué significan.
+          </p>
           <p>
             {s.questions.length} ejercicios · Sin prisa · Puedes volver al texto
           </p>
@@ -212,8 +225,12 @@ export function SessionRunner() {
                   <Lightbulb size={18} />
                   {l.title}
                 </summary>
-                <p>{l.body}</p>
-                <div className="example">{l.example}</div>
+                <p>
+                  <GlossaryText>{l.body}</GlossaryText>
+                </p>
+                <div className="example">
+                  <GlossaryText>{l.example}</GlossaryText>
+                </div>
               </details>
             ))
           )}
@@ -272,10 +289,16 @@ export function SessionRunner() {
       <div className={`exercise-layout ${passage ? "with-reader" : ""}`}>
         {passage && (
           <article className="panel reader">
-            <span className="eyebrow">{passage.type}</span>
-            <h2>{passage.title}</h2>
+            <span className="eyebrow">
+              <GlossaryText>{passage.type}</GlossaryText>
+            </span>
+            <h2>
+              <GlossaryText>{passage.title}</GlossaryText>
+            </h2>
             {passage.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i}>
+                <GlossaryText>{p}</GlossaryText>
+              </p>
             ))}
             <p className="fine-print">
               Puedes regresar al texto todas las veces que necesites.
@@ -295,7 +318,9 @@ export function SessionRunner() {
         <section className="panel exercise">
           <div className="exercise-label">
             <span className="eyebrow">
-              {s.subject === "math" ? "MATEMÁTICAS" : skillNames[q.skill]}
+              <GlossaryText>
+                {s.subject === "math" ? "MATEMÁTICAS" : skillNames[q.skill]}
+              </GlossaryText>
             </span>
             {q.retry && (
               <span className="chip">
@@ -350,7 +375,7 @@ export function SessionRunner() {
                       : ""
                 }
               >
-                {q.prompt}
+                <GlossaryText>{q.prompt}</GlossaryText>
               </h2>
               {q.kind === "bv" && (
                 <p>
@@ -362,22 +387,15 @@ export function SessionRunner() {
                 {q.kind === "choice" && (
                   <div className="options">
                     {q.choices?.map((choice, i) => (
-                      <button
+                      <AnswerOption
                         key={choice}
-                        type="button"
+                        text={choice}
                         disabled={submitted || busy}
-                        aria-pressed={answer === choice}
-                        className={`option ${answer === choice ? "selected" : ""} ${submitted && choice === q.correct ? "correct-option" : ""}`}
-                        onClick={() => setAnswer(choice)}
-                      >
-                        <span className="option-letter">
-                          {String.fromCharCode(65 + i)}
-                        </span>
-                        <span>{choice}</span>
-                        {submitted && choice === q.correct && (
-                          <Check size={20} />
-                        )}
-                      </button>
+                        selected={answer === choice}
+                        correct={submitted && choice === q.correct}
+                        letter={String.fromCharCode(65 + i)}
+                        onChoose={() => setAnswer(choice)}
+                      />
                     ))}
                   </div>
                 )}
@@ -389,20 +407,19 @@ export function SessionRunner() {
                     <div className="sequence-order">
                       {sequence.map((item, i) => (
                         <span key={item}>
-                          {i + 1}. {item}
+                          {i + 1}. <GlossaryText>{item}</GlossaryText>
                         </span>
                       ))}
                     </div>
                     {q.choices?.map((choice) => (
-                      <button
-                        type="button"
-                        className="option"
-                        disabled={submitted || sequence.includes(choice)}
+                      <AnswerOption
+                        text={choice}
+                        disabled={
+                          submitted || busy || sequence.includes(choice)
+                        }
                         key={choice}
-                        onClick={() => setSequence([...sequence, choice])}
-                      >
-                        {choice}
-                      </button>
+                        onChoose={() => setSequence([...sequence, choice])}
+                      />
                     ))}
                     {!submitted && (
                       <button
@@ -503,8 +520,14 @@ export function SessionRunner() {
                     : ""}
                 </p>
               )}
-              <p>{q.explanation}</p>
-              {q.evidence && <blockquote>“{q.evidence}”</blockquote>}
+              <p>
+                <GlossaryText>{q.explanation}</GlossaryText>
+              </p>
+              {q.evidence && (
+                <blockquote>
+                  “<GlossaryText>{q.evidence}</GlossaryText>”
+                </blockquote>
+              )}
               {!last.correct && !q.retry && (
                 <p className="fine-print">
                   Esta pregunta volverá a aparecer para practicar.

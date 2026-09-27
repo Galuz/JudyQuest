@@ -85,3 +85,7 @@ Los textos y preguntas son originales, basados en hechos verificados:
 - [National Park Service: cuarto vuelo](https://www.nps.gov/places/000/fourth-flight-landing.htm).
 
 El temario de Español fue proporcionado por el adulto. No se han reproducido las páginas del libro ni se afirma conocer las preguntas del examen.
+
+## Palabras con ayuda
+
+Las palabras educativas subrayadas abren un significado sencillo y un ejemplo sin salir de la misión. El glosario se incluye en la app para uso offline. Agregar términos y variantes en `src/content/glossary.ts`; usar `GlossaryText` en nuevos textos y `AnswerOption` para opciones consultables sin anidar botones ni elegir una respuesta al tocar una palabra. Mantener lenguaje para 10 años según SPEC.md.

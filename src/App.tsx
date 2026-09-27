@@ -25,6 +25,7 @@ import {
   Spanish,
 } from "./screens";
 import { SessionRunner } from "./components/SessionRunner";
+import { GlossaryProvider } from "./components/Glossary";
 function Shell() {
   const app = useApp(),
     location = useLocation();
@@ -162,10 +163,12 @@ function Shell() {
 }
 export default function App() {
   return (
-    <AppProvider>
-      <HashRouter>
-        <Shell />
-      </HashRouter>
-    </AppProvider>
+    <GlossaryProvider>
+      <AppProvider>
+        <HashRouter>
+          <Shell />
+        </HashRouter>
+      </AppProvider>
+    </GlossaryProvider>
   );
 }

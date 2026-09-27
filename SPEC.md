@@ -1,5 +1,14 @@
 # JudyQuest — Product Specification
 
+## Criterio permanente de lenguaje y vocabulario (27 de septiembre de 2026)
+
+Escribir para Judy, de 10 años: instrucciones directas, frases cortas y ejemplos concretos. Simplificar palabras difíciles que no aporten al aprendizaje. Cuando una palabra sí sea útil para aprender o forme parte del temario, conservarla y añadirla al glosario de `src/content/glossary.ts` con significado sencillo, ejemplo y variantes necesarias (plural o conjugación).
+
+Mostrar esas palabras subrayadas en lecturas, preguntas, opciones, guías y explicaciones mediante `GlossaryText`. Al tocarlas, abrir su significado sin salir de la misión ni seleccionar/enviar respuestas. Permitir cerrar y volver al mismo lugar; admitir teclado y lector de pantalla. Incluir el glosario en el contenido disponible sin internet. En controles de navegación, mantener etiquetas sencillas y mostrar la ayuda dentro de la actividad, sin anidar botones.
+
+Aplicar este criterio a todo contenido futuro de Español, Matemáticas y nuevas materias. No reemplazar automáticamente palabras escritas por Judy ni alterar respuestas o puntuaciones.
+
+
 ## 0. Prioridad de entrega — Matemáticas y Lectura (R1)
 
 Decisión del 27 de septiembre de 2026: comenzar por los módulos de Matemáticas y Comprensión Lectora. El examen de Español de Judy es el 28 de septiembre de 2026; Lectura tiene prioridad dentro de la implementación.

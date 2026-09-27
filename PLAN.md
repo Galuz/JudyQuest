@@ -4,6 +4,10 @@
 
 R1 implementada en React/TypeScript: Español, Matemáticas, sesiones persistentes, XP, reto semanal, PIN y PWA. Se verifican tipos, build, lint, pruebas automatizadas y recorridos en navegador. La prueba de instalación/offline en la tablet corresponde a R1.5 y no se marca realizada. README.md documenta reglas concretas, uso y límites.
 
+## Mantenimiento de vocabulario
+
+Antes de publicar contenido nuevo, revisar el lenguaje para 10 años. Simplificar instrucciones y registrar en el glosario las palabras educativas que conviene aprender, con definición y ejemplo. Comprobar que consultar una palabra no selecciona respuestas ni cambia el avance.
+
 ## Prioridad y regla de ejecución
 
 Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.

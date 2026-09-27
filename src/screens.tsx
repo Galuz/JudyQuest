@@ -41,6 +41,7 @@ import {
 import type { Question, Subject, WordEntry } from "./domain/types";
 import { PinGate } from "./components/PinGate";
 import { MathLesson } from "./components/SessionRunner";
+import { GlossaryText } from "./components/Glossary";
 export const money = (cents: number) =>
   new Intl.NumberFormat("es-MX", {
     style: "currency",
@@ -301,8 +302,12 @@ export function Spanish() {
           {lessons.slice(0, 8).map((l) => (
             <details key={l.skill}>
               <summary>{l.title}</summary>
-              <p>{l.body}</p>
-              <div className="example">{l.example}</div>
+              <p>
+                <GlossaryText>{l.body}</GlossaryText>
+              </p>
+              <div className="example">
+                <GlossaryText>{l.example}</GlossaryText>
+              </div>
             </details>
           ))}
         </section>
@@ -546,8 +551,10 @@ export function ProgressScreen() {
                 <div className="skill-row" key={skill}>
                   <div>
                     <span>
-                      {skillNames[skill] ??
-                        skill.replace("TABLE_", "Tabla del ")}
+                      <GlossaryText>
+                        {skillNames[skill] ??
+                          skill.replace("TABLE_", "Tabla del ")}
+                      </GlossaryText>
                     </span>
                     <strong>
                       {score.correct}/{score.total}
