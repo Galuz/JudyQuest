@@ -2,8 +2,9 @@
 
 ## 0. Project Setup
 
-- [ ] Create repository
-- [ ] Configure application stack
+- [x] Create repository
+- [x] Select React + TypeScript + Vite as frontend stack
+- [ ] Bootstrap React + TypeScript + Vite application
 - [ ] Configure linting
 - [ ] Configure formatting
 - [ ] Configure unit testing
@@ -13,6 +14,54 @@
 - [x] Add SPEC.md
 - [x] Add PLAN.md
 - [x] Add TASKS.md
+
+## 0.1. PWA & Local-First Foundation
+
+- [ ] Configure PWA support
+- [ ] Create Web App Manifest
+- [ ] Add app name and short name
+- [ ] Add installable app icons
+- [ ] Configure standalone display mode
+- [ ] Configure Service Worker
+- [ ] Cache application shell
+- [ ] Define offline caching strategy
+- [ ] Add offline fallback
+- [ ] Define PWA update strategy
+- [ ] Validate installability on Judy's tablet
+- [ ] Validate launch from home screen
+- [ ] Validate offline launch
+- [ ] Validate offline Math session
+- [ ] Validate offline Reading session
+- [ ] Configure Vercel deployment
+- [ ] Validate HTTPS production deployment
+
+## 0.2. Local Persistence Architecture
+
+- [ ] Add IndexedDB persistence
+- [ ] Evaluate/add Dexie as IndexedDB wrapper
+- [ ] Create database schema and versioning strategy
+- [ ] Create ProfileRepository interface
+- [ ] Create ProgressRepository interface
+- [ ] Create SessionRepository interface
+- [ ] Create RewardRepository interface
+- [ ] Create ChallengeRepository interface
+- [ ] Create SettingsRepository interface
+- [ ] Implement IndexedDB repository adapters
+- [ ] Ensure domain modules do not access IndexedDB directly
+- [ ] Persist Reward Ledger locally
+- [ ] Persist mastery locally
+- [ ] Persist XP and streaks locally
+- [ ] Persist Parent Settings locally
+- [ ] Test database migration path
+- [ ] Test application restart with persisted state
+
+## 0.3. Future Cloud Sync Boundary
+
+- [ ] Define optional SyncProvider interface
+- [ ] Keep cloud sync disabled for MVP
+- [ ] Document future multi-device synchronization
+- [ ] Document future remote backup/recovery
+- [ ] Evaluate Supabase only when cloud sync is required
 
 ## 1. Platform Core
 
