@@ -159,6 +159,12 @@ function Shell() {
         >
           <Download size={15} /> Cómo instalar
         </button>
+        <span
+          className="app-version"
+          title="Versión que está usando este dispositivo"
+        >
+          Versión {import.meta.env.VITE_APP_VERSION}
+        </span>
       </footer>
     </>
   );

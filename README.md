@@ -33,6 +33,8 @@ El service worker se genera en producción, no en el servidor de desarrollo. Par
 
 ## Instalar en la tablet
 
+Al pie de cada pantalla aparece **Versión AAAA.MM.DD-HHMMSS**. El identificador se genera automáticamente al compilar, con fecha y hora de Ciudad de México, y queda incluido en el código de esa versión. Una PWA antigua o sin conexión muestra su propia versión; no consulta la última publicada para rellenar la etiqueta. Para actualizar, abre la app con internet y pulsa **Actualizar ahora** cuando aparezca el aviso fuera de una sesión.
+
 1. Abre la dirección publicada con conexión a internet.
 2. En **Adultos**, crea un PIN de 4–8 dígitos y guárdalo: todavía no hay recuperación automática.
 3. Espera a que aparezca **Lista para usar sin conexión**.
