@@ -122,8 +122,12 @@ export function createRepositories(db = new JudyDatabase()) {
   const challenges: ChallengeRepository = {
     progress: async () => challengeProgress(await sessions.all()),
   };
-  // Only this engine writes monetary rewards. It is called inside the finishing transaction.
-  async function awardWeekly(session: LearningSession, now: Date) {
+  // Both finishing and recovery use this engine inside an atomic transaction.
+  async function awardWeekly(
+    session: LearningSession,
+    now: Date,
+    recoveredAt?: string,
+  ) {
     const challenge = qualifyingExamChallenge(session);
     if (!challenge) return;
     const week = weekId(now),
@@ -141,8 +145,9 @@ export function createRepositories(db = new JudyDatabase()) {
         config.weeklyLimit - earned,
       ),
     );
-    await db.rewards.add({
+    const reward: Reward = {
       id,
+      ...(recoveredAt ? { recoveredAt } : {}),
       challengeId: challenge.id,
       sessionId: session.id,
       profileId: "judy",
@@ -159,7 +164,9 @@ export function createRepositories(db = new JudyDatabase()) {
           : grant < examPrize(config.weeklyLimit, challenge.id)
             ? "Recompensa parcial por límite semanal"
             : `Español: ${challenge.title} · al menos 80% sin ayuda al primer intento`,
-    });
+    };
+    await db.rewards.add(reward);
+    return reward;
   }
   return {
     db,
@@ -169,6 +176,37 @@ export function createRepositories(db = new JudyDatabase()) {
     progress,
     profiles,
     challenges,
+    async recoverExamRewards(now = new Date()) {
+      return db.transaction(
+        "rw",
+        db.sessions,
+        db.settings,
+        db.rewards,
+        async () => {
+          const restored: Reward[] = [];
+          const completed = (await db.sessions.toArray())
+            .filter((s) => s.phase === "done" && s.finishedAt)
+            .sort(
+              (a, b) =>
+                Date.parse(a.finishedAt!) - Date.parse(b.finishedAt!) ||
+                a.id.localeCompare(b.id),
+            );
+          for (const session of completed) {
+            const ended = new Date(session.finishedAt!);
+            // Credit the original week, never move old study into a fresh budget.
+            if (
+              !Number.isFinite(ended.getTime()) ||
+              ended > now ||
+              (session.weekId && session.weekId !== weekId(ended))
+            )
+              continue;
+            const reward = await awardWeekly(session, ended, now.toISOString());
+            if (reward) restored.push(reward);
+          }
+          return restored;
+        },
+      );
+    },
     vocabulary: {
       all: () => db.vocabulary.toArray(),
       get: (id: string) => db.vocabulary.get(id),

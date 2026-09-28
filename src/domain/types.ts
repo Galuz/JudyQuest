@@ -65,6 +65,7 @@ export type ParentSettings = {
   customWords?: WordEntry[];
 };
 export type Reward = {
+  recoveredAt?: string;
   sessionId?: string;
   id: string;
   challengeId: string;

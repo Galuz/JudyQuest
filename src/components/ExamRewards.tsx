@@ -17,6 +17,9 @@ export function ExamRewards({ compact = false }: { compact?: boolean }) {
   const rewards = app.rewards.filter((r) => r.weekId === weekId());
   const earned = rewards.reduce((n, r) => n + r.amountGranted, 0);
   const remaining = Math.max(0, app.settings.weeklyLimit - earned);
+  const recovered = rewards
+    .filter((r) => r.recoveredAt && r.amountGranted > 0)
+    .reduce((sum, r) => sum + r.amountGranted, 0);
   return (
     <section className="panel exam-rewards" aria-label="Premios para mi examen">
       <span className="chip">MIS PREMIOS DE ESPAÑOL</span>
@@ -29,6 +32,13 @@ export function ExamRewards({ compact = false }: { compact?: boolean }) {
         <strong>{prizeMoney(earned)} ganados</strong>
         <span>{prizeMoney(remaining)} disponibles</span>
       </div>
+      {recovered > 0 && (
+        <p role="status">
+          ✓ Recuperamos {prizeMoney(recovered)} de tus prácticas anteriores de
+          esta semana. Ya están incluidos en tu dinero ganado. No necesitas
+          repetirlas.
+        </p>
+      )}
       <progress
         aria-label="Presupuesto ganado esta semana"
         max={Math.max(1, app.settings.weeklyLimit)}

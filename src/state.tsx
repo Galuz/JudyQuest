@@ -38,6 +38,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [parentUnlocked, setParentUnlocked] = useState(false);
   async function refresh() {
     try {
+      // Reconcile before reading balances so older installations recover once.
+      await repositories.recoverExamRewards();
       const [s, r, c, v] = await Promise.all([
         repositories.sessions.all(),
         repositories.rewards.all(),

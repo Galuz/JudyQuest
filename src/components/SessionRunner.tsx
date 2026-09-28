@@ -240,9 +240,9 @@ export function SessionRunner() {
               <p>
                 Puedes leer las explicaciones, aprender las palabras y volver a
                 practicar. Consultar una palabra durante una pregunta cuenta
-                como ayuda en esa respuesta. Si terminaste antes de activar
-                estos premios, esa sesión conserva su avance, pero no recibe
-                dinero automáticamente.
+                como ayuda en esa respuesta. Al abrir la app también revisamos
+                tus prácticas anteriores para recuperar los premios pendientes
+                que cumplan estos requisitos.
               </p>
             )}
           </div>

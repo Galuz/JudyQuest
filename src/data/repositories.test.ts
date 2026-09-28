@@ -191,7 +191,7 @@ describe("presupuesto del examen", () => {
     await finish("alone", "spanish");
     expect((await r.rewards.all())[0].sessionId).toBe("alone");
   });
-  it("no paga retrospectivamente sesiones ya terminadas", async () => {
+  it("no acredita sesiones incompletas al volver a llamar next", async () => {
     const old = sample("old", "spanish");
     old.phase = "done";
     old.mode = "study-topic:sources";
@@ -207,5 +207,65 @@ describe("presupuesto del examen", () => {
         examChallenges.reduce((n, c) => n + examPrize(limit, c.id), 0),
       ).toBe(limit);
     }
+  });
+});
+
+describe("recuperación de premios anteriores", () => {
+  it("recupera sesiones guardadas sin repetir, sin cambiar el avance y sin duplicar entre pestañas", async () => {
+    await finish("old-a", "spanish");
+    await finish("old-b", "spanish", now, "study-topic:summary");
+    await db.rewards.clear(); // Simulate sessions completed before monetary rewards existed.
+    const before = await r.sessions.all();
+    db.close();
+    await db.open();
+    await Promise.all([r.recoverExamRewards(now), r.recoverExamRewards(now)]);
+    expect(await r.rewards.all()).toHaveLength(2);
+    expect(
+      (await r.rewards.all()).reduce((n, x) => n + x.amountGranted, 0),
+    ).toBe(2000);
+    expect(
+      (await r.rewards.all()).every((x) => x.recoveredAt === now.toISOString()),
+    ).toBe(true);
+    expect(await r.sessions.all()).toEqual(before);
+    expect(await r.recoverExamRewards(now)).toEqual([]);
+  });
+  it("respeta dinero ya entregado, premios parciales y el límite semanal al recuperar", async () => {
+    await finish("paid", "spanish");
+    const existing = (await r.rewards.all())[0];
+    await r.rewards.markPaid(existing.id);
+    const paid = (await r.rewards.all())[0];
+    await finish("missing", "spanish", now, "study-topic:summary");
+    await db.rewards.delete(`judy:exam-topic:summary:${weekId(now)}`);
+    await r.settings.save({ ...defaults, weeklyLimit: 1050 });
+    const restored = await r.recoverExamRewards(now);
+    expect(restored[0].amountGranted).toBe(50);
+    expect(await db.rewards.get(existing.id)).toEqual(paid);
+    expect(
+      (await r.rewards.all()).reduce((n, x) => n + x.amountGranted, 0),
+    ).toBe(1050);
+    await r.settings.save(defaults);
+    expect(await r.recoverExamRewards(now)).toEqual([]);
+  });
+  it("conserva la semana original aunque se abra la app después del domingo", async () => {
+    await finish("sunday", "spanish");
+    await db.rewards.clear();
+    const monday = new Date("2026-09-28T12:00:00Z");
+    const restored = await r.recoverExamRewards(monday);
+    expect(restored[0].weekId).toBe(weekId(now));
+    expect(restored[0].earnedAt).toBe(now.toISOString());
+    await finish("monday", "spanish", monday);
+    expect(await r.rewards.all()).toHaveLength(2);
+  });
+  it("no inventa premios por prácticas incompletas, con ayuda o sin fecha de finalización", async () => {
+    await finish("help", "spanish", now, "study-topic:sources", true);
+    await r.sessions.create(sample("unfinished", "spanish"));
+    const noDate = {
+      ...(await r.sessions.get("help"))!,
+      id: "no-date",
+      finishedAt: undefined,
+    };
+    await r.sessions.create(noDate);
+    expect(await r.recoverExamRewards(now)).toEqual([]);
+    expect(await r.rewards.all()).toHaveLength(0);
   });
 });
