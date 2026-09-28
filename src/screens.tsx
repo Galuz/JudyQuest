@@ -10,7 +10,6 @@ import {
   BookOpen,
   Calculator,
   Check,
-  CheckCircle2,
   Compass,
   Flag,
   Headphones,

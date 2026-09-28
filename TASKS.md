@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-Código R1 implementado; pruebas automatizadas aprobadas. Las casillas de comprobación en tablet, instalación, offline real y prueba con Judy permanecen pendientes. Los checks de implementación no significan aceptación del usuario.
+Código R1 implementado. El 28 de septiembre se corrigió lint y se aprobaron 45 pruebas, tipos/build y precache; este último se añadió a CI. Evidencia y límites en [docs/validacion-r1.md](docs/validacion-r1.md). Las casillas de comprobación en tablet, instalación, offline real y prueba con Judy permanecen pendientes. Los checks de implementación no significan aceptación del usuario.
 
 ## Vocabulario con ayuda
 
@@ -22,7 +22,7 @@ Código R1 implementado; pruebas automatizadas aprobadas. Las casillas de compro
 - [x] Evitar dominio por consultas, reintentos, práctica temprana o repetición el mismo día.
 - [x] Integrar «Leer con mis palabras» en Español y reanudar sesiones guardadas.
 - [x] Probar migración conservando sesiones, ajustes, perfil y recompensas.
-- [x] Aprobar 29 pruebas automatizadas, tipos/build, lint y verificación del precache.
+- [x] Aprobar 45 pruebas automatizadas, tipos/build, lint y verificación del precache.
 - [x] Comprobar en navegador desconocimiento, ayuda, acierto, salida y reanudación tras cerrar la pestaña.
 - [x] Verificar que Español habilita lecturas con palabras practicadas y contextos nuevos.
 - [ ] Validar con Judy las primeras 20 palabras antes de ampliar a las otras 100 candidatas.
@@ -30,7 +30,7 @@ Código R1 implementado; pruebas automatizadas aprobadas. Las casillas de compro
 
 ## Cómo ejecutar este backlog
 
-Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.
+Actualizado el 28 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.
 
 Ejecutar R1.0 → R1.1 Lectura → R1.2 Matemáticas → R1.3 integración → R1.4 verificación → R1.5 instalación y prueba del adulto.
 
@@ -58,7 +58,7 @@ R1 se considera terminado según SPEC.md, sección 0. Las funcionalidades R2 y R
 - [x] Preparar manifest, nombre, short name, theme/background, iconos y display standalone.
 - [x] Configurar service worker, caché del shell y contenido inicial, fallback y estrategia offline.
 - [x] Definir actualización segura que no interrumpa sesiones.
-- [ ] Comprobar restauración de estado y migración básica sin pérdida de datos.
+- [x] Comprobar restauración de sesiones y migraciones v1→v2 y v2→v3 en pruebas con fake-indexeddb; validación real en R1.5.
 
 ## R1.1 — Español: Lectura y repaso del temario confirmado
 
@@ -90,22 +90,20 @@ R1 se considera terminado según SPEC.md, sección 0. Las funcionalidades R2 y R
 
 ### Repaso específico de Español — obligatorio en R1
 
-Temario recibido por fotografía el 27 de septiembre de 2026:
-- Relatos históricos: orden temporal, causa y consecuencia, párrafos y punto y coma (pp. 12–27).
-- Fábulas y refranes: moraleja y significado implícito (pp. 28–31).
-- Ortografía: dictado y uso de b/v en las palabras trabajadas en clase.
+Temario actualizado con las fotografías de las pp. 12–31: fuentes, resumen/paráfrasis, párrafos, puntos y comas, orden temporal, causa/consecuencia, fábulas y refranes. Se recibieron siete palabras con b del cuaderno. Ver docs/repaso-espanol-libro.md; el Recortable 1 sigue sin recibirse y no bloquea las actividades.
 
-Las páginas completas y las palabras exactas de clase no están disponibles. El adulto autorizó un banco de palabras cotidianas; continuar sin esperar más fotos ni listas.
-
+- [x] Implementar ocho temas, 48 preguntas base, 16 alternativas y repaso mixto de 20 preguntas.
+- [x] Añadir cola de hasta seis errores con ejemplos alternativos; ayuda/reintento no resuelven pendientes.
+- [x] Incorporar las siete palabras confirmadas y práctica adicional con v sin sobrescribir personalizaciones.
 - [x] Añadir orden de acontecimientos y reconocimiento de expresiones de sucesión temporal.
 - [x] Añadir relaciones de causa y consecuencia.
 - [x] Explicar y practicar separación de párrafos y agrupación por idea.
-- [x] Explicar el signo «;» y crear ejercicios inequívocos de punto y coma.
+- [x] Corregir el enfoque inicial de «;» por puntos y comas según el libro, preservando sesiones históricas.
 - [x] Evitar penalizar otras puntuaciones válidas en preguntas abiertas.
 - [x] Practicar moralejas con justificación en la fábula.
 - [x] Relacionar refranes con situaciones y explicar su sentido implícito.
 - [x] Añadir práctica de completar b/v con feedback y repaso de errores.
-- [x] Crear content/spanish/bv-common-words.v1.json con 24 palabras cotidianas, tres niveles, frases, huecos b/v y feedback; validar estructura y soluciones.
+- [x] Crear content/spanish/bv-common-words.v1.json con 34 palabras (24 originales, siete confirmadas y tres nuevas con v), frases, huecos b/v y feedback; validar estructura y soluciones.
 - [x] Integrar el banco inicial en completar b/v y dictado; identificarlo como práctica general.
 - [x] Añadir edición de palabras desde Parent Mode.
 - [x] Alternar sesiones de 6–8 palabras y reintroducir las falladas después de otras preguntas.
@@ -114,7 +112,7 @@ Las páginas completas y las palabras exactas de clase no están disponibles. El
 - [x] Implementar dictado con el adulto: consulta protegida, regreso a pantalla infantil sin respuesta visible, respuesta escrita y corrección.
 - [x] Hacer funcionar el dictado básico offline sin audio automático ni reconocimiento de voz.
 - [x] Diferenciar errores b/v, tildes y otros; normalizar espacios y mayúsculas.
-- [x] Registrar PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING y DICTATION sin mezclarlos con precisión lectora.
+- [x] Registrar habilidades de los ocho temas, BV_SPELLING y DICTATION; conservar SEMICOLON en el historial anterior.
 - [x] Integrar un repaso de todos los bloques con resumen de errores por tema.
 - [x] Mantener estos ejercicios acotados dentro de LanguageModule; posponer SpellingModule/GrammarModule completos.
 
@@ -136,9 +134,9 @@ Las páginas completas y las palabras exactas de clase no están disponibles. El
 ## R1.3 — Progreso y recompensa mínima compartida
 
 - [x] Mostrar progreso básico de Lectura y Matemáticas desde el inicio.
-- [x] Implementar XP básico por respuesta correcta independiente.
+- [x] Implementar 2 XP por acierto original, sin XP por reintentos; no equiparar XP con dominio ni elegibilidad monetaria.
 - [x] Persistir XP, sesiones y progreso de ambas materias.
-- [x] Definir condiciones exactas y monto configurado de un reto semanal sencillo antes de activarlo.
+- [x] Implementar nueve retos semanales de Español: ocho temas (5/6 sin ayuda, 10% cada uno) y repaso mixto (16/20, resto). Desactivar el premio combinado anterior.
 - [x] Crear Challenge, ChallengeResult, RewardLedgerEntry, WeeklyBudget y PaymentRecord.
 - [x] Implementar RewardEngine como única vía para conceder dinero.
 - [x] Configurar presupuesto global predeterminado de $100 MXN y edición por el adulto.
@@ -151,17 +149,20 @@ Las páginas completas y las palabras exactas de clase no están disponibles. El
 - [x] Implementar PIN, consulta de resultados, presupuesto, ledger y marcado como pagado.
 - [x] Evitar que marcar PAID libere presupuesto semanal.
 - [x] Mantener práctica y XP activos después del límite.
-- [x] Evitar dinero por práctica normal o repetición del reto.
+- [x] Evitar dinero por Matemáticas, vocabulario, práctica normal o repetición del reto.
+- [x] Recuperar premios faltantes atómicamente en la semana original, conservando premios previos y avance.
+- [x] Añadir celebración, voz/sonido opcional y botón de prueba sin conceder dinero.
 
 ## R1.4 — Verificación técnica antes de entregar
 
 - [x] Compilar y comprobar tipos.
+- [x] Corregir lint y añadir comprobación del precache al workflow de CI.
 - [x] Verificar respuestas y feedback de Matemáticas y Lectura.
 - [x] Verificar cobertura de las ocho habilidades lectoras, temas del examen y revisión editorial.
-- [ ] Verificar párrafos, punto y coma «;», moralejas/refranes, b/v y dictado con respuesta oculta.
+- [ ] Verificar los ocho temas del libro, moralejas/refranes, b/v y dictado con respuesta oculta.
 - [ ] Comprobar edición del banco de palabras, clasificación de errores y guardado por tema.
 - [ ] Comprobar dictado con adulto y repaso específico de Español offline.
-- [ ] Comprobar recorridos completos de ambas materias con guardado.
+- [x] Comprobar recorridos completos de Lectura y Matemáticas con guardado en navegador local (28 de septiembre; docs/validacion-r1.md).
 - [ ] Comprobar cierre/reapertura y conservación de sesiones, XP, ledger y ajustes.
 - [x] Probar reto repetido dos veces y veinte veces: una sola recompensa.
 - [ ] Probar recarga, reinicio, navegación atrás y solicitud duplicada sin doble recompensa.
@@ -169,12 +170,12 @@ Las páginas completas y las palabras exactas de clase no están disponibles. El
 - [x] Probar límite compartido entre materias, recompensa parcial y presupuesto agotado.
 - [x] Probar cambio de semana sin borrar historial, XP ni pagos.
 - [x] Comprobar que la práctica normal no concede dinero.
-- [ ] Comprobar inicio y sesión de Lectura offline tras preparar caché.
+- [x] Comprobar recarga y sesión completa de Lectura desde caché con servidor local detenido; modo avión real pendiente en R1.5.
 - [ ] Comprobar inicio y sesión de Matemáticas offline tras preparar caché.
 - [ ] Comprobar actualización segura y persistencia.
 - [ ] Revisar controles táctiles, contraste, lenguaje infantil, navegación y layout de tablet/móvil.
 - [x] Respetar preferencia de movimiento reducido si hay animaciones.
-- [ ] Configurar despliegue HTTPS, preferentemente Vercel.
+- [x] Confirmar despliegue HTTPS en Sites: versión 10 publicada correctamente; URL y evidencia en docs/validacion-r1.md.
 - [x] Añadir README con ejecución, alcance, instalación, preparación offline y límites del almacenamiento local.
 - [ ] Verificar ambos módulos en la versión desplegada.
 - [ ] Entregar URL e instrucciones cuando ambos módulos cumplan aceptación R1.
@@ -206,7 +207,7 @@ Este bloque se realiza DESPUÉS de terminar ambos módulos. No marcarlo completa
 - [ ] Priorizar habilidades débiles, errores recientes y habilidades olvidadas.
 - [ ] Ampliar y revisar el catálogo lector según uso real.
 - [ ] Completar modos Detective e Inferencia especializados.
-- [ ] Mantener CHARACTER_INTENT, AUTHOR_INTENT y SUMMARY como expansión posterior, fuera de R1.
+- [ ] Mantener CHARACTER_INTENT y AUTHOR_INTENT como expansión posterior; resumen/paráfrasis ya tienen práctica acotada en el libro.
 
 ### Velocidad y bosses
 

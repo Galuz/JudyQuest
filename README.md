@@ -11,9 +11,13 @@ Primera versión de la app educativa para Judy: Español y Matemáticas, instala
 - «Repasar mis errores» reconstruye pendientes desde las respuestas locales, propone hasta seis preguntas y prioriza otros ejemplos. Un reintento inmediato o un acierto con ayuda no resuelve el pendiente. No equivale a dominio permanente.
 - Matemáticas: aprendizaje de las tablas 1–10, práctica por tabla o mixta, explicaciones y repaso espaciado de errores.
 - Ejemplos guiados, texto consultable, corrección después de cada pregunta y resumen de resultados.
-- Sesiones reanudables, respuestas, precisión por habilidad y XP persistidos en IndexedDB.
+- Sesiones reanudables, respuestas, precisión por habilidad y XP persistidos en IndexedDB. Cada acierto original suma 2 XP; los reintentos no suman y los XP no equivalen a dominio ni a premio monetario.
 - Modo adulto con PIN: presupuesto, entrega de recompensas y edición del banco de palabras.
 - Recursos de la app, contenido y tipografías incluidos en el precache de la PWA. No hay APIs de contenido ni fuentes remotas.
+
+## Estado y validación
+
+La evidencia técnica, el despliegue confirmado y la lista para la tablet están en [docs/validacion-r1.md](docs/validacion-r1.md). R1 está implementada; la aceptación con Judy sigue pendiente.
 
 ## Desarrollo
 
@@ -82,7 +86,7 @@ En Español → **Palabras de mi cuaderno** se pueden practicar o dictar las sie
 
 Compatible con hosting estático HTTPS. Para Vercel, importa este repositorio: `npm run build`, directorio `dist`. La configuración está en `vercel.json`. Las rutas internas usan hash para facilitar recargas y hosting estático.
 
-La configuración de Sites, si se utiliza para la primera entrega privada, está en `.openai/hosting.json`. No requiere backend, cuentas infantiles ni servicios de pago.
+La publicación actual es [JudyQuest](https://judyquest.german-glz01.chatgpt.site), en Sites, con acceso público. Su configuración está en `.openai/hosting.json`. No requiere backend, cuentas infantiles ni servicios de pago.
 
 ## Fuentes de los relatos históricos
 
