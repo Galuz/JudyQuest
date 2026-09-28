@@ -1,5 +1,4 @@
 let context: AudioContext | undefined;
-let speechTimer: ReturnType<typeof setTimeout> | undefined;
 let enabled = true;
 try {
   enabled = localStorage.getItem("judy-reward-sound") !== "off";
@@ -15,27 +14,57 @@ export function setRewardSound(value: boolean) {
     /* Keep the in-memory preference. */
   }
   if (!value) {
-    clearTimeout(speechTimer);
-    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    try {
+      window.speechSynthesis?.cancel();
+    } catch {
+      /* Optional API. */
+    }
     void context?.suspend().catch(() => {});
   }
 }
-// Call directly from a tap, before waiting for the database transaction.
-export function prepareRewardAudio() {
+// Resume immediately in the tap handler, including iOS's interrupted state.
+// Resolve only once playback is ready; don't schedule notes on a suspended clock.
+export async function prepareRewardAudio(): Promise<void> {
   if (!enabled) return;
   try {
-    context ??= new AudioContext();
-    if (context.state === "suspended") void context.resume().catch(() => {});
+    const Audio =
+      window.AudioContext ??
+      (window as Window & { webkitAudioContext?: typeof AudioContext })
+        .webkitAudioContext;
+    if (!Audio) return;
+    if (!context || context.state === "closed") context = new Audio();
+    if (context.state !== "running") await context.resume();
   } catch {
-    /* The visible reward works even without audio support. */
+    /* A blocked speaker must never affect a saved reward. */
   }
 }
-export function celebrateReward(cents: number) {
-  if (!enabled || cents <= 0) return;
-  prepareRewardAudio();
+function announce(text: string) {
+  if (!enabled) return;
+  // No setTimeout: a replay/test tap must reach speak() in the same user gesture.
   try {
-    const audio = context;
-    if (audio)
+    if (
+      "speechSynthesis" in window &&
+      typeof SpeechSynthesisUtterance !== "undefined"
+    ) {
+      const speech = new SpeechSynthesisUtterance(text);
+      speech.lang = "es-MX";
+      speech.rate = 0.95;
+      const voices = window.speechSynthesis.getVoices();
+      const voice =
+        voices.find((v) => v.lang === "es-MX") ??
+        voices.find((v) => v.lang.startsWith("es"));
+      if (voice) speech.voice = voice;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.resume();
+      window.speechSynthesis.speak(speech);
+    }
+  } catch {
+    /* Written amount and the sound remain available. */
+  }
+  void prepareRewardAudio().then(() => {
+    if (!enabled || !context || context.state !== "running") return;
+    try {
+      const audio = context;
       [880, 1174, 1568, 2093].forEach((frequency, i) => {
         const oscillator = audio.createOscillator(),
           gain = audio.createGain();
@@ -54,27 +83,21 @@ export function celebrateReward(cents: number) {
           gain.disconnect();
         };
       });
-  } catch {
-    /* Never block saving a prize because of a sound failure. */
-  }
-  clearTimeout(speechTimer);
-  if ("speechSynthesis" in window) {
-    speechTimer = setTimeout(() => {
-      if (!enabled) return;
-      const pesos = Math.floor(cents / 100),
-        remainder = cents % 100;
-      const speech = new SpeechSynthesisUtterance(
-        `¡Felicidades, Judy! Ganaste ${pesos} ${pesos === 1 ? "peso" : "pesos"}${remainder ? ` con ${remainder} centavos` : ""} por aprender Español.`,
-      );
-      speech.lang = "es-MX";
-      speech.rate = 0.95;
-      const voices = window.speechSynthesis.getVoices();
-      const voice =
-        voices.find((v) => v.lang === "es-MX") ??
-        voices.find((v) => v.lang.startsWith("es"));
-      if (voice) speech.voice = voice;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(speech);
-    }, 650);
-  }
+    } catch {
+      /* Audio failure must not look like a saving failure. */
+    }
+  });
+}
+export function testRewardSound() {
+  announce(
+    "¡Hola, Judy! El sonido está listo. Esta es una prueba y no suma dinero.",
+  );
+}
+export function celebrateReward(cents: number) {
+  if (!enabled || cents <= 0) return;
+  const pesos = Math.floor(cents / 100),
+    remainder = cents % 100;
+  announce(
+    `¡Felicidades, Judy! Ganaste ${pesos} ${pesos === 1 ? "peso" : "pesos"}${remainder ? ` con ${remainder} centavos` : ""} por aprender Español.`,
+  );
 }

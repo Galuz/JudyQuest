@@ -61,6 +61,8 @@ En Español → **Palabras de mi cuaderno** se pueden practicar o dictar las sie
 - Un reto completado sin saldo queda registrado a $0 y no puede cobrarse otra vez esa semana. Cambiar el presupuesto no recalcula premios previos. `rewardAmount` se conserva únicamente por compatibilidad con datos anteriores.
 - Semana en America/Mexico_City, de lunes a lunes. No cambia el calendario existente ni el guardado local. El dinero lo entrega un adulto; la app solo lleva el registro.
 - Al ganar un premio positivo en una sesión activa, aparece una celebración, suena una caja musical creada con Web Audio y una voz anuncia el importe realmente concedido. Sonido opcional, silenciable y con botón para volver a escucharlo sin conceder dinero. Reabrir resultados no reproduce automáticamente la celebración. La disponibilidad de voz depende del dispositivo; el importe siempre se muestra escrito.
+- Las tarjetas y la lista muestran práctica completada por separado del premio semanal. Ver mi resultado permite reabrir una sesión guardada sin volver a hacerla; los resultados explican los aciertos independientes y los premios pendientes.
+- Probar sonido permite comprobar y activar audio sin ganar dinero. La voz se invoca directamente desde el toque de prueba/reproducción, sin temporizador; los tonos esperan a que AudioContext termine de reanudarse, también después de una interrupción. Los fallos de audio no se presentan como fallos de guardado.
 - Audio iniciado desde un toque para compatibilidad móvil. Animación limitada y respetuosa de movimiento reducido. No usa audios remotos ni requiere red para el sonido de caja.
 - Las protecciones evitan duplicados de uso normal, no la manipulación deliberada del reloj o almacenamiento local.
 

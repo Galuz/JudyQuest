@@ -1293,6 +1293,12 @@ summary svg {
 .reward-milestones strong {
   color: #196346;
 }
+.completion-label {
+  display: block;
+  color: #196346;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
 .prize-celebration {
   padding: 28px 20px;
   margin: 24px 0;

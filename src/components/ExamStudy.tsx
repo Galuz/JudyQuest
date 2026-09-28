@@ -1,5 +1,7 @@
 import { ArrowRight, BookOpen, RotateCcw } from "lucide-react";
 import { useApp } from "../state";
+import { Link } from "react-router-dom";
+import { weekId } from "../domain/engines";
 import { useStart } from "../useStart";
 import {
   bvQuestions,
@@ -92,17 +94,36 @@ export function ExamStudy() {
               ),
             );
           const attempts = sessions[0]?.attempts.filter((a) => !a.retry);
+          const reward = app.rewards.find(
+            (r) =>
+              r.challengeId === `exam-topic:${t.id}` && r.weekId === weekId(),
+          );
           return (
             <article className="panel study-card" key={t.id}>
               <span className="eyebrow">
                 {i + 1}. PÁGINAS {t.pages}
               </span>
               <h3>{t.title}</h3>
+              {sessions.length > 0 && (
+                <span className="chip">✓ Tema completado</span>
+              )}
+              {reward && (
+                <p className="fine-print">
+                  {reward.amountGranted > 0
+                    ? "✓ Premio de esta semana ganado"
+                    : "Reto de esta semana completado sin presupuesto"}
+                </p>
+              )}
               <p className="fine-print">
                 {attempts
                   ? `Última práctica: ${attempts.filter((a) => a.correct).length}/${attempts.length} al primer intento`
                   : "Explicación, ejemplo y práctica"}
               </p>
+              {sessions[0] && (
+                <Link className="text-button" to={`/sesion/${sessions[0].id}`}>
+                  Ver mi resultado
+                </Link>
+              )}
               <details>
                 <summary>
                   <BookOpen size={17} /> Entender el tema
@@ -126,7 +147,8 @@ export function ExamStudy() {
                   )
                 }
               >
-                Practicar este tema <ArrowRight size={17} />
+                {sessions.length ? "Volver a practicar" : "Practicar este tema"}{" "}
+                <ArrowRight size={17} />
               </button>
             </article>
           );

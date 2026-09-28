@@ -18,10 +18,13 @@ import { AnswerOption, GlossaryText, GlossaryHelpScope } from "./Glossary";
 import { vocabulary } from "../content/vocabulary";
 import { UNKNOWN_WORD, vocabularyStatus } from "../domain/vocabulary";
 import { studyTopics } from "../content/exam-study";
+import { examChallenges } from "../domain/exam-rewards";
+import { weekId } from "../domain/engines";
 import {
   celebrateReward,
   prepareRewardAudio,
   soundEnabled,
+  setRewardSound,
 } from "../reward-sound";
 import { prizeMoney } from "./ExamRewards";
 export function MathLesson({ table }: { table: number }) {
@@ -142,6 +145,13 @@ export function SessionRunner() {
     );
   const s = session;
   const sessionReward = app.rewards.find((r) => r.sessionId === s.id);
+  const challenge = examChallenges.find((c) => c.mode === s.mode);
+  const previousPrize =
+    challenge &&
+    app.rewards.find(
+      (r) =>
+        r.challengeId === challenge.id && r.weekId === (s.weekId ?? weekId()),
+    );
   const q = s.questions[s.index];
   const last = s.attempts.at(-1);
   const original = s.attempts.filter((a) => !a.retry),
@@ -213,6 +223,30 @@ export function SessionRunner() {
             : "Cada intento te enseña algo"}
         </h1>
         <p>{s.title}</p>
+        {challenge && <p className="chip">✓ Práctica completada y guardada</p>}
+        {challenge && !sessionReward && (
+          <div className="panel" role="status">
+            <h2>
+              {previousPrize
+                ? "Este reto ya tiene su premio registrado"
+                : "Tu práctica cuenta; el premio sigue pendiente"}
+            </h2>
+            <p>
+              {previousPrize
+                ? "Repetir el tema no suma dinero otra vez esta semana."
+                : `Para el premio cuentan tus aciertos sin pistas al primer intento: ${original.filter((a) => a.correct && !a.assisted).length} de ${original.length}. Necesitas ${s.mode === "study-exam" ? "16 de 20" : "5 de 6"}.`}
+            </p>
+            {!previousPrize && (
+              <p>
+                Puedes leer las explicaciones, aprender las palabras y volver a
+                practicar. Consultar una palabra durante una pregunta cuenta
+                como ayuda en esa respuesta. Si terminaste antes de activar
+                estos premios, esa sesión conserva su avance, pero no recibe
+                dinero automáticamente.
+              </p>
+            )}
+          </div>
+        )}
         {sessionReward &&
           (sessionReward.amountGranted > 0 ? (
             <div className="prize-celebration" role="status">
@@ -224,14 +258,21 @@ export function SessionRunner() {
                 Tu esfuerzo tiene premio. Ya quedó guardado para que un adulto
                 te lo entregue.
               </p>
-              {soundEnabled() && (
-                <button
-                  className="secondary"
-                  onClick={() => celebrateReward(sessionReward.amountGranted)}
-                >
-                  Escuchar mi premio
-                </button>
-              )}
+              <button
+                className="secondary"
+                onClick={() => {
+                  setRewardSound(true);
+                  celebrateReward(sessionReward.amountGranted);
+                }}
+              >
+                {soundEnabled()
+                  ? "Escuchar mi premio"
+                  : "Activar sonido y escuchar mi premio"}
+              </button>
+              <p className="fine-print">
+                Si no sonó automáticamente, toca el botón. Revisa el volumen y
+                el modo silencio de tu tablet.
+              </p>
               <p className="fine-print">Escuchar otra vez no suma dinero.</p>
             </div>
           ) : (
