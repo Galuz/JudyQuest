@@ -1737,6 +1737,24 @@ footer > span.app-version {
   border-left: 4px solid #567541;
   padding: 10px 14px;
 }
+.fraction-number {
+  display: inline-grid;
+  grid-template-rows: auto auto;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  margin: 0.15em 0.12em;
+  min-width: 1.25em;
+}
+.fraction-numerator {
+  border-bottom: 2px solid currentColor;
+  padding: 0 0.2em 0.12em;
+}
+.fraction-denominator {
+  padding: 0.12em 0.2em 0;
+}
 /* Equal-sized pies make fractions comparable, independent of slice count. */
 .fraction-pies {
   display: flex;

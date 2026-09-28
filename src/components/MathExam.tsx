@@ -11,7 +11,7 @@ import {
   type MathTopic,
 } from "../content/math-exam";
 import { FractionPies } from "./FractionVisuals";
-import { MathText } from "./MathText";
+import { FractionNumber, MathText } from "./MathText";
 
 export function MathGuide({ topic }: { topic: MathTopic }) {
   return (
@@ -95,7 +95,8 @@ function FractionExplorer() {
       </div>
       <div aria-live="polite">
         <p className="fraction-value">
-          {numerator}/{denominator} · {numerator}{" "}
+          <FractionNumber numerator={numerator} denominator={denominator} /> ·{" "}
+          {numerator}{" "}
           {numerator === 1
             ? names[denominator].slice(0, -1)
             : names[denominator]}
