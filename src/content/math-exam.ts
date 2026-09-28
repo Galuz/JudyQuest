@@ -78,8 +78,7 @@ export function readableMathQuestion(question: Question): Question {
     left === right ? "igual a" : left > right ? "mayor que" : "menor que";
   return {
     ...question,
-    prompt:
-      "Compara la cantidad pintada de los dos pasteles.",
+    prompt: "Compara la cantidad pintada de los dos pasteles.",
     explanation: `${a.numerator}/${a.denominator} es ${relationship} ${b.numerator}/${b.denominator}. ${left === right ? "Los dos tienen la misma cantidad pintada." : left > right ? "El primero tiene más cantidad pintada." : "El primero tiene menos cantidad pintada."} Si dividimos los dos pasteles en ${common} partes iguales, el primero tiene ${left} ${left === 1 ? "parte pintada" : "partes pintadas"} y el segundo ${right}.`,
   };
 }
@@ -359,6 +358,7 @@ export const mathTopics: MathTopic[] = [
     pages: "18–19",
     goal: "Dividir es repartir en partes iguales. Las tablas te ayudan a saber cuánto toca.",
     steps: [
+      "El signo ÷ significa dividido entre. Lee 12 ÷ 3 como doce dividido entre tres: reparte 12 en 3 grupos iguales.",
       "Ve de izquierda a derecha. Si la primera cifra es menor que el divisor, toma también la siguiente. Pregunta cuántas veces cabe el divisor sin pasarse.",
       "Escribe esa cifra en el cociente. Multiplica y resta para saber cuánto sobra.",
       "Baja la siguiente cifra junto al sobrante y repite. Si ya empezaste el cociente y ahora no cabe, escribe 0 en ese lugar. Al terminar, comprueba multiplicando.",
@@ -366,7 +366,7 @@ export const mathTopics: MathTopic[] = [
     example: [
       "84 ÷ 4. En el 8 cabe el 4 dos veces: escribe 2. Resta 8 − 8 = 0.",
       "Baja el 4. El 4 cabe una vez: escribe 1 junto al 2. Resta 4 − 4 = 0.",
-      "Resultado: 21. Comprueba: 4 × 21 = 84.",
+      "Resultado: 84 ÷ 4 = 21. Comprueba: 4 × 21 = 84.",
     ],
     remember:
       "Conserva los ceros que van en medio del cociente: 408 ÷ 4 = 102. Nunca dividimos entre 0.",
@@ -392,7 +392,7 @@ export const mathTopics: MathTopic[] = [
       "Comprueba: divisor × cociente + residuo = dividendo. El residuo debe ser menor que el divisor.",
     ],
     example: [
-      "17 fichas entre 5 niños: cada uno recibe 3 y sobran 2.",
+      "17 fichas entre 5 niños: 17 ÷ 5 da 3 y sobran 2. Cada uno recibe 3 fichas.",
       "Dividendo 17 · divisor 5 · cociente 3 · residuo 2.",
       "Comprobamos: 5 × 3 + 2 = 17. Sobran menos de 5; no alcanza para otra ronda.",
     ],

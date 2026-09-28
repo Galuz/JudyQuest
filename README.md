@@ -22,6 +22,8 @@ La evidencia técnica, el despliegue confirmado y la lista para la tablet están
 
 ## Desarrollo
 
+Convención de Matemáticas: representar siempre las operaciones de división con **÷** (óbelo), también en guías, opciones y explicaciones. Mostrarlo legible y separado de los números. Reservar `/` para escribir fracciones, no usarlo como signo de división.
+
 Node.js 22 o superior; npm.
 
 ```bash

@@ -9,6 +9,7 @@ import {
 import { glossaryParts, type GlossaryEntry } from "../content/glossary";
 import { repositories } from "../data/repositories";
 import { useApp } from "../state";
+import { MathText } from "./MathText";
 
 type BeforeHelp = () => Promise<void>;
 const GlossaryContext = createContext<
@@ -119,7 +120,7 @@ export function GlossaryText({ children }: { children: string }) {
             {part.text}
           </button>
         ) : (
-          part.text
+          <MathText key={index}>{part.text}</MathText>
         ),
       )}
     </>

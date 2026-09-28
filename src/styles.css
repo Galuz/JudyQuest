@@ -1714,6 +1714,18 @@ footer > span.app-version {
 .math-guide ol {
   padding-left: 24px;
 }
+.division-expression {
+  white-space: nowrap;
+}
+.division-sign {
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1.3em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: -0.04em;
+  padding-inline: 0.06em;
+}
 .math-guide li {
   margin: 12px 0;
   line-height: 1.7;

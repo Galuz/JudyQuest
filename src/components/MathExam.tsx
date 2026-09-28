@@ -11,6 +11,7 @@ import {
   type MathTopic,
 } from "../content/math-exam";
 import { FractionPies } from "./FractionVisuals";
+import { MathText } from "./MathText";
 
 export function MathGuide({ topic }: { topic: MathTopic }) {
   return (
@@ -20,18 +21,22 @@ export function MathGuide({ topic }: { topic: MathTopic }) {
       </p>
       <ol>
         {topic.steps.map((step) => (
-          <li key={step}>{step}</li>
+          <li key={step}>
+            <MathText>{step}</MathText>
+          </li>
         ))}
       </ol>
       <div className="example">
         <strong>Lo hacemos juntos</strong>
         {topic.example.map((line) => (
-          <p key={line}>{line}</p>
+          <p key={line}>
+            <MathText>{line}</MathText>
+          </p>
         ))}
         {topic.bars && <FractionPies bars={topic.bars} />}
       </div>
       <p className="math-remember">
-        <strong>Recuerda:</strong> {topic.remember}
+        <strong>Recuerda:</strong> <MathText>{topic.remember}</MathText>
       </p>
     </div>
   );
