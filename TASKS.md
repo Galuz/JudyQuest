@@ -2,7 +2,9 @@
 
 ## Estado actual
 
-Código R1 implementado. El 28 de septiembre se corrigió lint y se aprobaron 45 pruebas, tipos/build y precache; este último se añadió a CI. Evidencia y límites en [docs/validacion-r1.md](docs/validacion-r1.md). Las casillas de comprobación en tablet, instalación, offline real y prueba con Judy permanecen pendientes. Los checks de implementación no significan aceptación del usuario.
+Transición de hosting autorizada: mantener Sites activo para la instalación actual de Judy y publicar GitHub Pages automáticamente desde `main`. Retirar Sites solo cuando el adulto lo indique; el progreso entre dominios no se sincroniza. Ver README → Publicación.
+
+Código R1 implementado. El 28 de septiembre se corrigió lint y se aprobaron 45 pruebas, tipos/build y precache; este último se añadió a CI. Evidencia y límites en [docs/validacion-r1.md](docs/validacion-r1.md). El usuario confirmó instalación y actualización; siguen pendientes las demás comprobaciones en tablet, offline real y prueba con Judy. Los checks de implementación no significan aceptación del usuario.
 
 ## Vocabulario con ayuda
 
@@ -184,7 +186,8 @@ Temario actualizado con las fotografías de las pp. 12–31: fuentes, resumen/pa
 
 Este bloque se realiza DESPUÉS de terminar ambos módulos. No marcarlo completado por una comprobación del desarrollador.
 
-- [ ] El adulto instala la PWA en la tablet.
+- [x] El adulto instala la PWA en la tablet (confirmado por el usuario el 28 de septiembre de 2026).
+- [x] El adulto confirma que puede actualizar la PWA (28 de septiembre de 2026); conservación del avance tras actualizar pendiente de confirmación.
 - [ ] El adulto verifica apertura desde la pantalla de inicio.
 - [ ] Judy completa una sesión de Lectura y el repaso de los temas de Español.
 - [ ] El adulto realiza un dictado con Judy y revisan sus errores.

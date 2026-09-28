@@ -1,5 +1,7 @@
 # Validación de R1 — 28 de septiembre de 2026
 
+Este registro describe la revisión inicial de R1. La configuración posterior de publicación simultánea en Sites y GitHub Pages se documenta en README → Publicación; conservar Sites hasta autorización expresa del adulto.
+
 R1 está implementada. Este registro distingue comprobaciones de desarrollo, publicación y aceptación en la tablet. La prueba con Judy sigue pendiente; no se declara R1 aceptada.
 
 ## Cambios de esta revisión
@@ -46,6 +48,8 @@ La carga sin servidor verifica el uso de caché local. No simula todas las condi
 Esta comprobación corresponde a la publicación existente. Las correcciones de lint, CI y documentación de esta revisión no implican por sí mismas una nueva publicación o un merge en `main`.
 
 ## Prueba pendiente en la tablet — adulto y Judy
+
+Confirmación del usuario, 28 de septiembre de 2026: pudo instalar la PWA y puede actualizarla. Se dan por comprobadas ambas capacidades. Sigue pendiente confirmar conservación del avance tras actualizar, modo avión, dictado, audio y las sesiones con Judy.
 
 Usar siempre el mismo dominio y navegador para conservar el avance. No borrar datos ni usar navegación privada.
 

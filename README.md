@@ -86,7 +86,18 @@ En Español → **Palabras de mi cuaderno** se pueden practicar o dictar las sie
 
 Compatible con hosting estático HTTPS. Para Vercel, importa este repositorio: `npm run build`, directorio `dist`. La configuración está en `vercel.json`. Las rutas internas usan hash para facilitar recargas y hosting estático.
 
-La publicación actual es [JudyQuest](https://judyquest.german-glz01.chatgpt.site), en Sites, con acceso público. Su configuración está en `.openai/hosting.json`. No requiere backend, cuentas infantiles ni servicios de pago.
+Durante la transición se mantienen dos instalaciones independientes:
+
+- [Sites](https://judyquest.german-glz01.chatgpt.site): conserva la dirección y la PWA que Judy ya tiene instalada. La publicación en Sites sigue siendo manual; su configuración permanece en `.openai/hosting.json`.
+- [GitHub Pages](https://galuz.github.io/JudyQuest/): `.github/workflows/ci.yml` publica automáticamente cada push a `main`, incluidos los merges, después de aprobar lint, pruebas y ambas compilaciones/PWA. También permite ejecución manual desde Actions sobre `main`. Los PR se verifican sin publicar.
+
+Sites permanece activo hasta que el adulto indique expresamente retirarlo. Publicar Pages no actualiza ni redirige la instalación de Sites. Cada dominio conserva su propio progreso: no hay sincronización ni transferencia automática. Antes de cambiar la instalación de Judy, resolver el traslado de su avance; no desinstalar ni borrar datos de Sites durante la transición.
+
+El build predeterminado usa `/` para Sites. Para Pages se usa `JUDY_BASE_PATH=/JudyQuest/ npm run build`, y `node scripts/check-pwa.mjs /JudyQuest/` comprueba el manifest, los iconos, el shell y el fallback offline bajo esa ruta. La CI conserva el build de Sites como artefacto durante siete días y despliega a Pages el build con su subruta. No intercambiar los dos artefactos.
+
+En GitHub, Settings → Pages → Source debe estar en **GitHub Actions**. El job de despliegue usa el token efímero de GitHub (`pages: write` e `id-token: write`); no requiere un PAT ni credenciales de Sites. Los despliegues se serializan y no se cancela uno que ya está en curso. El enlace de la ejecución muestra la URL publicada. El aviso **Actualizar ahora** de la PWA sigue apareciendo fuera de las sesiones.
+
+Ninguna publicación requiere backend de progreso ni cuentas infantiles.
 
 ## Fuentes de los relatos históricos
 
