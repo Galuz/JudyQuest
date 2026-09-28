@@ -2,6 +2,8 @@
 
 ## Estado actual
 
+Módulo del examen de Matemáticas añadido a partir del temario enviado el 28 de septiembre: ocho temas, 64 preguntas, guías y dibujos, repaso mixto de 16 y repaso de errores. Contenido original; páginas del libro no proporcionadas. La práctica en el dispositivo de Judy sigue pendiente. Mantiene las tablas existentes y el presupuesto de Español.
+
 Transición de hosting autorizada: mantener Sites activo para la instalación actual de Judy y publicar GitHub Pages automáticamente desde `main`. Retirar Sites solo cuando el adulto lo indique; el progreso entre dominios no se sincroniza. Ver README → Publicación.
 
 Código R1 implementado. El 28 de septiembre se corrigió lint y se aprobaron 45 pruebas, tipos/build y precache; este último se añadió a CI. Evidencia y límites en [docs/validacion-r1.md](docs/validacion-r1.md). El usuario confirmó instalación y actualización; siguen pendientes las demás comprobaciones en tablet, offline real y prueba con Judy. Los checks de implementación no significan aceptación del usuario.

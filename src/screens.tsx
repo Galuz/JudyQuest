@@ -2,6 +2,8 @@ import { ExamRewards } from "./components/ExamRewards";
 import { useStart } from "./useStart";
 import { VocabularyInvitation } from "./components/VocabularyScreen";
 import { ExamStudy } from "./components/ExamStudy";
+import { MathExam } from "./components/MathExam";
+import { mathTopics } from "./content/math-exam";
 import { studyTopics } from "./content/exam-study";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -123,18 +125,18 @@ export function Home() {
             <span className="subject-icon">
               <Calculator size={30} />
             </span>
-            <span className="pill">TABLAS DEL 1 AL 10</span>
+            <span className="pill">PREPARO MI EXAMEN</span>
           </div>
           <div>
             <p className="eyebrow">PEQUEÑOS NÚMEROS, GRANDES IDEAS</p>
             <h2>Matemáticas</h2>
             <p>
-              Aprende las tablas paso a paso
-              <br className="desktop" /> y practica multiplicaciones.
+              Fracciones, multiplicaciones
+              <br className="desktop" /> y divisiones paso a paso.
             </p>
           </div>
           <div className="card-bottom">
-            <span>Aprende · Practica · Mejora</span>
+            <span>Guías · Ejercicios · Repaso de examen</span>
             <span className="round-arrow">
               <ArrowRight />
             </span>
@@ -398,6 +400,10 @@ export function MathScreen() {
           <Calculator size={36} />
         </span>
       </div>
+      <MathExam />
+      <div className="section-heading">
+        <h2>También practico mis tablas</h2>
+      </div>
       <div className="math-layout">
         <section className="panel">
           <h2>¿Qué tabla quieres practicar?</h2>
@@ -517,6 +523,7 @@ export function ProgressScreen() {
                     <span>
                       <GlossaryText>
                         {skillNames[skill] ??
+                          mathTopics.find((t) => t.id === skill)?.title ??
                           skill.replace("TABLE_", "Tabla del ")}
                       </GlossaryText>
                     </span>

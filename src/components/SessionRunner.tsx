@@ -18,6 +18,8 @@ import { AnswerOption, GlossaryText, GlossaryHelpScope } from "./Glossary";
 import { vocabulary } from "../content/vocabulary";
 import { UNKNOWN_WORD, vocabularyStatus } from "../domain/vocabulary";
 import { studyTopics } from "../content/exam-study";
+import { mathTopics } from "../content/math-exam";
+import { FractionBars, MathGuide } from "./MathExam";
 import { examChallenges } from "../domain/exam-rewards";
 import { weekId } from "../domain/engines";
 import {
@@ -157,6 +159,11 @@ export function SessionRunner() {
   const original = s.attempts.filter((a) => !a.retry),
     correct = original.filter((a) => a.correct).length;
   const isVocabulary = s.mode.startsWith("vocabulary");
+  const isMathStudy = s.mode.startsWith("math-study");
+  const mathTopic = mathTopics.find(
+    (t) =>
+      t.id === (s.phase === "intro" ? s.mode.split(":")[1] : q?.studyTopic),
+  );
   const studyLesson = s.mode.startsWith("study-topic:")
     ? studyTopics.find((t) => t.id === s.mode.split(":")[1])
     : undefined;
@@ -297,6 +304,37 @@ export function SessionRunner() {
           Volver a intentar te ayuda a aprender. Aquí contamos las respuestas
           correctas de la primera vez.
         </p>
+        {isMathStudy && (
+          <div className="review-list">
+            <h2>Así voy por tema</h2>
+            <p>
+              Consultar una guía durante una pregunta cuenta como ayuda.
+              Practicar con ayuda también sirve para aprender.
+            </p>
+            {mathTopics.map((t) => {
+              const attempts = original.filter(
+                (a) =>
+                  s.questions.find((q) => q.id === a.questionId)?.studyTopic ===
+                  t.id,
+              );
+              return (
+                attempts.length > 0 && (
+                  <div key={t.id}>
+                    <strong>{t.title}</strong>
+                    <p>
+                      {attempts.filter((a) => a.correct && !a.assisted).length}/
+                      {attempts.length} sin ayuda al primer intento ·{" "}
+                      {attempts.filter((a) => a.assisted).length} con ayuda
+                    </p>
+                  </div>
+                )
+              );
+            })}
+            <Link className="text-button" to="/matematicas">
+              Volver a mis temas y repasar errores
+            </Link>
+          </div>
+        )}
         {original.some((a) => !a.correct) && (
           <div className="review-list">
             <h3>Una pista para la próxima</h3>
@@ -355,12 +393,29 @@ export function SessionRunner() {
             <GlossaryText>{s.title}</GlossaryText>
           </h1>
           <p className="glossary-hint">
-            Toca las palabras subrayadas para saber qué significan.
+            {isMathStudy
+              ? "Ten a mano papel y lápiz. Sigue un paso a la vez."
+              : "Toca las palabras subrayadas para saber qué significan."}
           </p>
           <p>
-            {s.questions.length} ejercicios · Sin prisa · Puedes volver al texto
+            {s.questions.length} {s.questions.length === 1 ? "ejercicio" : "ejercicios"} · Sin prisa · Puedes volver al texto
           </p>
-          {s.subject === "math" ? (
+          {isMathStudy ? (
+            mathTopic ? (
+              <MathGuide topic={mathTopic} />
+            ) : (
+              <div className="example">
+                <p>
+                  Lee qué te piden y resuelve en tu cuaderno. En cada pregunta
+                  podrás abrir la guía del tema si la necesitas.
+                </p>
+                <p>
+                  En fracciones, busca partes del mismo tamaño. En divisiones,
+                  comprueba multiplicando y sumando lo que sobra.
+                </p>
+              </div>
+            )
+          ) : s.subject === "math" ? (
             <MathLesson table={Number(s.mode.split(":")[1])} />
           ) : studyLesson ? (
             <div>
@@ -559,6 +614,31 @@ export function SessionRunner() {
                 >
                   <GlossaryText>{q.prompt}</GlossaryText>
                 </h2>
+                {q.fractionBars && <FractionBars bars={q.fractionBars} />}
+                {isMathStudy && mathTopic && !submitted && (
+                  <div className="math-question-help">
+                    {!q.helpUsed ? (
+                      <button
+                        type="button"
+                        className="secondary"
+                        disabled={busy}
+                        onClick={() =>
+                          void action(() => repositories.useHelp(s.id, s.index))
+                        }
+                      >
+                        <Lightbulb size={18} /> Necesito la guía del tema
+                      </button>
+                    ) : (
+                      <details open key={q.id}>
+                        <summary>Guía: {mathTopic.title}</summary>
+                        <p className="fine-print">
+                          Esta respuesta será con ayuda.
+                        </p>
+                        <MathGuide topic={mathTopic} />
+                      </details>
+                    )}
+                  </div>
+                )}
                 {targetWord && !submitted && (
                   <p className="glossary-hint">
                     ¿Quieres una pista? Toca:{" "}
