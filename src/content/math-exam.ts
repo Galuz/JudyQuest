@@ -50,19 +50,57 @@ function equivalent(i: number, n: number, d: number, factor: number) {
     [bar(n, d)],
   );
 }
+export function comparisonLabel(value: string) {
+  return (
+    (
+      { ">": "mayor que", "<": "menor que", "=": "igual a" } as Record<
+        string,
+        string
+      >
+    )[value] ?? value
+  );
+}
+
+// Stored sessions keep their original answer values, so old symbol-based
+// questions still grade correctly while all visible copy uses plain words.
+export function readableMathQuestion(question: Question): Question {
+  if (
+    !question ||
+    question.studyTopic !== "compare" ||
+    question.fractionBars?.length !== 2
+  )
+    return question;
+  const [a, b] = question.fractionBars;
+  const common = commonDenominator(a.denominator, b.denominator);
+  const left = (a.numerator * common) / a.denominator;
+  const right = (b.numerator * common) / b.denominator;
+  const relationship =
+    left === right ? "igual a" : left > right ? "mayor que" : "menor que";
+  return {
+    ...question,
+    prompt:
+      "Compara la cantidad pintada de los dos pasteles.",
+    explanation: `${a.numerator}/${a.denominator} es ${relationship} ${b.numerator}/${b.denominator}. ${left === right ? "Los dos tienen la misma cantidad pintada." : left > right ? "El primero tiene más cantidad pintada." : "El primero tiene menos cantidad pintada."} Si dividimos los dos pasteles en ${common} partes iguales, el primero tiene ${left} ${left === 1 ? "parte pintada" : "partes pintadas"} y el segundo ${right}.`,
+  };
+}
+
 function compare(i: number, a: number, b: number, c: number, d: number) {
   const common = commonDenominator(b, d),
     left = (a * common) / b,
     right = (c * common) / d;
-  const sign = left === right ? "=" : left > right ? ">" : "<";
-  return q(
-    `compare-${i}`,
-    `Compara ${a}/${b} y ${c}/${d}. ¿Qué signo va en medio?`,
-    sign,
-    ["<", "=", ">"].filter((s) => s !== sign),
-    `Usa partes del mismo tamaño: ${a}/${b} = ${left}/${common} y ${c}/${d} = ${right}/${common}. Compara ${left} con ${right}: ${a}/${b} ${sign} ${c}/${d}.`,
-    [bar(a, b), bar(c, d)],
-  );
+  const sign =
+    left === right ? "igual a" : left > right ? "mayor que" : "menor que";
+  return readableMathQuestion({
+    ...q(
+      `compare-${i}`,
+      "Compara las cantidades pintadas.",
+      sign,
+      ["menor que", "igual a", "mayor que"].filter((s) => s !== sign),
+      `Usa partes del mismo tamaño: ${a}/${b} = ${left}/${common} y ${c}/${d} = ${right}/${common}. Compara ${left} con ${right}: ${a}/${b} ${sign} ${c}/${d}.`,
+      [bar(a, b), bar(c, d)],
+    ),
+    studyTopic: "compare",
+  });
 }
 function fractionOperation(
   i: number,
@@ -161,7 +199,7 @@ export const mathTopics: MathTopic[] = [
       ),
       q(
         "parts-4",
-        "¿Qué fracción de esta barra está pintada?",
+        "¿Qué fracción de este pastel está pintada?",
         "3/8",
         ["8/3", "5/8"],
         "Hay 8 partes iguales en total y 3 pintadas: 3/8, tres octavos.",
@@ -186,7 +224,7 @@ export const mathTopics: MathTopic[] = [
       ),
       q(
         "parts-7",
-        "¿Qué fracción representa toda la barra pintada?",
+        "¿Qué fracción representa todo el pastel pintado?",
         "4/4",
         ["1/4", "0/4"],
         "Tomamos las 4 partes de 4: 4/4. Eso es un entero.",
@@ -240,12 +278,12 @@ export const mathTopics: MathTopic[] = [
       "Cambia las dos fracciones a sextos multiplicando arriba y abajo por el mismo número. Después compara los numeradores.",
     ],
     example: [
-      "1/2 = 3/6 y 2/3 = 4/6.",
-      "3 partes son menos que 4: 1/2 < 2/3.",
-      "< significa menor que; >, mayor que; =, igual a. La boca abierta mira al mayor.",
+      "Un medio equivale a tres sextos. Dos tercios equivalen a cuatro sextos.",
+      "3 partes son menos que 4: 1/2 es menor que 2/3.",
+      "Lee de izquierda a derecha: la primera fracción es menor que, mayor que o igual a la segunda.",
     ],
     remember:
-      "Un denominador más grande no significa una cantidad más grande: 1/4 es menor que 1/2.",
+      "Mayor que significa más cantidad pintada; menor que, menos cantidad pintada; igual a, la misma cantidad. Cuenta partes solo cuando sean del mismo tamaño.",
     bars: [bar(3, 6), bar(4, 6)],
     questions: [
       [1, 4, 3, 4],

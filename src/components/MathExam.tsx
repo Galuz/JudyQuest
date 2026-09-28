@@ -10,35 +10,7 @@ import {
   pendingMathErrors,
   type MathTopic,
 } from "../content/math-exam";
-import type { Question } from "../domain/types";
-
-export function FractionBars({
-  bars,
-}: {
-  bars: NonNullable<Question["fractionBars"]>;
-}) {
-  return (
-    <div className="fraction-bars">
-      {bars.map(({ numerator, denominator }, i) => (
-        <div key={i}>
-          <div
-            className="fraction-bar"
-            role="img"
-            aria-label={`${numerator} de ${denominator} partes iguales pintadas; un entero completo es toda la barra`}
-          >
-            {Array.from({ length: denominator }, (_, part) => (
-              <span key={part} className={part < numerator ? "painted" : ""} />
-            ))}
-          </div>
-          <p className="fine-print">
-            {numerator} de {denominator} partes pintadas · Las barras
-            representan enteros del mismo tamaño.
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-}
+import { FractionPies } from "./FractionVisuals";
 
 export function MathGuide({ topic }: { topic: MathTopic }) {
   return (
@@ -56,7 +28,7 @@ export function MathGuide({ topic }: { topic: MathTopic }) {
         {topic.example.map((line) => (
           <p key={line}>{line}</p>
         ))}
-        {topic.bars && <FractionBars bars={topic.bars} />}
+        {topic.bars && <FractionPies bars={topic.bars} />}
       </div>
       <p className="math-remember">
         <strong>Recuerda:</strong> {topic.remember}
@@ -79,7 +51,7 @@ function FractionExplorer() {
   };
   return (
     <details className="panel fraction-explorer">
-      <summary>Prueba con una barra de fracciones</summary>
+      <summary>Prueba con un pastel de fracciones</summary>
       <p>
         El entero no cambia de tamaño. Cambia cuántas partes iguales tiene y
         cuántas pintas.
@@ -123,7 +95,7 @@ function FractionExplorer() {
             ? names[denominator].slice(0, -1)
             : names[denominator]}
         </p>
-        <FractionBars bars={[{ numerator, denominator }]} />
+        <FractionPies bars={[{ numerator, denominator }]} />
       </div>
     </details>
   );
@@ -188,7 +160,7 @@ export function MathExam() {
           onClick={() =>
             void start(
               "math",
-                  "Refuerzo mis Matemáticas",
+              "Refuerzo mis Matemáticas",
               "math-study-review",
               mathReviewQuestions(app.sessions),
             )
