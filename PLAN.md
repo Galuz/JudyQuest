@@ -2,7 +2,7 @@
 
 ## Estado de implementación
 
-R1 implementada en React/TypeScript: Español, Matemáticas, sesiones persistentes, XP, reto semanal, PIN y PWA. Se verifican tipos, build, lint, pruebas automatizadas y recorridos en navegador. La prueba de instalación/offline en la tablet corresponde a R1.5 y no se marca realizada. README.md documenta reglas concretas, uso y límites.
+R1 implementada en React/TypeScript: Español, Matemáticas, sesiones persistentes, XP, nueve retos semanales de Español, PIN y PWA. Validación del 28 de septiembre: 45 pruebas, tipos/build, lint y precache aprobados. Ver evidencia y pendientes en docs/validacion-r1.md. La prueba de instalación/offline en la tablet corresponde a R1.5 y no se marca realizada. README.md documenta reglas concretas, uso y límites.
 
 ## Mantenimiento de vocabulario
 
@@ -14,7 +14,7 @@ Implementadas las primeras 20 palabras tras el análisis previo: contenido, comp
 
 ## Prioridad y regla de ejecución
 
-Actualizado el 27 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.
+Actualizado el 28 de septiembre de 2026. Examen de Español: 28 de septiembre de 2026.
 
 Entregar primero R1 con Matemáticas y Comprensión Lectora completas en el alcance de SPEC.md, sección 0. Priorizar Lectura por la urgencia escolar. El adulto instalará y probará después de terminar ambos módulos.
 
@@ -45,8 +45,8 @@ Salida: inicio navegable y base persistente preparada para construir las dos mat
 - Cubrir LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE al menos una vez en el conjunto.
 - Añadir un ejemplo guiado por habilidad.
 - Revisar claridad, respuestas y evidencia antes de habilitar el contenido.
-- Aplicar el temario recibido el 27 de septiembre: relatos históricos (orden temporal, causa/consecuencia, párrafos y punto y coma; pp. 12–27), fábulas/refranes (moraleja y significado implícito; pp. 28–31) y dictado/b-v con palabras de clase.
-- Las páginas del libro y palabras exactas no se han proporcionado. El adulto autorizó vocabulario cotidiano; usar content/spanish/bv-common-words.v1.json sin esperar la lista escolar y sin afirmar correspondencia exacta con el libro.
+- Aplicar las fotografías del libro recibidas el 27 de septiembre: ocho temas de las pp. 12–31, con 48 preguntas base y 16 alternativas; ver docs/repaso-espanol-libro.md. El tema de puntuación es puntos y comas, no el signo «;».
+- Conservar las siete palabras con b confirmadas del cuaderno y la práctica complementaria con v. El banco general editable contiene 34 palabras y no reemplaza las listas del cuaderno. Falta únicamente el Recortable 1, que no bloquea las actividades originales.
 - Verificar los hechos de los relatos históricos reales y la interpretación de fábulas/refranes antes de publicar.
 
 ### Recorrido completo
@@ -63,14 +63,16 @@ Explicación guiada → texto → pregunta → respuesta → feedback → eviden
 
 1. Relatos: ordenar hechos, identificar marcadores temporales y vincular causas/consecuencias.
 2. Párrafos: reconocer separaciones y agrupar oraciones por idea.
-3. Punto y coma: explicar y practicar el signo «;» con ejercicios inequívocos.
+3. Puntos y comas: mayúscula tras punto, seguido/aparte/final, enumeraciones, vocativo y aclaración. Conservar el historial antiguo de «;» sin incluirlo en el examen.
 4. Fábulas y refranes: identificar moralejas y relacionar significado implícito con situaciones.
 5. Ortografía: completar b/v, corregir con explicación y repetir palabras falladas.
 6. Dictado offline con adulto: consultar palabra en Parent Mode, ocultarla al volver a la pantalla infantil, dictar, recibir respuesta escrita y corregir.
 
-Registrar PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING y DICTATION separadamente de las habilidades lectoras. No construir todavía SpellingModule ni GrammarModule completos.
+Registrar habilidades por tema, incluyendo fuentes, resumen/paráfrasis, párrafos, puntos/comas, orden temporal, causa/consecuencia, moralejas/refranes y ortografía. Mantener SEMICOLON solo por compatibilidad histórica. No construir todavía SpellingModule ni GrammarModule completos.
 
-Integrar el banco content/spanish/bv-common-words.v1.json: 24 palabras cotidianas en tres niveles, frases para dictado, huecos b/v y feedback. Permitir edición desde Parent Mode. Sesiones sugeridas de 6–8 palabras, repitiendo errores después de otras preguntas. Diferenciar errores b/v de tildes u otros errores; normalizar espacios y mayúsculas. El adulto lee la frase y repite la palabra; ocultar frase escrita y solución durante la respuesta infantil. No enseñar una distinción artificial de sonido entre b y v.
+Integrar el banco content/spanish/bv-common-words.v1.json: 34 palabras (24 iniciales, siete con b del cuaderno y tres adicionales con v), frases para dictado, huecos b/v y feedback. Permitir edición desde Parent Mode. Sesiones sugeridas de 6–8 palabras, repitiendo errores después de otras preguntas. Diferenciar errores b/v de tildes u otros errores; normalizar espacios y mayúsculas. El adulto lee la frase y repite la palabra; ocultar frase escrita y solución durante la respuesta infantil. No enseñar una distinción artificial de sonido entre b y v.
+
+Añadir repaso mixto de 20 preguntas y una cola de hasta seis errores que priorice ejemplos alternativos; ayuda y reintentos no resuelven pendientes.
 
 No depender de audio automático, reconocimiento de voz ni conexión para dictado. Incluir repaso de todos los bloques con feedback por tema y sin cronómetro.
 
@@ -91,17 +93,17 @@ Salida: una sesión matemática completa, desde aprendizaje hasta resumen guarda
 
 ## R1.3 — Integración mínima compartida
 
-- Mostrar progreso básico de ambas materias y XP de respuestas correctas independientes.
-- Añadir un único reto semanal sencillo; concretar condiciones y monto configurado antes de activarlo.
+- Mostrar progreso básico de ambas materias y 2 XP por acierto original (los reintentos no suman). Los XP son práctica; no acreditan dominio ni sustituyen los requisitos sin ayuda de los premios.
+- Dedicar temporalmente el presupuesto a nueve retos de Español: ocho temas (10% cada uno, redondeado hacia abajo en centavos) y repaso mixto (resto). Exigir 5/6 o 16/20 aciertos originales sin ayuda. Matemáticas y práctica ordinaria no conceden dinero.
 - Implementar RewardEngine central con límite global de $100 MXN por defecto, periodos, duplicados, recompensa parcial y ledger.
 - Usar America/Mexico_City para el periodo semanal, de lunes 00:00 hasta el siguiente lunes 00:00 exclusivo.
 - Registrar finalización y recompensa de forma atómica con unicidad por perfil/reto/periodo; no generar dinero directamente desde las materias.
-- Precisar antes de activar el reto cómo se registra una finalización con presupuesto agotado, los cambios del límite y el estado pagado.
+- Registrar retos sin saldo a $0, conservar importes previos al cambiar presupuesto y contar pagos anteriores dentro del límite. Recuperar premios faltantes de sesiones terminadas atómicamente, en su semana original y sin alterar XP ni sesiones.
 - Parent Mode mínimo con PIN: resultados por materia, presupuesto, ledger y marcado como pagado.
 - No descontar del gasto semanal una recompensa por marcarla como pagada.
 - Mantener práctica y XP disponibles al alcanzar el límite.
 
-Salida: aprendizaje, progreso y un reto integrados para ambas materias.
+Salida: progreso de ambas materias y premios semanales de Español integrados con un presupuesto global.
 
 ## R1.4 — Verificación técnica y preparación de entrega
 
@@ -110,13 +112,13 @@ Estas comprobaciones corresponden al desarrollo; la instalación y prueba del ad
 - Compilar y comprobar tipos.
 - Verificar flujo completo de Lectura y Matemáticas, corrección y persistencia.
 - Revisar contenido lector, cobertura de las ocho habilidades y todos los bloques del temario confirmado.
-- Verificar ejercicios de párrafos, signo «;», moralejas/refranes, b/v y dictado con respuesta oculta.
+- Verificar los ocho temas del libro, b/v y dictado con respuesta oculta.
 - Comprobar que el banco de palabras se puede editar y los errores se clasifican correctamente.
 - Probar pago duplicado, concurrencia, cap entre materias, recompensa parcial, cambio de semana y continuidad de práctica sin dinero.
 - Comprobar inicio y sesiones de ambas materias offline después de preparar caché.
 - Comprobar cierre/reapertura y actualización segura sin perder datos.
 - Revisar navegación y controles táctiles en tamaños de tablet y móvil.
-- Preparar despliegue HTTPS, preferentemente Vercel, compatible con cualquier hosting estático.
+- Despliegue actual en Sites: https://judyquest.german-glz01.chatgpt.site. Confirmar versión y publicación antes de dar una entrega por desplegada; conservar compatibilidad con hosting estático.
 - Crear README con ejecución, alcance R1, instalación, uso offline y límites del almacenamiento local.
 - Entregar URL e instrucciones solamente cuando ambos módulos cumplan la aceptación R1.
 
@@ -134,7 +136,7 @@ Ahora sí, después de terminar ambos módulos:
 6. Registran errores, claridad de instrucciones, dificultad y comprensión de los textos.
 7. Corregir fallos que impidan estudiar antes de ampliar funcionalidades.
 
-Priorizar la utilidad para el repaso de Español. El temario general está confirmado y se ha aprobado un banco de vocabulario cotidiano. No se dispone de las páginas del libro ni de la lista exacta de clase; no son dependencias para continuar. No presentar la práctica general como reproducción del examen.
+Priorizar la utilidad del repaso de Español, basado en las páginas y las siete palabras confirmadas. No presentar las actividades originales como reproducción del examen.
 
 ## R2 — Completar el MVP después de la primera prueba
 
@@ -153,7 +155,7 @@ Implementar incrementalmente y validar cada mejora:
 11. Respaldo/restauración local, recuperación del PIN y endurecimiento frente a cambios de reloj.
 12. Consolidar pruebas de contratos de módulos y criterios del MVP completo.
 
-No añadir nuevas materias antes de estabilizar Matemáticas y Lectura con uso real. CHARACTER_INTENT, AUTHOR_INTENT y SUMMARY son expansiones posteriores de Lectura, no requisitos R1.
+No añadir nuevas materias antes de estabilizar Matemáticas y Lectura con uso real. CHARACTER_INTENT y AUTHOR_INTENT siguen pendientes; resumen/paráfrasis ya tienen práctica acotada dentro del repaso del libro.
 
 ## R3 — Nuevas materias y expansión
 

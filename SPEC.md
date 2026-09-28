@@ -17,103 +17,65 @@ Persistencia en IndexedDB v3: estado por sentido de palabra, ayudas, primera/úl
 
 Hasta dos palabras nuevas por día y tres repasos por sesión. Español incorpora «Leer con mis palabras» para reutilizar hasta tres palabras ya practicadas en contextos distintos. Los modos `vocabulary-*` no habilitan dinero; los XP de práctica no equivalen a recuerdo independiente. La aplicación sigue siendo local, sin cuenta infantil, servidor ni sincronización. README.md detalla las reglas implementadas.
 
-## 0. Prioridad de entrega — Matemáticas y Lectura (R1)
+## 0. Alcance vigente de R1 — actualizado el 28 de septiembre de 2026
 
-Decisión del 27 de septiembre de 2026: comenzar por los módulos de Matemáticas y Comprensión Lectora. El examen de Español de Judy es el 28 de septiembre de 2026; Lectura tiene prioridad dentro de la implementación.
+Esta sección refleja el código actual y sustituye el alcance inicial del 27 de septiembre. Las secciones 1–45 describen la visión y el roadmap; no implican que todas sus funciones estén implementadas. La evidencia de validación y los pendientes están en [docs/validacion-r1.md](docs/validacion-r1.md) y [TASKS.md](TASKS.md).
 
-Orden obligatorio:
+### Funciones implementadas
 
-1. Base mínima de la aplicación e inicio con acceso a ambas materias.
-2. Comprensión Lectora funcional, con contenido y explicaciones.
-3. Matemáticas funcionales, con aprendizaje y práctica de tablas 1–10.
-4. Integración de progreso, XP básico, un reto semanal y controles mínimos del adulto.
-5. Verificación técnica de ambos módulos y de su persistencia.
-6. Entrega de URL, instalación por el adulto y prueba con Judy.
-7. Mejoras del MVP completo y, después, nuevas materias.
-
-La urgencia orienta las prioridades; no constituye una promesa de que la aplicación ya esté terminada ni sustituye las verificaciones. La instalación y la prueba del usuario ocurren después de terminar AMBOS módulos en el alcance R1. Las comprobaciones técnicas durante el desarrollo sí se realizan desde el inicio.
-
-### Alcance R1 y significado de “módulo terminado”
-
-| Área | Incluido en R1 | Posterior a la primera prueba |
+| Área | R1 actual | Pendiente después de validar R1 |
 | --- | --- | --- |
-| Inicio | Elegir Lectura o Matemáticas, volver al inicio y consultar progreso básico. | Dashboards completos y personalización. |
-| Lectura | Explicación guiada, lectura, preguntas, corrección, evidencia, explicación del error, resumen y guardado. Habilidades: LITERAL, SEQUENCE, MAIN_IDEA, DETAILS, CAUSE_EFFECT, INFERENCE, CONTEXT_VOCABULARY y EVIDENCE. | Adaptación avanzada, mastery formal, bosses, temporizadores y modos especializados independientes. |
-| Español: repaso del examen | Párrafos, punto y coma, moralejas/refranes, b/v y dictado con apoyo del adulto; resultados por tema. | Módulos completos de Ortografía y Gramática, audio automático y reconocimiento de voz. |
-| Matemáticas | Tablas 1–10; lecciones de grupos, suma repetida y conmutatividad; práctica por tabla y mixta; entrada numérica; corrección; repaso de errores; resumen y guardado. | Speed, tiers, bosses y adaptación/mastery avanzados. |
-| Progreso | Sesiones, respuestas y aciertos por tabla/habilidad; XP básico. | Niveles, rachas, logros y gráficas avanzadas. |
-| Recompensas | Un reto semanal sencillo, RewardEngine central, pago único por periodo, ledger, límite global y Parent Mode mínimo con PIN. | Catálogo de retos, recompensas por bosses/hitos, misiones complejas y metas de ahorro. |
-| Distribución | PWA local-first, contenido inicial disponible offline y persistencia tras cerrar/reabrir. | Sincronización cloud y múltiples dispositivos. |
+| Inicio y progreso | Accesos a Español/Matemáticas, sesiones reanudables, precisión por habilidad y XP. | Niveles, rachas y dashboards avanzados. |
+| Lectura | Dos relatos históricos, dos fábulas, refranes, explicación, preguntas, evidencia, feedback y resumen guardado. Ocho habilidades lectoras iniciales. | Catálogo más amplio, adaptación y dominio formal. |
+| Repaso del libro | Ocho temas de pp. 12–31, 48 preguntas base y 16 alternativas, seis preguntas por tema, repaso mixto de 20 y cola de hasta seis errores. | Validar claridad/dificultad con Judy. |
+| Ortografía | Banco editable de 34 palabras, práctica b/v, dictado con PIN y siete palabras confirmadas del cuaderno. | Módulos completos de ortografía y gramática. |
+| Matemáticas | Tablas 1–10, grupos, suma repetida, conmutatividad, práctica por tabla/mixta y reintentos espaciados dentro de la sesión. | Speed, bosses, adaptación y dominio avanzado. |
+| Vocabulario | 20 palabras y 80 actividades con ayudas registradas, calendario y lecturas contextualizadas. | Validar con Judy antes de ampliar a 100 candidatas adicionales. |
+| Recompensas | Nueve retos semanales de Español, presupuesto global, ledger, PIN y recuperación de premios faltantes. | Otros retos, bosses y metas de ahorro. |
+| Distribución | PWA, contenido y tipografías locales, IndexedDB v3, aviso de actualización fuera de sesiones. | Respaldo/restauración y recuperación de PIN; sincronización fuera del MVP. |
 
-R1 es una primera entrega utilizable, previa al MVP completo descrito en la sección 43. Las características posteriores se conservan en el roadmap, pero no bloquean la instalación ni la primera prueba de R1.
+### Temario confirmado del libro
 
-### Contenido de Español para R1
+Las fotografías de Español 5, Serie Trascender, EK Editores, se recibieron el 27 de septiembre. Los ejercicios son originales y las fábulas son adaptaciones identificadas; no se publican las fotografías ni las respuestas manuscritas. Ver [cobertura y decisiones](docs/repaso-espanol-libro.md).
 
-- Catálogo inicial enfocado al examen: 2 relatos históricos breves, 2 fábulas y 4 refranes con situaciones de ejemplo. Al menos 4 preguntas por relato/fábula y una actividad de interpretación por refrán; cubrir las 8 habilidades lectoras R1 al menos una vez en el conjunto. Este catálogo sustituye el requisito anterior de 8 textos genéricos.
-- Cada pregunta debe incluir respuesta verificable, explicación y evidencia textual; revisar manualmente que no haya respuestas ambiguas.
-- Incorporar al menos un ejemplo guiado por habilidad. Estos ejemplos no cuentan como intentos independientes.
-- Permitir consultar el texto al responder; no imponer cronómetro en Lectura R1.
-- Incluir lectura de secuencias e identificación de idea principal y evidencias.
-- Temario recibido del adulto mediante fotografía el 27 de septiembre de 2026. Incorporar los contenidos siguientes a R1; no tratarlos como ampliaciones opcionales.
-- La imagen aporta temas y referencias de páginas, no el contenido del libro ni la lista de palabras trabajadas en clase. No afirmar que se han revisado esas páginas.
-
-### Temario confirmado — examen de Español del 28 de septiembre
-
-| Bloque de la fotografía | Referencia indicada | Actividad R1 |
-| --- | --- | --- |
-| Relatos históricos: hechos en orden temporal | pp. 12–27 | Ordenar acontecimientos e identificar expresiones de sucesión temporal en el relato. |
-| Relatos históricos: causa y consecuencia | pp. 12–27 | Relacionar qué ocurrió, por qué ocurrió y qué sucedió como resultado. |
-| Párrafos | pp. 12–27 | Reconocer límites de párrafo y agrupar oraciones que desarrollan una misma idea. |
-| Punto y coma | pp. 12–27 | Explicación breve y ejercicios de uso del signo «;» en contextos inequívocos. Practicar específicamente «;», además de los conocimientos previos sobre punto («.») y coma («,»). |
-| Fábulas y refranes: moraleja y significado implícito | pp. 28–31 | Identificar y justificar la moraleja; relacionar refranes con situaciones y explicar su sentido no literal. |
-| Ortografía: dictado y uso de b y v en palabras trabajadas en clase | Sin páginas indicadas | Completar b/v y escribir palabras dictadas; explicar cada corrección y volver a practicar errores. |
-
-### Ajuste de alcance del módulo de Español
-
-R1 conserva ReadingModule y añade un bloque acotado de repaso de Español dentro de LanguageModule: párrafos, punto y coma, moralejas/refranes y ortografía b/v con dictado.
-
-Estos ejercicios son obligatorios en R1. No requieren construir el SpellingModule o GrammarModule completos del roadmap. Registrar resultados con habilidades específicas (PARAGRAPHS, SEMICOLON, MORAL, PROVERB_MEANING, BV_SPELLING, DICTATION), separadas de las ocho habilidades de comprensión lectora.
-
-- Reutilizar sesiones, corrección, guardado y controles compartidos.
-- Usar contenidos originales; para relatos históricos basados en hechos reales, verificar hechos antes de publicarlos. No presentar narraciones inventadas como historia real.
-- Punto y coma: aceptar variantes válidas o plantear selección de ejemplos con una respuesta inequívoca; no marcar como universal una única puntuación posible.
-- Usar el banco inicial aprobado de palabras cotidianas de casa y escuela en content/spanish/bv-common-words.v1.json: 24 palabras, tres niveles, frases de dictado, huecos b/v y feedback. Es práctica general, no un ranking estadístico ni la lista exacta de clase. Permitir editarlo desde Parent Mode.
-- Dictado R1: el adulto consulta la palabra en Parent Mode, vuelve a la pantalla infantil con la respuesta oculta y dicta en voz alta. Judy escribe y la aplicación corrige.
-- El dictado básico debe funcionar offline; audio automático y reconocimiento de voz no son requisitos R1.
-- Distinguir en el feedback un error b/v de una tilde u otro error ortográfico; no penalizar como error de b/v una diferencia de mayúsculas o espacios.
-- El adulto confirmó que no dispone de la lista de clase y autorizó palabras de uso cotidiano. No esperar fotografías ni listas adicionales para continuar; una lista escolar posterior será una personalización opcional.
-- El repaso integra todos los bloques del temario y muestra errores por tema; sin cronómetro ni barrera monetaria para volver a practicar.
-
-### Banco inicial de b/v confirmado
-
-Fuente de contenido: content/spanish/bv-common-words.v1.json.
-
-| Nivel | Palabras |
+| Páginas | Tema |
 | --- | --- |
-| 1 — Primeras palabras | barco, botella, nube, abuelo, vaca, vaso, ventana, verde |
-| 2 — Casa y escuela | bicicleta, biblioteca, caballo, escribir, vestido, vecino, verano, lluvia |
-| 3 — Más detalles | bebé, árbol, también, abrir, volver, vivir, nuevo, avión |
+| 12–15 | Relatos históricos, fuentes y palabras clave |
+| 16–17 | Resumen, paráfrasis e ideas principales |
+| 18–19 | Párrafos e ideas secundarias |
+| 20–21 | Puntos y comas: mayúscula, seguido/aparte/final, listas, vocativo y aclaración |
+| 22–23 | Orden temporal y simultaneidad |
+| 24–25 | Causa/consecuencia |
+| 26–29 | Fábulas y moralejas |
+| 30–31 | Refranes y sentido implícito |
 
-La dificultad es una propuesta didáctica inicial y podrá ajustarse al desempeño de Judy. El banco contiene 12 palabras con b y 12 con v.
+El enfoque inicial sobre el signo «;» fue corregido tras revisar el libro. Se conserva su historial, pero no forma parte del repaso del examen. El Recortable 1 no se recibió; las actividades no dependen de él. No se afirma conocer las preguntas del examen.
 
-- Alternar completar b/v y dictado con adulto en sesiones breves sugeridas de 6–8 palabras.
-- Usar la frase de contexto en el dictado, especialmente cuando existan palabras que suenen igual.
-- No enseñar una diferencia artificial de pronunciación entre b y v.
-- Ocultar tanto la palabra como la frase escrita y la solución durante el dictado infantil.
-- Registrar las tildes por separado: una tilde omitida no implica que haya fallado la elección de b/v.
-- El banco está integrado en completar b/v, dictado y edición del adulto; los intentos y resultados se guardan localmente. La instalación y validación en la tablet siguen pendientes del adulto.
+Las siete palabras confirmadas son bebamos, cabían, cabemos, deberíamos, habría, sabiendo y saben. La lista complementaria con v es práctica adicional. El banco general conserva las 24 palabras originales y añade las siete confirmadas y tres con v: 34 en total. La personalización del adulto no altera las listas específicas del cuaderno ni las sesiones empezadas.
 
-### Criterios de aceptación de R1
+En dictado, el adulto abre palabra/frase con PIN y las oculta antes de entregar la tablet. La corrección distingue b/v, tildes y otros errores; normaliza espacios exteriores y mayúsculas. No requiere reconocimiento de voz ni audio remoto. No se enseña una diferencia artificial de pronunciación entre b y v.
 
-- Judy puede completar una sesión de Lectura y una de Matemáticas, recibir explicación de errores y consultar sus resultados.
-- Puede practicar todos los bloques del temario de Español: orden temporal, causa/consecuencia, párrafos, punto y coma, moralejas/refranes y b/v con dictado.
-- Los resultados distinguen comprensión lectora, estructura/puntuación, interpretación y ortografía; el dictado no muestra la respuesta antes de contestar.
-- Ambas materias conservan sesiones, respuestas y progreso después de cerrar y reabrir.
-- Los contenidos iniciales de ambos módulos funcionan offline tras la primera carga y la preparación de su caché.
-- El reto semanal utiliza el mismo RewardEngine y presupuesto global; recargar, repetir o enviar dos veces no duplica dinero.
-- El adulto puede consultar resultados, configurar el presupuesto y marcar recompensas pagadas mediante Parent Mode.
-- Antes de entregar la URL se comprueban los dos recorridos completos, persistencia, recompensas y funcionamiento offline.
-- Después de completar ambos módulos, el adulto instala en la tablet y prueba con Judy; se registran fallos y dificultades antes de ampliar el producto.
+### Progreso y premios vigentes
+
+- El progreso registra sesiones, intentos y precisión por habilidad. Cada acierto original suma 2 XP; los reintentos no suman. XP no equivale a dominio ni a acierto sin ayuda para dinero.
+- El presupuesto semanal predeterminado es $100 MXN, dedicado temporalmente al examen de Español. Ocho temas reciben 10% cada uno (redondeado hacia abajo en centavos) y el repaso mixto recibe el resto.
+- Cada tema exige 5/6 aciertos originales sin ayuda; el mixto exige 16/20. Ayuda y reintentos no cuentan para el premio. Matemáticas, vocabulario y práctica general conservan XP pero no habilitan el antiguo reto combinado.
+- Un premio por perfil/reto/semana; finalización y premio se guardan juntos. El límite incluye dinero entregado y premios anteriores. Un reto sin saldo queda registrado a $0. Cambiar presupuesto no recalcula premios ya registrados.
+- La recuperación de premios faltantes se ejecuta al refrescar, con claves únicas y transacción; respeta semana original y premios existentes, sin cambiar sesiones ni XP.
+- Semana de lunes a lunes en America/Mexico_City. El adulto entrega el dinero; la app registra lo ganado y pagado.
+- Celebración visual, tonos Web Audio y voz opcional por premio positivo; probar/repetir audio no concede dinero. Disponibilidad de voz y audio móvil debe verificarse en la tablet.
+
+### Aceptación y orden de trabajo
+
+R1.0–R1.3 implementan la base y ambos módulos. R1.4 verifica build, lint, pruebas, precache, recorridos, persistencia y actualización. R1.5 corresponde a instalación y uso real con Judy; no se completa por aprobar pruebas automatizadas.
+
+1. Comprobar recorridos completos de Lectura, Matemáticas, repaso y dictado, con corrección y conservación del avance.
+2. Verificar que recargas, reintentos y concurrencia no duplican XP de una misma respuesta ni dinero.
+3. Comprobar carga desde caché y estudio sin servidor; completar además modo avión, cierre/reapertura y actualización en la tablet.
+4. Confirmar el despliegue HTTPS y su versión. Publicación actual: https://judyquest.german-glz01.chatgpt.site.
+5. El adulto instala, estudia con Judy y registra comprensión, dificultad, audio y fallos. Corregir bloqueos antes de ampliar funcionalidades.
+
+No hay cuentas infantiles, backend de progreso, exportación/restauración ni recuperación de PIN en R1. El progreso pertenece al origen/navegador/dispositivo: cambiar dominio o borrar sus datos pierde acceso al avance. El PIN es un control familiar local.
 
 ## 1. Product Vision
 
@@ -350,7 +312,7 @@ Habilidades:
 
 ## 5. Future Learning Modules
 
-Los siguientes módulos completos forman parte oficial del roadmap, aunque no son necesarios para liberar el MVP. Excepción acotada: los ejercicios de b/v, dictado, párrafos y punto y coma del temario confirmado sí forman parte de R1 (sección 0), sin exigir estos módulos completos.
+Los siguientes módulos completos forman parte oficial del roadmap, aunque no son necesarios para liberar el MVP. Excepción acotada: los ejercicios de b/v, dictado, párrafos, puntos y comas del temario confirmado sí forman parte de R1 (sección 0), sin exigir estos módulos completos.
 
 ### Español / Lengua — Expansiones
 
@@ -1273,7 +1235,7 @@ El MVP completo incluye únicamente:
 - Adaptive Learning;
 - Reading Boss.
 
-También se conservan las actividades de repaso de Español incluidas desde R1: párrafos, punto y coma, moralejas/refranes, b/v y dictado asistido por el adulto.
+También se conservan las actividades de repaso de Español incluidas desde R1: párrafos, puntos y comas, moralejas/refranes, b/v y dictado asistido por el adulto.
 
 ## 44. Post-MVP Roadmap
 
