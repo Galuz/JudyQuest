@@ -17,6 +17,7 @@ import { PinGate } from "./PinGate";
 import { AnswerOption, GlossaryText, GlossaryHelpScope } from "./Glossary";
 import { vocabulary } from "../content/vocabulary";
 import { UNKNOWN_WORD, vocabularyStatus } from "../domain/vocabulary";
+import { studyTopics } from "../content/exam-study";
 export function MathLesson({ table }: { table: number }) {
   const a = table || 3,
     b = 4;
@@ -131,6 +132,9 @@ export function SessionRunner() {
   const original = s.attempts.filter((a) => !a.retry),
     correct = original.filter((a) => a.correct).length;
   const isVocabulary = s.mode.startsWith("vocabulary");
+  const studyLesson = s.mode.startsWith("study-topic:")
+    ? studyTopics.find((t) => t.id === s.mode.split(":")[1])
+    : undefined;
   const back =
     s.mode === "vocabulary-daily"
       ? "/palabras"
@@ -245,6 +249,11 @@ export function SessionRunner() {
           <Link className="secondary" to="/progreso">
             Ver mi progreso
           </Link>
+          {s.mode.startsWith("study-") && original.some((a) => !a.correct) && (
+            <Link className="secondary" to="/espanol">
+              Repasar mis errores
+            </Link>
+          )}
         </div>
       </section>
     );
@@ -270,6 +279,15 @@ export function SessionRunner() {
           </p>
           {s.subject === "math" ? (
             <MathLesson table={Number(s.mode.split(":")[1])} />
+          ) : studyLesson ? (
+            <div>
+              <p>
+                <GlossaryText>{studyLesson.body}</GlossaryText>
+              </p>
+              <div className="example">
+                <GlossaryText>{studyLesson.example}</GlossaryText>
+              </div>
+            </div>
           ) : (
             topicLessons.map((l) => (
               <details key={l.skill} open={topicLessons.length <= 2}>
@@ -350,8 +368,12 @@ export function SessionRunner() {
         >
           {q.readingText && (
             <article className="panel reader">
-              <p className="eyebrow">LEER CON MIS PALABRAS</p>
-              <h2>Una pequeña historia</h2>
+              <p className="eyebrow">
+                {q.studyTopic
+                  ? "LECTURA PARA ESTA PREGUNTA"
+                  : "LEER CON MIS PALABRAS"}
+              </p>
+              <h2>{q.readingTitle ?? "Una pequeña historia"}</h2>
               {q.readingText.split("\n\n").map((p, i) => (
                 <p key={i}>
                   <GlossaryText>{p}</GlossaryText>

@@ -11,6 +11,199 @@ export type GlossaryEntry = {
 // Add word forms here when introducing new educational vocabulary.
 const existingGlossary: GlossaryEntry[] = [
   {
+    word: "Paráfrasis",
+    forms: ["paráfrasis", "parafrasear"],
+    meaning:
+      "Es explicar una idea con tus propias palabras, sin cambiar lo que significa.",
+    example:
+      "«El niño estaba contento» puede decirse «El pequeño se sentía feliz».",
+  },
+  {
+    word: "Resumen",
+    forms: ["resumen", "resúmenes", "resumir"],
+    meaning:
+      "Es una versión más corta de un texto que conserva lo más importante.",
+    example:
+      "Después de leer una historia, cuentas sus hechos principales en pocas oraciones.",
+  },
+  {
+    word: "Cita textual",
+    forms: ["cita textual", "citas textuales"],
+    meaning:
+      "Son las palabras exactas que tomamos de un texto o de una persona. Se escriben entre comillas y se dice de dónde vienen.",
+    example:
+      "Ana dijo: «Me gusta leer». Las comillas señalan sus palabras exactas.",
+  },
+  {
+    word: "Idea secundaria",
+    forms: ["idea secundaria", "ideas secundarias"],
+    meaning:
+      "Es un dato, ejemplo o explicación que completa la idea principal.",
+    example:
+      "«Hay libros de animales y plantas» da ejemplos de los libros de una biblioteca.",
+  },
+  {
+    word: "Nexo",
+    forms: ["nexo", "nexos"],
+    meaning: "Es una palabra o expresión que une ideas.",
+    example:
+      "En «Leo porque quiero aprender», porque une lo que hago con la razón.",
+  },
+  {
+    word: "Fuente de información",
+    forms: [
+      "fuente de información",
+      "fuentes de información",
+      "fuente",
+      "fuentes",
+    ],
+    meaning:
+      "Es de donde obtenemos información sobre un tema: un libro, una fotografía, un mapa o una persona que sabe de él.",
+    example:
+      "Una fotografía antigua puede servir como fuente para conocer cómo era una plaza.",
+  },
+  {
+    word: "Palabras clave",
+    forms: ["palabras clave", "palabra clave"],
+    meaning:
+      "Son palabras importantes que ayudan a reconocer de qué trata un texto.",
+    example:
+      "Murales, pinturas y pinceles son pistas de un texto sobre pintura.",
+  },
+  {
+    word: "Alfabetización",
+    forms: ["alfabetización", "alfabetizar"],
+    meaning: "Es aprender o enseñar a leer y escribir.",
+    example:
+      "En una campaña de alfabetización se ayuda a las personas a aprender a leer y escribir.",
+  },
+  {
+    word: "Mural",
+    forms: ["mural", "murales"],
+    meaning: "Es una pintura hecha sobre una pared o un muro.",
+    example: "Un mural puede contar una historia mediante imágenes.",
+  },
+  {
+    word: "Muralista",
+    forms: ["muralista", "muralistas"],
+    meaning: "Es una persona que pinta murales.",
+    example: "Diego Rivera fue un muralista mexicano.",
+  },
+  {
+    word: "Época",
+    forms: ["época", "épocas"],
+    meaning: "Es un periodo de la historia o de la vida.",
+    example:
+      "La ropa de una fotografía puede dar pistas de la época en que se tomó.",
+  },
+  {
+    word: "Vocativo",
+    forms: ["vocativo", "vocativos"],
+    meaning:
+      "Es el nombre o la palabra con la que llamamos a quien estamos hablando. Se separa con comas.",
+    example: "En «Judy, ven a leer», Judy es el vocativo.",
+  },
+  {
+    word: "Aclaración",
+    forms: ["aclaración", "aclaraciones"],
+    meaning: "Es información que añadimos para explicar algo mejor.",
+    example: "En «Luna, mi gata, duerme», mi gata aclara quién es Luna.",
+  },
+  {
+    word: "Enumeración",
+    forms: ["enumeración", "enumeraciones"],
+    meaning: "Es nombrar varios elementos, uno tras otro.",
+    example: "«Traje libros, lápices y hojas» contiene una enumeración.",
+  },
+  {
+    word: "Simultáneamente",
+    forms: ["simultáneamente", "simultáneo", "simultáneos"],
+    meaning: "Quiere decir que dos o más cosas pasan al mismo tiempo.",
+    example: "Mientras tú lees, yo dibujo. Lo hacemos simultáneamente.",
+  },
+  {
+    word: "Significado implícito",
+    forms: ["significado implícito", "implícito", "implícita"],
+    meaning:
+      "Es un mensaje que entendemos con las pistas, aunque no esté dicho directamente.",
+    example:
+      "Un refrán sobre un camarón puede aconsejarnos estar atentos, aunque no diga «pon atención».",
+  },
+  {
+    word: "Zagal",
+    forms: ["zagal"],
+    meaning:
+      "Es una palabra que significa muchacho. En esta fábula, el muchacho cuida ovejas.",
+    example: "El zagal llevó a sus ovejas a comer pasto.",
+  },
+  {
+    word: "Tapia",
+    forms: ["tapia"],
+    meaning: "Es una pared o muro.",
+    example: "El gallo se subió a la tapia para cantar.",
+  },
+  {
+    word: "Collado",
+    forms: ["collado"],
+    meaning: "En esta lectura, es un cerro o una elevación del terreno.",
+    example: "Desde el collado, el muchacho podía ver sus ovejas.",
+  },
+  {
+    word: "Chanza",
+    forms: ["chanza"],
+    meaning: "Es una broma.",
+    example: "El joven dijo que había un lobo, pero solo era una chanza.",
+  },
+  {
+    word: "Apacentar",
+    forms: ["apacentar", "apacentando"],
+    meaning: "Es llevar o dejar a los animales a comer pasto.",
+    example: "El pastor salió a apacentar a las ovejas.",
+  },
+  {
+    word: "Escarmentar",
+    forms: ["escarmentar", "escarmentada", "escarmentados"],
+    meaning:
+      "Es aprender de una experiencia desagradable para no repetir el mismo error.",
+    example:
+      "Después de creer dos bromas, los labradores quedaron escarmentados.",
+  },
+  {
+    word: "Labrador",
+    forms: ["labrador", "labradores"],
+    meaning:
+      "En esta fábula, es una persona que trabaja la tierra para cultivar.",
+    example: "Los labradores dejaron su trabajo en el campo para ayudar.",
+  },
+  {
+    word: "Rebaño",
+    forms: ["rebaño", "rebaños"],
+    meaning: "Es un grupo de ovejas u otros animales que se cuidan juntos.",
+    example: "El pastor cuidaba un rebaño de veinte ovejas.",
+  },
+  {
+    word: "Presumir",
+    forms: ["presumir", "presumido", "presunción", "alarde"],
+    meaning:
+      "Es mostrar lo que tienes o logras para que los demás te admiren, a veces creyéndote mejor que ellos.",
+    example:
+      "Podemos alegrarnos de ganar sin presumir ni burlarnos de quien perdió.",
+  },
+  {
+    word: "Generación",
+    forms: ["generación", "generaciones"],
+    meaning:
+      "Es un grupo de personas de edades parecidas. Los abuelos, los padres y los hijos pertenecen a distintas generaciones.",
+    example:
+      "Un refrán puede pasar de los abuelos a sus hijos y después a sus nietos.",
+  },
+  {
+    word: "Cotidiano",
+    forms: ["cotidiano", "cotidiana", "cotidianas", "cotidianos"],
+    meaning: "Es algo que forma parte de la vida de todos los días.",
+    example: "Preparar la mochila es una actividad cotidiana.",
+  },
+  {
     word: "Moraleja",
     forms: ["moraleja", "moralejas"],
     meaning: "Es la enseñanza que nos deja una historia.",

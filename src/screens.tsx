@@ -1,5 +1,7 @@
 import { useStart } from "./useStart";
 import { VocabularyInvitation } from "./components/VocabularyScreen";
+import { ExamStudy } from "./components/ExamStudy";
+import { studyTopics } from "./content/exam-study";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -29,7 +31,6 @@ import {
   classroomWords,
   supplementalVWords,
   dictationQuestions,
-  examQuestions,
   lessons,
   passages,
   proverbs,
@@ -216,7 +217,7 @@ export function Spanish() {
           <BookOpen size={36} />
         </span>
       </div>
-      <VocabularyInvitation reading />
+      <ExamStudy />
       <section className="panel">
         <p className="eyebrow">REPASO DE ORTOGRAFÍA</p>
         <h2>Palabras de mi cuaderno</h2>
@@ -274,30 +275,7 @@ export function Spanish() {
           Practicar palabras con v
         </button>
       </section>
-      <section className="exam-banner">
-        <div>
-          <span className="chip">REPASO DEL EXAMEN</span>
-          <h2>Una misión con todos los temas</h2>
-          <p>
-            Historias, párrafos, punto y coma, enseñanzas de las fábulas,
-            consejos de los refranes y palabras con b y v.
-          </p>
-        </div>
-        <button
-          disabled={busy}
-          className="primary"
-          onClick={() =>
-            void start(
-              "spanish",
-              "Repaso de Español",
-              "exam",
-              examQuestions(bank),
-            )
-          }
-        >
-          Comenzar repaso <ArrowRight size={18} />
-        </button>
-      </section>
+      <VocabularyInvitation reading />
       <div className="section-heading">
         <h2>Lee y descubre</h2>
         <button
@@ -310,17 +288,30 @@ export function Spanish() {
       </div>
       {showLessons && (
         <section className="panel lesson-grid">
-          {lessons.slice(0, 8).map((l) => (
-            <details key={l.skill}>
-              <summary>{l.title}</summary>
-              <p>
-                <GlossaryText>{l.body}</GlossaryText>
-              </p>
-              <div className="example">
-                <GlossaryText>{l.example}</GlossaryText>
-              </div>
-            </details>
-          ))}
+          {lessons
+            .filter((l) =>
+              [
+                "LITERAL",
+                "SEQUENCE",
+                "MAIN_IDEA",
+                "DETAILS",
+                "CAUSE_EFFECT",
+                "INFERENCE",
+                "CONTEXT_VOCABULARY",
+                "EVIDENCE",
+              ].includes(l.skill),
+            )
+            .map((l) => (
+              <details key={l.skill}>
+                <summary>{l.title}</summary>
+                <p>
+                  <GlossaryText>{l.body}</GlossaryText>
+                </p>
+                <div className="example">
+                  <GlossaryText>{l.example}</GlossaryText>
+                </div>
+              </details>
+            ))}
         </section>
       )}
       <div className="reading-grid">
@@ -353,18 +344,16 @@ export function Spanish() {
           className="practice-card"
           disabled={busy}
           onClick={() =>
-            void start(
-              "spanish",
-              "Párrafos y punto y coma",
-              "punctuation",
-              punctuation,
-            )
+            void start("spanish", "Párrafos, puntos y comas", "punctuation", [
+              ...punctuation.filter((q) => q.skill === "PARAGRAPHS"),
+              ...studyTopics.find((t) => t.id === "punctuation")!.questions,
+            ])
           }
         >
           <PencilLine />
           <div>
-            <h3>Párrafos y punto y coma</h3>
-            <p>Organiza tus ideas y conoce el signo ;.</p>
+            <h3>Párrafos, puntos y comas</h3>
+            <p>Organiza tus ideas y practica los signos.</p>
           </div>
           <ArrowRight />
         </button>

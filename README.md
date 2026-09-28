@@ -5,8 +5,10 @@ Primera versión de la app educativa para Judy: Español y Matemáticas, instala
 ## Qué funciona
 
 - Aprender palabras nuevas: 20 palabras iniciales, 80 actividades, comprobación inicial, definiciones y repasos guardados por palabra.
-- Español: dos relatos históricos, dos fábulas originales, cuatro refranes, párrafos, punto y coma, b/v y dictado asistido por un adulto.
-- Repaso del temario: orden temporal, causa/consecuencia, moraleja, estructura del texto, puntuación y ortografía.
+- Español: repaso del libro, lecturas adicionales, b/v y dictado asistido por un adulto.
+- Repaso del libro (pp. 12–31): ocho temas, 48 preguntas base y 16 alternativas, con explicaciones originales y adaptaciones de las dos fábulas de clase. Incluye fuentes, resúmenes, párrafos, puntos y comas, orden temporal, causa/consecuencia, moralejas y refranes.
+- Repaso mixto de 20 preguntas: dos por tema, dos palabras confirmadas con b y dos complementarias con v. No incluye el punto y coma como tema del examen.
+- «Repasar mis errores» reconstruye pendientes desde las respuestas locales, propone hasta seis preguntas y prioriza otros ejemplos. Un reintento inmediato o un acierto con ayuda no resuelve el pendiente. No equivale a dominio permanente.
 - Matemáticas: aprendizaje de las tablas 1–10, práctica por tabla o mixta, explicaciones y repaso espaciado de errores.
 - Ejemplos guiados, texto consultable, corrección después de cada pregunta y resumen de resultados.
 - Sesiones reanudables, respuestas, precisión por habilidad y XP persistidos en IndexedDB.

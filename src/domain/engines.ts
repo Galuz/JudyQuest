@@ -7,9 +7,11 @@ export function grade(q: Question, answer: string) {
   const value = normalize(answer),
     expected = normalize(q.correct);
   const correct =
-    q.kind === "number"
-      ? /^\d+$/.test(value) && Number(value) === Number(expected)
-      : value === expected;
+    q.kind === "choice"
+      ? answer.normalize("NFC").trim() === q.correct.normalize("NFC").trim()
+      : q.kind === "number"
+        ? /^\d+$/.test(value) && Number(value) === Number(expected)
+        : value === expected;
   if (correct) return { correct, errorType: undefined };
   let errorType = "respuesta";
   if (q.kind === "word") {

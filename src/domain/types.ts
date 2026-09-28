@@ -16,6 +16,9 @@ export type Question = {
   vocabularyWordId?: string;
   vocabularyActivity?: number;
   readingText?: string;
+  readingTitle?: string;
+  studyTopic?: string;
+  reviewOf?: string;
   helpUsed?: boolean;
 };
 export type Attempt = {

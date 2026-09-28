@@ -1635,6 +1635,73 @@ footer > span {
   }
 }
 /* Vocabulary shares the existing learning cards and touch-sized controls. */
+.exam-study {
+  margin-bottom: 28px;
+}
+.study-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.study-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.study-card h3,
+.study-card p {
+  margin: 0;
+}
+.study-card details {
+  margin-bottom: 12px;
+}
+.study-card details p {
+  margin: 14px 0;
+}
+.study-card summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding: 12px 0;
+  font-weight: 700;
+}
+.study-card summary svg {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.study-card > button {
+  margin-top: auto;
+}
+.study-review {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+.study-review > div {
+  flex: 1;
+}
+.study-review h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.study-review button {
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .study-grid {
+    grid-template-columns: 1fr;
+  }
+  .study-review {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .exam-study .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
 .vocabulary-invitation,
 .vocabulary-daily {
   display: flex;

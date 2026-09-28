@@ -1,6 +1,7 @@
 import type { Passage, Question, WordEntry } from "../domain/types";
 import bank from "../../content/spanish/bv-common-words.v1.json";
 import { shuffle } from "../domain/engines";
+import { studyExamQuestions, studyTopics } from "./exam-study";
 export const words: WordEntry[] = bank.words;
 // Keep the notebook list separate from suggested practice, and preserve its order.
 export const classroomWords = bank.classroomConfirmed.map((id) =>
@@ -21,12 +22,27 @@ export const skillNames: Record<string, string> = {
   EVIDENCE: "Pistas en el texto",
   PARAGRAPHS: "Párrafos",
   SEMICOLON: "Punto y coma",
+  HISTORICAL_SOURCES: "Historias y fuentes",
+  SUMMARY: "Resúmenes y mis propias palabras",
+  SECONDARY_IDEA: "Ideas que completan el texto",
+  PUNCTUATION: "Puntos y comas",
+  FABLE: "Cómo es una fábula",
   MORAL: "Moralejas",
   PROVERB_MEANING: "Refranes",
   BV_SPELLING: "Uso de b y v",
   DICTATION: "Dictado",
 };
 export const lessons = [
+  ...[
+    ["HISTORICAL_SOURCES", "sources"],
+    ["SUMMARY", "summary"],
+    ["SECONDARY_IDEA", "paragraphs"],
+    ["PUNCTUATION", "punctuation"],
+    ["FABLE", "fables"],
+  ].map(([skill, id]) => {
+    const t = studyTopics.find((t) => t.id === id)!;
+    return { skill, title: t.title, body: t.body, example: t.example };
+  }),
   {
     skill: "LITERAL",
     title: "Encuentra la respuesta",
@@ -589,14 +605,5 @@ export function dictationQuestions(entries = words, count = 6): Question[] {
     }));
 }
 export function examQuestions(entries = words): Question[] {
-  return [
-    passages[0].questions[2],
-    passages[0].questions[0],
-    passages[2].questions[0],
-    passages[2].questions[2],
-    punctuation[0],
-    punctuation[4],
-    ...shuffle(proverbs).slice(0, 2),
-    ...bvQuestions(entries, 4),
-  ];
+  return studyExamQuestions(bvQuestions(entries, 4));
 }
