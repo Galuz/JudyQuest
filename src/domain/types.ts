@@ -20,6 +20,7 @@ export type Question = {
   studyTopic?: string;
   reviewOf?: string;
   helpUsed?: boolean;
+  fractionBars?: { numerator: number; denominator: number }[];
 };
 export type Attempt = {
   questionId: string;
