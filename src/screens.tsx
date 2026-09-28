@@ -1,3 +1,4 @@
+import { ExamRewards } from "./components/ExamRewards";
 import { useStart } from "./useStart";
 import { VocabularyInvitation } from "./components/VocabularyScreen";
 import { ExamStudy } from "./components/ExamStudy";
@@ -24,7 +25,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { useApp, useProgress } from "./state";
-import { challengeProgress, mathQuestions, weekId } from "./domain/engines";
+import { mathQuestions, weekId } from "./domain/engines";
 import { repositories } from "./data/repositories";
 import {
   bvQuestions,
@@ -56,8 +57,6 @@ export function Home() {
   const pending = app.sessions
     .filter((s) => s.phase !== "done")
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
-  const cp = challengeProgress(app.sessions);
-  const reward = app.rewards.find((r) => r.weekId === weekId());
   return (
     <>
       <div className="welcome">
@@ -161,41 +160,7 @@ export function Home() {
             </Link>
           </div>
         </section>
-        <section className="panel weekly-card">
-          <div className="section-heading">
-            <span className="icon-tile small">
-              <Trophy size={20} />
-            </span>
-            <span className="chip">ESTA SEMANA</span>
-          </div>
-          <h3>Exploradora de dos mundos</h3>
-          <p>
-            Termina una misión de Español y una de Matemáticas. Cada una debe
-            tener al menos 4 preguntas y 80% de respuestas correctas a la
-            primera. Por ejemplo, en una misión de 5 preguntas necesitas acertar
-            4. Aprender palabras nuevas tiene sus propios repasos y no cuenta
-            para este premio.
-          </p>
-          <div className="check-list">
-            <span className={cp.spanish ? "done" : ""}>
-              <CheckCircle2 size={17} /> Español
-            </span>
-            <span className={cp.math ? "done" : ""}>
-              <CheckCircle2 size={17} /> Matemáticas
-            </span>
-          </div>
-          <div className="weekly-reward">
-            <span>{reward ? "Premio guardado" : "Premio de esta semana"}</span>
-            <strong>
-              {money(reward?.amountGranted ?? app.settings.rewardAmount)}
-            </strong>
-          </div>
-          <p className="fine-print">
-            Puedes ganar este premio una vez por semana. El máximo entre todas
-            las materias es {money(app.settings.weeklyLimit)} por semana. Un
-            adulto te entrega el dinero.
-          </p>
-        </section>
+        <ExamRewards compact />
       </div>
     </>
   );
@@ -632,7 +597,6 @@ function ParentControls() {
   const app = useApp(),
     p = useProgress();
   const [limit, setLimit] = useState(String(app.settings.weeklyLimit / 100)),
-    [amount, setAmount] = useState(String(app.settings.rewardAmount / 100)),
     [message, setMessage] = useState(""),
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false),
@@ -658,7 +622,6 @@ function ParentControls() {
       await repositories.settings.save({
         ...(await repositories.settings.get()),
         weeklyLimit: Math.round(Number(limit) * 100),
-        rewardAmount: Math.round(Number(amount) * 100),
       });
       await app.refresh();
       setMessage("Ajustes guardados.");
@@ -739,8 +702,11 @@ function ParentControls() {
         <section className="panel">
           <h2>Recompensa semanal</h2>
           <p>
-            Una sesión de Español y una de Matemáticas, ambas con al menos 4
-            preguntas y 80% de aciertos al primer intento.
+            Presupuesto dedicado al examen de Español: 10% por cada uno de los
+            ocho temas y el resto para el repaso de 20 preguntas. Requiere 5 de
+            6 o 16 de 20 aciertos al primer intento sin ayuda. Matemáticas y
+            otras prácticas conservan sus puntos, pero no conceden dinero por
+            ahora.
           </p>
           <form onSubmit={save}>
             <label>
@@ -755,26 +721,15 @@ function ParentControls() {
                 onChange={(e) => setLimit(e.target.value)}
               />
             </label>
-            <label>
-              Premio del reto (pesos)
-              <input
-                type="number"
-                min="0"
-                max="10000"
-                step="0.01"
-                required
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
-            </label>
+
             <button className="primary" disabled={busy}>
               Guardar ajustes
             </button>
           </form>
           <p className="fine-print">
-            El premio se gana una sola vez por semana. Si queda poco dinero para
-            premios, se guarda solo esa cantidad. Si ya no queda dinero, el
-            premio es de $0 y el reto cuenta como terminado esa semana. Lo que
+            Cada premio se gana una sola vez por semana. Si queda poco dinero
+            para premios, se guarda solo esa cantidad. Si ya no queda dinero, el
+            premio es de $0 y ese reto cuenta como terminado esa semana. Lo que
             falte no pasa a la siguiente semana. Cambiar estos ajustes no cambia
             los premios que ya se ganaron.
           </p>

@@ -18,6 +18,12 @@ import { AnswerOption, GlossaryText, GlossaryHelpScope } from "./Glossary";
 import { vocabulary } from "../content/vocabulary";
 import { UNKNOWN_WORD, vocabularyStatus } from "../domain/vocabulary";
 import { studyTopics } from "../content/exam-study";
+import {
+  celebrateReward,
+  prepareRewardAudio,
+  soundEnabled,
+} from "../reward-sound";
+import { prizeMoney } from "./ExamRewards";
 export function MathLesson({ table }: { table: number }) {
   const a = table || 3,
     b = 4;
@@ -104,6 +110,7 @@ export function SessionRunner() {
   }, [session?.index, id]);
   async function action(fn: () => Promise<unknown>) {
     if (busy) return;
+    prepareRewardAudio();
     setBusy(true);
     setError("");
     try {
@@ -111,6 +118,13 @@ export function SessionRunner() {
       const s = await repositories.sessions.get(id!);
       if (s) setSession(s);
       await app.refresh();
+      if (s?.phase === "done" && session?.phase !== "done") {
+        const reward = (await repositories.rewards.all()).find(
+          (r) => r.sessionId === s.id,
+        );
+        if (reward && reward.amountGranted > 0)
+          celebrateReward(reward.amountGranted);
+      }
     } catch {
       setError(
         "No pudimos guardar. Tu avance anterior está seguro; intenta de nuevo.",
@@ -127,6 +141,7 @@ export function SessionRunner() {
       </div>
     );
   const s = session;
+  const sessionReward = app.rewards.find((r) => r.sessionId === s.id);
   const q = s.questions[s.index];
   const last = s.attempts.at(-1);
   const original = s.attempts.filter((a) => !a.retry),
@@ -198,6 +213,33 @@ export function SessionRunner() {
             : "Cada intento te enseña algo"}
         </h1>
         <p>{s.title}</p>
+        {sessionReward &&
+          (sessionReward.amountGranted > 0 ? (
+            <div className="prize-celebration" role="status">
+              <span className="prize-sparkles" aria-hidden="true">
+                ✦ ✧ ✦
+              </span>
+              <h2>¡Ganaste {prizeMoney(sessionReward.amountGranted)}!</h2>
+              <p>
+                Tu esfuerzo tiene premio. Ya quedó guardado para que un adulto
+                te lo entregue.
+              </p>
+              {soundEnabled() && (
+                <button
+                  className="secondary"
+                  onClick={() => celebrateReward(sessionReward.amountGranted)}
+                >
+                  Escuchar mi premio
+                </button>
+              )}
+              <p className="fine-print">Escuchar otra vez no suma dinero.</p>
+            </div>
+          ) : (
+            <p role="status">
+              ¡Reto completado! Esta semana ya no quedaba presupuesto para este
+              premio. Tus puntos y tu avance están guardados.
+            </p>
+          ))}
         <div className="result-stats">
           <div>
             <strong>

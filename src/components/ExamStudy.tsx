@@ -14,6 +14,7 @@ import {
   topicQuestions,
 } from "../content/exam-study";
 import { GlossaryText } from "./Glossary";
+import { ExamRewards } from "./ExamRewards";
 
 export function ExamStudy() {
   const app = useApp();
@@ -21,6 +22,7 @@ export function ExamStudy() {
   const pending = pendingStudyErrors(app.sessions);
   return (
     <section className="exam-study" aria-labelledby="study-title">
+      <ExamRewards />
       <div className="exam-banner">
         <div>
           <span className="chip">MI LIBRO · PÁGINAS 12–31</span>

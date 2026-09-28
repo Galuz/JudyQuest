@@ -22,6 +22,7 @@ import {
   usedHelp,
 } from "../domain/vocabulary";
 import { vocabulary, vocabularyQuestion } from "../content/vocabulary";
+import { examPrize, qualifyingExamChallenge } from "../domain/exam-rewards";
 export interface SessionRepository {
   all(): Promise<LearningSession[]>;
   get(id: string): Promise<LearningSession | undefined>;
@@ -122,12 +123,12 @@ export function createRepositories(db = new JudyDatabase()) {
     progress: async () => challengeProgress(await sessions.all()),
   };
   // Only this engine writes monetary rewards. It is called inside the finishing transaction.
-  async function awardWeekly(now: Date) {
+  async function awardWeekly(session: LearningSession, now: Date) {
+    const challenge = qualifyingExamChallenge(session);
+    if (!challenge) return;
     const week = weekId(now),
-      id = `judy:weekly-explorer:${week}`;
+      id = `judy:${challenge.id}:${week}`;
     if (await db.rewards.get(id)) return;
-    const p = challengeProgress(await sessions.all(), week);
-    if (!p.spanish || !p.math) return;
     const config = await settings.get(),
       earned = (await db.rewards.where("weekId").equals(week).toArray()).reduce(
         (n, r) => n + r.amountGranted,
@@ -135,14 +136,18 @@ export function createRepositories(db = new JudyDatabase()) {
       );
     const grant = Math.max(
       0,
-      Math.min(config.rewardAmount, config.weeklyLimit - earned),
+      Math.min(
+        examPrize(config.weeklyLimit, challenge.id),
+        config.weeklyLimit - earned,
+      ),
     );
     await db.rewards.add({
       id,
-      challengeId: "weekly-explorer",
+      challengeId: challenge.id,
+      sessionId: session.id,
       profileId: "judy",
-      moduleId: "cross-module",
-      amountRequested: config.rewardAmount,
+      moduleId: "spanish",
+      amountRequested: examPrize(config.weeklyLimit, challenge.id),
       amountGranted: grant,
       earnedAt: now.toISOString(),
       periodId: week,
@@ -151,9 +156,9 @@ export function createRepositories(db = new JudyDatabase()) {
       reason:
         grant === 0
           ? "Límite semanal alcanzado"
-          : grant < config.rewardAmount
+          : grant < examPrize(config.weeklyLimit, challenge.id)
             ? "Recompensa parcial por límite semanal"
-            : "Una sesión de cada materia con al menos 80% de aciertos",
+            : `Español: ${challenge.title} · al menos 80% sin ayuda al primer intento`,
     });
   }
   return {
@@ -265,7 +270,7 @@ export function createRepositories(db = new JudyDatabase()) {
             s.weekId = weekId(now);
           }
           await db.sessions.put(s);
-          if (s.phase === "done") await awardWeekly(now);
+          if (s.phase === "done") await awardWeekly(s, now);
           return s;
         },
       );

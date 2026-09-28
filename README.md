@@ -52,18 +52,17 @@ El banco general contiene 34 palabras: las 24 iniciales, siete con b confirmadas
 
 En Español → **Palabras de mi cuaderno** se pueden practicar o dictar las siete confirmadas juntas: bebamos, cabían, cabemos, deberíamos, habría, sabiendo y saben. La práctica adicional con v usa vivir, volver, vamos, venimos, ventana, vecino y viajar; no se presenta como lista confirmada del salón. Estos accesos usan las listas del cuaderno/práctica adicional incluso si el adulto personalizó el banco general, sin modificar esa personalización. La corrección del dictado distingue tildes y b/v. No requiere migrar ni borrar el avance guardado.
 
-## Economía R1
+## Economía: preparación del examen
 
-- Perfil local inicial: `judy`. Presupuesto global predeterminado: $100 MXN semanales.
-- Los modos de vocabulario no habilitan premios en dinero. Sus aciertos originales conservan los 2 XP habituales, incluso con ayuda; esos puntos no equivalen a dominio.
-- Reto **Exploradora de dos mundos**: terminar una sesión de cada materia, con al menos cuatro preguntas originales y 80% de aciertos al primer intento en cada una. Premio inicial: $10 MXN, configurable.
-- Semana: lunes 00:00 a lunes siguiente 00:00, en `America/Mexico_City`; se asigna la sesión a la semana en que termina.
-- Una transacción IndexedDB registra cierre de sesión y premio; una clave única por perfil/reto/semana evita duplicados, también entre pestañas.
-- Se suman todos los importes concedidos de la semana, incluso los marcados como pagados. El premio se recorta al presupuesto restante.
-- Si no hay presupuesto, se registra $0 y se consume el reto de esa semana. El resto de una recompensa parcial no se traslada.
-- Cambiar límite o importe afecta a premios futuros. No revoca ni recalcula los registrados. Bajar el límite por debajo de lo ya ganado deja disponible $0.
-- Cada respuesta correcta original otorga 2 XP. Los repasos de errores dentro de una sesión no alteran precisión ni generan XP adicional. La práctica habitual nunca concede dinero por sí misma.
-- El reloj y los datos son locales: esta versión evita cobros duplicados en uso normal, no pretende resistir la manipulación del dispositivo. Marcar entregado solo registra un pago realizado fuera de la app.
+- Todo el presupuesto semanal (por defecto $100 MXN) se dedica temporalmente a Español. Matemáticas y otras prácticas dan XP, pero ya no habilitan el premio combinado anterior.
+- Ocho retos de tema: 10% del presupuesto cada uno ($10 por defecto). Repaso mezclado: el resto ($20). Se calcula en centavos enteros, sin perder redondeos.
+- Cada tema requiere 5/6 aciertos originales sin ayuda; el repaso requiere 16/20. Reintentos inmediatos y respuestas asistidas no cuentan como aciertos para dinero. Se permite estudiar de nuevo y completar otra sesión para conseguir un reto pendiente.
+- Premio único por reto/perfil/semana, registrado atómicamente al terminar una nueva sesión. No hay cobros retroactivos por sesiones ya terminadas. El historial y premios anteriores, incluso entregados, cuentan en el límite semanal. El premio se recorta al saldo disponible.
+- Un reto completado sin saldo queda registrado a $0 y no puede cobrarse otra vez esa semana. Cambiar el presupuesto no recalcula premios previos. `rewardAmount` se conserva únicamente por compatibilidad con datos anteriores.
+- Semana en America/Mexico_City, de lunes a lunes. No cambia el calendario existente ni el guardado local. El dinero lo entrega un adulto; la app solo lleva el registro.
+- Al ganar un premio positivo en una sesión activa, aparece una celebración, suena una caja musical creada con Web Audio y una voz anuncia el importe realmente concedido. Sonido opcional, silenciable y con botón para volver a escucharlo sin conceder dinero. Reabrir resultados no reproduce automáticamente la celebración. La disponibilidad de voz depende del dispositivo; el importe siempre se muestra escrito.
+- Audio iniciado desde un toque para compatibilidad móvil. Animación limitada y respetuosa de movimiento reducido. No usa audios remotos ni requiere red para el sonido de caja.
+- Las protecciones evitan duplicados de uso normal, no la manipulación deliberada del reloj o almacenamiento local.
 
 ## Arquitectura
 

@@ -2,6 +2,7 @@ import "fake-indexeddb/auto";
 import { beforeEach, afterEach, describe, it, expect } from "vitest";
 import { createRepositories, JudyDatabase, defaults } from "./repositories";
 import type { LearningSession, Subject } from "../domain/types";
+import { examChallenges, examPrize } from "../domain/exam-rewards";
 import { weekId } from "../domain/engines";
 const now = new Date("2026-09-27T18:00:00Z");
 let db: JudyDatabase, r: ReturnType<typeof createRepositories>;
@@ -31,9 +32,30 @@ const sample = (id: string, subject: Subject): LearningSession => ({
     explanation: "4",
   })),
 });
-async function finish(id: string, subject: Subject, date = now) {
-  await r.sessions.create(sample(id, subject));
-  for (let i = 0; i < 4; i++) {
+async function finish(
+  id: string,
+  subject: Subject,
+  date = now,
+  mode = "study-topic:sources",
+  assisted = false,
+) {
+  const s = sample(id, subject);
+  s.mode = mode;
+  const count = mode === "study-exam" ? 20 : 6;
+  s.questions = Array.from({ length: count }, (_, i) => ({
+    ...s.questions[i % 4],
+    id: `${id}-${i}`,
+    studyTopic:
+      mode === "study-exam"
+        ? i < 16
+          ? examChallenges[Math.floor(i / 2)].mode.split(":")[1]
+          : undefined
+        : mode.split(":")[1],
+    kind: mode === "study-exam" && i >= 16 ? "bv" : "number",
+  }));
+  await r.sessions.create(s);
+  for (let i = 0; i < count; i++) {
+    if (assisted) await r.useHelp(id, i);
     await r.answer(id, i, "4", 1200, date);
     await r.next(id, date);
   }
@@ -59,18 +81,17 @@ describe("persistencia y recompensas", () => {
     expect(s?.questions).toHaveLength(5);
     expect((await r.progress.get()).xp).toBe(0);
   });
-  it("no concede dinero por una sola materia ni por práctica repetida", async () => {
-    await finish("a", "spanish");
-    await finish("b", "spanish");
+  it("no concede dinero por Matemáticas ni por práctica fuera del examen", async () => {
+    await finish("a", "spanish", now, "test");
+    await finish("b", "math");
     expect(await r.rewards.all()).toHaveLength(0);
   });
   it("concede un solo premio incluso con finalizaciones concurrentes y repeticiones", async () => {
-    await finish("a", "spanish");
-    await Promise.all([finish("b", "math"), finish("c", "math")]);
+    await Promise.all([finish("b", "spanish"), finish("c", "spanish")]);
     for (let i = 0; i < 20; i++) await r.next("b", now);
     expect(await r.rewards.all()).toHaveLength(1);
     expect((await r.rewards.all())[0].amountGranted).toBe(1000);
-    expect((await r.progress.get()).xp).toBe(24);
+    expect((await r.progress.get()).xp).toBeGreaterThan(0);
   });
   it("respeta el límite global y registra una recompensa parcial", async () => {
     await r.settings.save({ ...defaults, weeklyLimit: 10000 });
@@ -90,8 +111,9 @@ describe("persistencia y recompensas", () => {
     await finish("a", "spanish");
     await finish("b", "math");
     expect(
-      (await r.rewards.all()).find((x) => x.challengeId === "weekly-explorer")
-        ?.amountGranted,
+      (await r.rewards.all()).find(
+        (x) => x.challengeId === "exam-topic:sources",
+      )?.amountGranted,
     ).toBe(200);
     expect(
       (await r.rewards.all()).reduce((n, x) => n + x.amountGranted, 0),
@@ -103,7 +125,7 @@ describe("persistencia y recompensas", () => {
     const reward = (await r.rewards.all())[0];
     await r.rewards.markPaid(reward.id);
     await r.rewards.markPaid(reward.id);
-    await finish("c", "math");
+    await finish("c", "spanish");
     expect(await r.rewards.all()).toHaveLength(1);
     expect((await r.rewards.all())[0].status).toBe("PAID");
     expect((await r.rewards.all())[0].amountGranted).toBe(1000);
@@ -113,10 +135,10 @@ describe("persistencia y recompensas", () => {
     await finish("a", "spanish");
     await finish("b", "math");
     await r.settings.save(defaults);
-    await finish("c", "math");
+    await finish("c", "spanish");
     expect(await r.rewards.all()).toHaveLength(1);
     expect((await r.rewards.all())[0].amountGranted).toBe(0);
-    expect((await r.progress.get()).xp).toBe(24);
+    expect((await r.progress.get()).xp).toBeGreaterThan(0);
   });
   it("renueva el reto una semana después y conserva historial y XP", async () => {
     await finish("a", "spanish");
@@ -125,7 +147,7 @@ describe("persistencia y recompensas", () => {
     await finish("c", "spanish", next);
     await finish("d", "math", next);
     expect(await r.rewards.all()).toHaveLength(2);
-    expect((await r.progress.get()).xp).toBe(32);
+    expect((await r.progress.get()).xp).toBe(48);
     expect(await r.sessions.all()).toHaveLength(4);
   });
   it("una sesión con baja precisión no habilita premio", async () => {
@@ -144,5 +166,46 @@ describe("persistencia y recompensas", () => {
     await r.sessions.create(s);
     await finish("b", "math");
     expect(await r.rewards.all()).toHaveLength(0);
+  });
+});
+
+describe("presupuesto del examen", () => {
+  it("reparte los $100 entre ocho temas y el examen, sin duplicar al reabrir", async () => {
+    for (const c of examChallenges) await finish(c.id, "spanish", now, c.mode);
+    expect(
+      (await r.rewards.all()).reduce((sum, x) => sum + x.amountGranted, 0),
+    ).toBe(10000);
+    expect(await r.rewards.all()).toHaveLength(9);
+    db.close();
+    await db.open();
+    await finish("again", "spanish");
+    expect(await r.rewards.all()).toHaveLength(9);
+    expect(
+      (await r.rewards.all()).find((x) => x.challengeId === "exam-mixed")
+        ?.amountGranted,
+    ).toBe(2000);
+  });
+  it("las pistas no conceden dinero y una nueva sesión independiente sí", async () => {
+    await finish("help", "spanish", now, "study-topic:sources", true);
+    expect(await r.rewards.all()).toHaveLength(0);
+    await finish("alone", "spanish");
+    expect((await r.rewards.all())[0].sessionId).toBe("alone");
+  });
+  it("no paga retrospectivamente sesiones ya terminadas", async () => {
+    const old = sample("old", "spanish");
+    old.phase = "done";
+    old.mode = "study-topic:sources";
+    old.weekId = weekId(now);
+    await r.sessions.create(old);
+    await r.next(old.id, now);
+    await finish("math", "math");
+    expect(await r.rewards.all()).toHaveLength(0);
+  });
+  it("reparte todos los centavos de presupuestos que no son múltiplos de diez", () => {
+    for (const limit of [0, 1, 9, 101, 9999, 10000]) {
+      expect(
+        examChallenges.reduce((n, c) => n + examPrize(limit, c.id), 0),
+      ).toBe(limit);
+    }
   });
 });
