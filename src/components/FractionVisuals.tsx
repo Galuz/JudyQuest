@@ -1,5 +1,6 @@
 import type { Question } from "../domain/types";
 import { comparisonLabel } from "../content/math-exam";
+import { FractionNumber } from "./MathText";
 
 type Fraction = NonNullable<Question["fractionBars"]>[number];
 
@@ -61,7 +62,7 @@ export function FractionComparison({
   onChange: (value: string) => void;
 }) {
   const [left, right] = question.fractionBars!;
-  const fraction = (f: Fraction) => `${f.numerator}/${f.denominator}`;
+  const fraction = (f: Fraction) => `${f.numerator} sobre ${f.denominator}`;
   return (
     <fieldset className="fraction-comparison">
       <legend>
@@ -73,7 +74,7 @@ export function FractionComparison({
       <div className="comparison-row">
         <figure>
           <figcaption className="comparison-number">
-            {fraction(left)}
+            <FractionNumber {...left} />
           </figcaption>
           <FractionPie {...left} />
         </figure>
@@ -96,7 +97,7 @@ export function FractionComparison({
         </label>
         <figure>
           <figcaption className="comparison-number">
-            {fraction(right)}
+            <FractionNumber {...right} />
           </figcaption>
           <FractionPie {...right} />
         </figure>
@@ -106,9 +107,9 @@ export function FractionComparison({
         className="comparison-sentence"
         aria-live="polite"
       >
-        {fraction(left)} es{" "}
+        <FractionNumber {...left} /> es{" "}
         <strong>{answer ? comparisonLabel(answer) : "…"}</strong>{" "}
-        {fraction(right)}.
+        <FractionNumber {...right} />.
       </p>
     </fieldset>
   );
