@@ -18,8 +18,13 @@ import { AnswerOption, GlossaryText, GlossaryHelpScope } from "./Glossary";
 import { vocabulary } from "../content/vocabulary";
 import { UNKNOWN_WORD, vocabularyStatus } from "../domain/vocabulary";
 import { studyTopics } from "../content/exam-study";
-import { mathTopics } from "../content/math-exam";
-import { FractionBars, MathGuide } from "./MathExam";
+import {
+  mathTopics,
+  readableMathQuestion,
+  comparisonLabel,
+} from "../content/math-exam";
+import { MathGuide } from "./MathExam";
+import { FractionPies, FractionComparison } from "./FractionVisuals";
 import { examChallenges } from "../domain/exam-rewards";
 import { weekId } from "../domain/engines";
 import {
@@ -154,7 +159,11 @@ export function SessionRunner() {
       (r) =>
         r.challengeId === challenge.id && r.weekId === (s.weekId ?? weekId()),
     );
-  const q = s.questions[s.index];
+  const q = readableMathQuestion(s.questions[s.index]);
+  const isComparison =
+    s.subject === "math" &&
+    q?.studyTopic === "compare" &&
+    q.fractionBars?.length === 2;
   const last = s.attempts.at(-1);
   const original = s.attempts.filter((a) => !a.retry),
     correct = original.filter((a) => a.correct).length;
@@ -341,9 +350,9 @@ export function SessionRunner() {
             {original
               .filter((a) => !a.correct)
               .map((a) => {
-                const question = s.questions.find(
-                  (q) => q.id === a.questionId,
-                )!;
+                const question = readableMathQuestion(
+                  s.questions.find((q) => q.id === a.questionId)!,
+                );
                 return (
                   <div key={a.questionId}>
                     <strong>
@@ -398,7 +407,9 @@ export function SessionRunner() {
               : "Toca las palabras subrayadas para saber qué significan."}
           </p>
           <p>
-            {s.questions.length} {s.questions.length === 1 ? "ejercicio" : "ejercicios"} · Sin prisa · Puedes volver al texto
+            {s.questions.length}{" "}
+            {s.questions.length === 1 ? "ejercicio" : "ejercicios"} · Sin prisa
+            · Puedes volver al texto
           </p>
           {isMathStudy ? (
             mathTopic ? (
@@ -614,7 +625,9 @@ export function SessionRunner() {
                 >
                   <GlossaryText>{q.prompt}</GlossaryText>
                 </h2>
-                {q.fractionBars && <FractionBars bars={q.fractionBars} />}
+                {q.fractionBars && !isComparison && (
+                  <FractionPies bars={q.fractionBars} />
+                )}
                 {isMathStudy && mathTopic && !submitted && (
                   <div className="math-question-help">
                     {!q.helpUsed ? (
@@ -655,7 +668,15 @@ export function SessionRunner() {
                   </p>
                 )}
                 <form onSubmit={submit}>
-                  {q.kind === "choice" && (
+                  {isComparison && (
+                    <FractionComparison
+                      question={q}
+                      answer={submitted ? (last?.answer ?? "") : answer}
+                      disabled={submitted || busy}
+                      onChange={setAnswer}
+                    />
+                  )}
+                  {q.kind === "choice" && !isComparison && (
                     <div className="options">
                       {q.choices?.map((choice, i) => (
                         <AnswerOption
@@ -803,7 +824,12 @@ export function SessionRunner() {
                 </h3>
                 {!last.correct && (
                   <p>
-                    Tu respuesta: <strong>{last.answer}</strong>
+                    Tu respuesta:{" "}
+                    <strong>
+                      {isComparison
+                        ? comparisonLabel(last.answer)
+                        : last.answer}
+                    </strong>
                     {last.errorType === "tilde"
                       ? " · Usaste bien la b y la v. Revisa el acento escrito (la tilde)."
                       : ""}

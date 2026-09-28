@@ -6,6 +6,8 @@ import {
   mathExamQuestions,
   pendingMathErrors,
   mathReviewQuestions,
+  readableMathQuestion,
+  comparisonLabel,
 } from "./math-exam";
 import { grade } from "../domain/engines";
 import { createRepositories, JudyDatabase } from "../data/repositories";
@@ -45,6 +47,37 @@ const exampleSession = (
 });
 
 describe("examen de Matemáticas", () => {
+  it("adapta preguntas guardadas sin cambiar sus respuestas ni exigir símbolos", () => {
+    for (const [symbol, label, n] of [
+      ["<", "menor que", 1],
+      ["=", "igual a", 2],
+      [">", "mayor que", 3],
+    ] as const) {
+      const old: Question = {
+        id: "old-compare",
+        skill: "compare",
+        studyTopic: "compare",
+        kind: "choice",
+        prompt: "¿Qué signo?",
+        correct: symbol,
+        choices: ["<", "=", ">"],
+        explanation: `Usa ${symbol}`,
+        fractionBars: [
+          { numerator: n, denominator: 4 },
+          { numerator: 2, denominator: 4 },
+        ],
+      };
+      const display = readableMathQuestion(old);
+      expect(display.explanation).toContain(`${n}/4 es ${label} 2/4`);
+      expect(display.explanation).not.toMatch(/[<>=]/);
+      expect(display.prompt).not.toContain("signo");
+      expect(display.correct).toBe(symbol);
+      expect(display.choices).toEqual(old.choices);
+      expect(comparisonLabel(display.correct)).toBe(label);
+      expect(grade(old, display.correct).correct).toBe(true);
+      expect(old.prompt).toBe("¿Qué signo?");
+    }
+  });
   it("cubre ocho temas con 64 preguntas inequívocas y dibujos de partes iguales", () => {
     expect(mathTopics).toHaveLength(8);
     expect(mathPool).toHaveLength(64);
@@ -77,12 +110,15 @@ describe("examen de Matemáticas", () => {
         ).toEqual([q.correct]);
       }
       if (q.studyTopic === "compare") {
+        const fractions = q.fractionBars!.map(
+          (f) => f.numerator / f.denominator,
+        );
         expect(q.correct).toBe(
           Math.abs(fractions[0] - fractions[1]) < 1e-10
-            ? "="
+            ? "igual a"
             : fractions[0] > fractions[1]
-              ? ">"
-              : "<",
+              ? "mayor que"
+              : "menor que",
         );
       }
       if (q.studyTopic === "fractions") {
