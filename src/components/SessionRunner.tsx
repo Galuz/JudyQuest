@@ -19,10 +19,11 @@ import { vocabulary } from "../content/vocabulary";
 import { UNKNOWN_WORD, vocabularyStatus } from "../domain/vocabulary";
 import { studyTopics } from "../content/exam-study";
 import {
-  mathTopics,
+  allMathTopics,
   readableMathQuestion,
   comparisonLabel,
 } from "../content/math-exam";
+import { DivisionDiagram } from "./DivisionDiagram";
 import { MathGuide } from "./MathExam";
 import { FractionPies, FractionComparison } from "./FractionVisuals";
 import { examChallenges } from "../domain/exam-rewards";
@@ -169,7 +170,7 @@ export function SessionRunner() {
     correct = original.filter((a) => a.correct).length;
   const isVocabulary = s.mode.startsWith("vocabulary");
   const isMathStudy = s.mode.startsWith("math-study");
-  const mathTopic = mathTopics.find(
+  const mathTopic = allMathTopics.find(
     (t) =>
       t.id === (s.phase === "intro" ? s.mode.split(":")[1] : q?.studyTopic),
   );
@@ -320,7 +321,7 @@ export function SessionRunner() {
               Consultar una guía durante una pregunta cuenta como ayuda.
               Practicar con ayuda también sirve para aprender.
             </p>
-            {mathTopics.map((t) => {
+            {allMathTopics.map((t) => {
               const attempts = original.filter(
                 (a) =>
                   s.questions.find((q) => q.id === a.questionId)?.studyTopic ===
@@ -625,6 +626,9 @@ export function SessionRunner() {
                 >
                   <GlossaryText>{q.prompt}</GlossaryText>
                 </h2>
+                {q.divisionDiagram && (
+                  <DivisionDiagram {...q.divisionDiagram} />
+                )}
                 {q.fractionBars && !isComparison && (
                   <FractionPies bars={q.fractionBars} />
                 )}

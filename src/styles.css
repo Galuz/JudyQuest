@@ -2054,3 +2054,51 @@ footer > span.app-version {
     width: 100%;
   }
 }
+
+.book-review {
+  margin-top: 32px;
+  scroll-margin-top: 24px;
+}
+.book-review > p {
+  max-width: 65ch;
+}
+.book-review .study-grid {
+  margin-top: 20px;
+}
+.division-house {
+  margin: 20px auto;
+  text-align: center;
+}
+.division-house-grid {
+  display: grid;
+  grid-template-columns: 2em 3em;
+  grid-template-rows: repeat(3, auto);
+  width: max-content;
+  margin: 0 auto 12px;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.house-quotient {
+  grid-column: 2;
+  grid-row: 1;
+}
+.house-divisor {
+  grid-column: 1;
+  grid-row: 2;
+  padding-right: 0.25em;
+}
+.house-dividend {
+  grid-column: 2;
+  grid-row: 2;
+  border-top: 3px solid currentColor;
+  border-left: 3px solid currentColor;
+}
+.house-remainder {
+  grid-column: 2;
+  grid-row: 3;
+}
+.division-house figcaption {
+  font-size: 1rem;
+  line-height: 1.6;
+}
