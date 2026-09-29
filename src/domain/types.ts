@@ -20,6 +20,12 @@ export type Question = {
   studyTopic?: string;
   reviewOf?: string;
   helpUsed?: boolean;
+  divisionDiagram?: {
+    dividend: number;
+    divisor: number;
+    quotient: number;
+    remainder: number;
+  };
   fractionBars?: { numerator: number; denominator: number }[];
 };
 export type Attempt = {

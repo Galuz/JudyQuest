@@ -10,6 +10,8 @@ import {
   pendingMathErrors,
   type MathTopic,
 } from "../content/math-exam";
+import { bookTopics } from "../content/math-book";
+import { DivisionDiagram } from "./DivisionDiagram";
 import { FractionPies } from "./FractionVisuals";
 import { FractionNumber, MathText } from "./MathText";
 
@@ -33,6 +35,9 @@ export function MathGuide({ topic }: { topic: MathTopic }) {
             <MathText>{line}</MathText>
           </p>
         ))}
+        {topic.divisionDiagram && (
+          <DivisionDiagram {...topic.divisionDiagram} labels />
+        )}
         {topic.bars && <FractionPies bars={topic.bars} />}
       </div>
       <p className="math-remember">
@@ -175,6 +180,20 @@ export function MathExam() {
           Repasar mis errores de Matemáticas
         </button>
       </div>
+      <p>
+        <a
+          className="text-button"
+          href="#como-en-mi-libro"
+          onClick={(e) => {
+            e.preventDefault();
+            document
+              .getElementById("como-en-mi-libro")
+              ?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          Nuevo: Como en mi libro · repaso extra
+        </a>
+      </p>
       <FractionExplorer />
       <div className="section-heading">
         <h3>Un paso a la vez</h3>
@@ -236,6 +255,81 @@ export function MathExam() {
           );
         })}
       </div>
+      <section
+        id="como-en-mi-libro"
+        className="book-review"
+        aria-labelledby="book-review-title"
+      >
+        <span className="eyebrow">REPASO EXTRA · PÁGINAS 12–22</span>
+        <h2 id="book-review-title">Como en mi libro</h2>
+        <p>
+          Tu avance en los ocho temas sigue guardado. Aquí puedes practicar lo
+          que falta, una actividad a la vez. Empieza por las cifras del
+          cociente.
+        </p>
+        <p>
+          Ten papel y lápiz: escribe tus pasos antes de elegir y explica con tus
+          palabras cómo llegaste al resultado.
+        </p>
+        <div className="study-grid">
+          {bookTopics.map((topic, i) => {
+            const sessions = [...app.sessions]
+              .filter((s) => s.mode === `math-study-book:${topic.id}`)
+              .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+            const unfinished = sessions.find((s) => s.phase !== "done");
+            const last = sessions.find((s) => s.phase === "done");
+            const attempts = last?.attempts.filter((a) => !a.retry);
+            return (
+              <article className="panel study-card" key={topic.id}>
+                <span className="eyebrow">
+                  EXTRA {i + 1} · PÁGINAS {topic.pages}
+                </span>
+                <h3>{topic.title}</h3>
+                <p>{topic.goal}</p>
+                <p className="fine-print">4 ejercicios · Sin reloj</p>
+                {attempts && (
+                  <p>
+                    Última práctica: {attempts.filter((a) => a.correct).length}{" "}
+                    de {attempts.length} al primer intento ·{" "}
+                    {attempts.filter((a) => a.assisted).length} con ayuda
+                  </p>
+                )}
+                {last && (
+                  <Link className="text-button" to={`/sesion/${last.id}`}>
+                    Ver mi resultado
+                  </Link>
+                )}
+                <details>
+                  <summary>
+                    <BookOpen size={17} /> Entender: {topic.title}
+                  </summary>
+                  <MathGuide topic={topic} />
+                </details>
+                {unfinished ? (
+                  <Link className="primary" to={`/sesion/${unfinished.id}`}>
+                    Continuar: {topic.title}
+                  </Link>
+                ) : (
+                  <button
+                    className="secondary full"
+                    disabled={busy}
+                    onClick={() =>
+                      void start(
+                        "math",
+                        topic.title,
+                        `math-study-book:${topic.id}`,
+                        topic.questions,
+                      )
+                    }
+                  >
+                    Practicar: {topic.title}
+                  </button>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </section>
       {error && (
         <p className="error" role="alert">
           {error}

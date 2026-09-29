@@ -1,4 +1,5 @@
 import type { LearningSession, Question } from "../domain/types";
+import { bookTopics } from "./math-book";
 import { shuffle } from "../domain/engines";
 
 // Original exercises based on the supplied syllabus, not on unseen textbook pages.
@@ -10,6 +11,7 @@ export type MathTopic = {
   steps: string[];
   example: string[];
   remember: string;
+  divisionDiagram?: Question["divisionDiagram"];
   bars?: Question["fractionBars"];
   questions: Question[];
 };
@@ -538,6 +540,7 @@ export const mathTopics: MathTopic[] = [
   questions: t.questions.map((question) => ({ ...question, studyTopic: t.id })),
 }));
 
+export const allMathTopics = [...mathTopics, ...bookTopics];
 export const mathPool = mathTopics.flatMap((t) => t.questions);
 // Two from each topic, including a sum and a subtraction in every mixed exam.
 export function mathExamQuestions(): Question[] {
@@ -577,12 +580,14 @@ export function mathReviewQuestions(sessions: LearningSession[]): Question[] {
     .map((missed) => {
       const fresh =
         shuffle(
-          mathPool.filter(
-            (q) =>
-              q.studyTopic === missed.studyTopic &&
-              q.id !== missed.id &&
-              !used.has(q.id),
-          ),
+          allMathTopics
+            .flatMap((t) => t.questions)
+            .filter(
+              (q) =>
+                q.studyTopic === missed.studyTopic &&
+                q.id !== missed.id &&
+                !used.has(q.id),
+            ),
         )[0] ?? missed;
       used.add(fresh.id);
       return {
